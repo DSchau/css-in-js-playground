@@ -1,0 +1,39 @@
+{
+  "name": "jss-playground",
+  "version": "1.0.0",
+  "author": "Dustin Schau <dustinschau@gmail.com>",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "build:prod": "webpack --env.production",
+    "start": "webpack-dev-server",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
+  },
+  "devDependencies": {
+    "@types/codemirror": "^0.0.43",
+    "@types/jest": "^20.0.6",
+    "@types/prop-types": "^15.5.1",
+    "@types/react": "next",
+    "@types/react-dom": "next",
+    "awesome-typescript-loader": "^3.2.2",
+    "css-loader": "^0.28.4",
+    "html-webpack-plugin": "^2.30.1",
+    "jest": "^20.0.4",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "ts-jest": "^20.0.10",
+    "typescript": "^2.4.2",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "codemirror": "^5.28.0",
+    "normalize.css": "^7.0.0",
+    "prop-types": "next",
+    "react": "next",
+    "react-dom": "next",
+    "styled-components": "^2.1.2"
+  }
+}
