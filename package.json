@@ -29,11 +29,13 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "buble": "^0.15.2",
     "codemirror": "^5.28.0",
+    "glamor": "^2.20.40",
     "normalize.css": "^7.0.0",
-    "prop-types": "next",
     "react": "next",
     "react-dom": "next",
+    "react-icons": "^2.2.5",
     "styled-components": "^2.1.2"
   }
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as T from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 
 import * as CodeMirror from 'codemirror';
-import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/jsx/jsx';
+import 'codemirror/keymap/sublime';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 
@@ -16,24 +16,36 @@ const Container = styled.div`
 `;
 
 const TextArea = styled.textarea`
+  width: 100%;
+  border: none;
 `;
 
 export default class Editor extends React.Component<any, any> {
   private editor: any;
-
-  static propTypes = {
-    onUpdate: T.func.isRequired
-  };
+  private textArea: HTMLTextAreaElement;
 
   componentDidMount() {
-    this.editor = CodeMirror.fromTextArea(document.getElementById('editor') as HTMLTextAreaElement, {
-      mode: 'javascript',
+    this.editor = CodeMirror.fromTextArea(this.textArea, {
+      autofocus: true,
+      mode: 'text/jsx',
+      keyMap: 'sublime',
       lineNumbers: true,
       tabSize: 2,
       theme: 'dracula'
     });
 
     this.editor.on('change', this.onChange);
+  }
+
+  componentWillUnmount() {
+    this.editor.off('change', this.onChange);
+    this.editor.toTextArea();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // if (value !== this.editor.getValue(value)) {
+    //  this.editor.setValue(value);
+    // }
   }
 
   onChange = (codeMirrorEv) => {
@@ -43,7 +55,7 @@ export default class Editor extends React.Component<any, any> {
   render() {
     return (
       <Container>
-        <TextArea id="editor" onChange={ev => console.log(ev)}/>
+        <TextArea innerRef={node => this.textArea = node}/>
       </Container>
     );
   }
