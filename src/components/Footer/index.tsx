@@ -17,11 +17,16 @@ const Text = styled.h1`
   padding: 0;
 `;
 
+const Link = styled.a`
+  color: inherit;
+  text-decoration-skip: ink;
+`;
+
 export default function Footer() {
   return (
     <FooterContainer>
       <Text>
-        Made with <HeartIcon color="red" /> by Dustin Schau
+        Made with <HeartIcon color="red" /> by <Link href="https://dustinschau.com" target="_blank" rel="noopener">Dustin Schau</Link>
       </Text>
     </FooterContainer>
   );

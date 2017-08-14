@@ -8,6 +8,5 @@ export default function transform(code): string {
         templateString: false
       }
     }).code;
-  } catch (e) {
-  }
+  } catch (e) {}
 }

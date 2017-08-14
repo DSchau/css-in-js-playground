@@ -25,11 +25,25 @@ const Children = styled.div`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 4px;
 `;
 
 const Select = styled.select`
   height: 32px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  box-shadow: none;
+  appearance: none;
+  font-size: 1.3rem;
+  text-align: center;
+  text-align-last: center;
+  .wf-active & {
+    font-family: 'Montserrat', sans-serif;
+  }
+`;
+
+const Option = styled.option`
 `;
 
 export default class SideBar extends React.Component<any, any> {
@@ -76,7 +90,7 @@ export default class SideBar extends React.Component<any, any> {
         <Select value={this.state.selected} onChange={this.handleChange}>
           {
             options
-              .map(option => <option key={option} value={option}>{kebabCase(option)}</option>)
+              .map(option => <Option key={option} value={option}>{kebabCase(option)}</Option>)
           }
         </Select>
         <Children>{this.props.children}</Children>

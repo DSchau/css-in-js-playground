@@ -18,6 +18,11 @@ module.exports = function webpackConfig() {
     module: {
       rules: [
         {
+          enforce: 'pre',
+          test: /\.js$/,
+          use: 'source-map-loader'
+        },
+        {
           test: /\.tsx?$/,
           use: 'awesome-typescript-loader',
           include: [path.join(__dirname, 'src')]
@@ -28,9 +33,9 @@ module.exports = function webpackConfig() {
           include: [path.join(__dirname, 'node_modules')]
         },
         {
-          enforce: 'pre',
           test: /\.js$/,
-          use: 'source-map-loader'
+          use: ['raw-loader'],
+          include: [path.join(__dirname, 'src/snippets')]
         }
       ]
     },

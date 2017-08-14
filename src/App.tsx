@@ -1,38 +1,19 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 
-import Editor from './components/Editor/';
+import CodeProvider from './components/CodeProvider/';
 import Footer from './components/Footer/';
 import Header from './components/Header/';
-import Preview from './components/Preview/';
 import SideBar from './components/SideBar/';
-
-import { TABLET_UP } from './constants/breakpoints';
 
 const Container = styled.main`
   display: flex;
   height: 100vh;
 `;
 
-const Contents = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  @media only screen and (${TABLET_UP}) {
-    flex-direction: row;
-  }
-`;
-
-export default class App extends React.Component {
+class App extends React.Component {
   state = {
     code: ``
-  };
-
-  handleEditorChange = code => {
-    this.setState({
-      code
-    });
   };
 
   handleSelect = code => {
@@ -48,11 +29,20 @@ export default class App extends React.Component {
         <SideBar defaultSnippet="StyledComponents" onSelect={this.handleSelect}>
           <Footer />
         </SideBar>
-        <Contents>
-          <Editor code={this.state.code} onUpdate={this.handleEditorChange} />
-          <Preview code={this.state.code} />
-        </Contents>
+        <CodeProvider code={this.state.code} />
       </Container>
     );
   }
 }
+
+injectGlobal`
+  html, body {
+    font-family: sans-serif;
+  }
+
+  .wf-active {
+    font-family: 'Bitter', sans-serif;
+  }
+`;
+
+export default App;
