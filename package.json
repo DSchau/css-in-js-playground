@@ -29,13 +29,26 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "aphrodite": "^1.2.3",
     "buble": "^0.15.2",
     "codemirror": "^5.28.0",
+    "cxs": "^5.0.0-1",
+    "emotion": "^7.0.13",
+    "glam": "^4.0.5",
     "glamor": "^2.20.40",
+    "glamorous": "^4.1.1",
+    "jss": "^8.1.0",
+    "jss-preset-default": "^3.0.0",
+    "lodash.debounce": "^4.0.8",
+    "lodash.kebabcase": "^4.1.1",
     "normalize.css": "^7.0.0",
+    "polished": "^1.4.0",
+    "query-string": "^5.0.0",
+    "radium": "^0.19.4",
     "react": "next",
     "react-dom": "next",
     "react-icons": "^2.2.5",
-    "styled-components": "^2.1.2"
+    "styled-components": "^2.1.2",
+    "styletron-react": "^2.5.8"
   }
 }

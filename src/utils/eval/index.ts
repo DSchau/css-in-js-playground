@@ -11,8 +11,8 @@ export default function evalCode(code = '', scope = {}) {
   try {
     const scopeKeys = Object.keys(scope);
     const scopeValues = scopeKeys.map(key => scope[key]);
-    const res = new Function('React', ...scopeKeys, transformed);
-    const Component = res(React, ...scopeValues);
+    const res = new Function('React', 'Component', ...scopeKeys, transformed);
+    const Component = res(React, React.Component, ...scopeValues);
     if (typeof Component !== 'function') {
       return noop;
     }

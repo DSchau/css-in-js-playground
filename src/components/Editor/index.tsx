@@ -6,6 +6,7 @@ import 'codemirror/mode/jsx/jsx';
 import 'codemirror/keymap/sublime';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
+import * as debounce from 'lodash.debounce';
 
 const Container = styled.div`
   display: flex;
@@ -23,6 +24,13 @@ const TextArea = styled.textarea`
 export default class Editor extends React.Component<any, any> {
   private editor: any;
   private textArea: HTMLTextAreaElement;
+  private handleChange: Function;
+
+  constructor(props) {
+    super(props);
+
+    this.handleChange = debounce(this.onChange, 250);
+  }
 
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.textArea, {
@@ -34,18 +42,18 @@ export default class Editor extends React.Component<any, any> {
       theme: 'dracula'
     });
 
-    this.editor.on('change', this.onChange);
+    this.editor.on('change', this.handleChange);
   }
 
   componentWillUnmount() {
-    this.editor.off('change', this.onChange);
+    this.editor.off('change', this.handleChange);
     this.editor.toTextArea();
   }
 
-  componentWillReceiveProps(nextProps) {
-    // if (value !== this.editor.getValue(value)) {
-    //  this.editor.setValue(value);
-    // }
+  componentWillReceiveProps({ code }) {
+    if (code !== this.editor.getValue()) {
+      this.editor.setValue(code);
+    }
   }
 
   onChange = (codeMirrorEv) => {

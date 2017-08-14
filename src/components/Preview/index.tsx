@@ -29,7 +29,6 @@ export default class Preview extends React.Component<any, any> {
 
     getStylingLibrary(code)
       .then(library => {
-        console.log(library);
         this.setState({
           loaded: true,
           scope: library
@@ -39,7 +38,6 @@ export default class Preview extends React.Component<any, any> {
 
   render() {
     const { code } = this.props;
-    
     const Component = evalCode(transform(code || ''), this.state.scope);
     return (
       <Container>

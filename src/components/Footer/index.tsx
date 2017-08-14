@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <FooterContainer>
       <Text>
-        Made with <HeartIcon /> by Dustin Schau
+        Made with <HeartIcon color="red" /> by Dustin Schau
       </Text>
     </FooterContainer>
   );

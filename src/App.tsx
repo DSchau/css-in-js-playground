@@ -35,15 +35,21 @@ export default class App extends React.Component {
     });
   };
 
+  handleSelect = code => {
+    this.setState({
+      code
+    });
+  }
+
   render() {
     return (
       <Container>
         <Header />
-        <SideBar>
+        <SideBar defaultSnippet="StyledComponents" onSelect={this.handleSelect}>
           <Footer />
         </SideBar>
         <Contents>
-          <Editor onUpdate={this.handleEditorChange} />
+          <Editor code={this.state.code} onUpdate={this.handleEditorChange} />
           <Preview code={this.state.code} />
         </Contents>
       </Container>
