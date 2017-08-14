@@ -10,7 +10,7 @@
     "format": "npm run format:js & npm run format:ts",
     "format:js": "prettier --write --single-quote \"src/snippets/*.js\"",
     "format:ts": "prettier --write --single-quote --parser typescript \"src/**/*.ts\"",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot --host 0.0.0.0",
     "test": "jest",
     "test:watch": "npm run test -- --watch"
   },

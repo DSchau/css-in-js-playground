@@ -8,7 +8,8 @@ import SideBar from './components/SideBar/';
 
 const Container = styled.main`
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  height: 100%;
 `;
 
 class App extends React.Component {
@@ -25,11 +26,9 @@ class App extends React.Component {
   render() {
     return (
       <Container>
-        <Header />
-        <SideBar defaultSnippet="StyledComponents" onSelect={this.handleSelect}>
-          <Footer />
-        </SideBar>
+        <Header defaultSnippet="StyledComponents" onSelect={this.handleSelect} />
         <CodeProvider code={this.state.code} />
+        <Footer />
       </Container>
     );
   }
@@ -38,6 +37,14 @@ class App extends React.Component {
 injectGlobal`
   html, body {
     font-family: sans-serif;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
   }
 
   .wf-active {

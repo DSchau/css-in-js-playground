@@ -24,6 +24,8 @@ class Button extends Component {
 const styles = {
   base: {
     color: '#fff',
+    border: 'none',
+    cursor: 'pointer',
     ':hover': {
       background: 'black'
     }

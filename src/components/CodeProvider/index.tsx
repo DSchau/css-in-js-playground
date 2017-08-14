@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import Editor from '../CodeEditor/';
+import ErrorBoundary from '../ErrorBoundary/';
 import Preview from '../CodePreview/';
 
 import { TABLET_UP } from '../../constants/breakpoints';
@@ -50,7 +51,9 @@ class CodeProvider extends React.Component<CodeProviderProps, CodeProviderState>
     return (
       <Container>
         <Editor code={this.state.code} onUpdate={this.handleEditorUpdate} />
-        <Preview code={this.state.code} />
+        <ErrorBoundary>
+          <Preview code={this.state.code} />
+        </ErrorBoundary>
       </Container>
     );
   }

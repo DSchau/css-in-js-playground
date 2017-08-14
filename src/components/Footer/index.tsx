@@ -7,6 +7,9 @@ const FooterContainer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
+  background-color: black;
+  padding: 0.75rem 0.5rem;
 `;
 
 const Text = styled.h1`
@@ -15,6 +18,10 @@ const Text = styled.h1`
   color: white;
   margin: 0;
   padding: 0;
+  font-family: serif;
+  .wf-active & {
+    font-family: 'Bitter', serif;
+  }
 `;
 
 const Link = styled.a`

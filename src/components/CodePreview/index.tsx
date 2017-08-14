@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-import ErrorBoundary from '../ErrorBoundary/';
-
 import evalCode from '../../utils/eval';
 import transform from '../../utils/transpile';
 import getStylingLibrary from '../../utils/libraries';
@@ -12,6 +10,9 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  @media only screen and (min-width: 768px) {
+    height: auto;
+  }
 `;
 
 const CodeContainer = styled.div`
@@ -44,13 +45,14 @@ export default class Preview extends React.Component<any, any> {
 
   render() {
     const { code } = this.props;
+    if (!this.state.loaded) {
+      return null;
+    }
     const Component = evalCode(transform(code || ''), this.state.scope);
     return (
       <Container>
         <CodeContainer>
-          <ErrorBoundary>
-            {this.state.loaded && <Component />}
-          </ErrorBoundary>
+          <Component />
         </CodeContainer>
       </Container>
     );

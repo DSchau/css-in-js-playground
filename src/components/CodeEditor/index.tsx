@@ -15,6 +15,10 @@ const Container = styled.div`
   height: 100%;
   overflow: auto;
   position: relative;
+  -webkit-overflow-scrolling: touch;
+  @media only screen and (min-width: 768px) {
+    height: auto;
+  }
 `;
 
 const TextArea = styled.textarea`
