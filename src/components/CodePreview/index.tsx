@@ -46,7 +46,7 @@ export default class Preview extends React.Component<any, any> {
   render() {
     const { code } = this.props;
     if (!this.state.loaded) {
-      return null;
+      return <Container />;
     }
     const Component = evalCode(transform(code || ''), this.state.scope);
     return (

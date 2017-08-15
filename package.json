@@ -6,11 +6,11 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "build:prod": "webpack --env.production",
+    "build:prod": "webpack --env.environment production",
     "format": "npm run format:js & npm run format:ts",
     "format:js": "prettier --write --single-quote \"src/snippets/*.js\"",
     "format:ts": "prettier --write --single-quote --parser typescript \"src/**/*.ts\"",
-    "start": "webpack-dev-server --hot --host 0.0.0.0",
+    "start": "webpack-dev-server --env.environment development --hot --host 0.0.0.0 --port 8000",
     "test": "jest",
     "test:watch": "npm run test -- --watch"
   },
@@ -22,6 +22,7 @@
     "@types/react-dom": "next",
     "awesome-typescript-loader": "^3.2.2",
     "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^20.0.4",
     "prettier": "^1.5.3",
@@ -31,6 +32,7 @@
     "ts-jest": "^20.0.10",
     "typescript": "^2.4.2",
     "webpack": "^3.5.4",
+    "webpack-config-assign": "^1.0.0",
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {

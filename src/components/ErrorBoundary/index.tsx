@@ -6,15 +6,31 @@ const Container = styled.div`
   width: 100%;
 `;
 
-export default class ErrorBoundary extends React.Component<any, any> {
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state = {
-    error: false
+    code: ``,
+    error: undefined
   };
 
-  componentDidCatch(error) {
+  componentDidCatch(error, info) {
+    if (this.props.onError) {
+      this.props.onError({
+        message: info.componentStack
+      });
+    }
     this.setState({
       error
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { code } = nextProps;
+    if (code !== this.state.code) {
+      this.setState({
+        code,
+        error: undefined
+      })
+    }
   }
 
   render() {
@@ -26,3 +42,16 @@ export default class ErrorBoundary extends React.Component<any, any> {
     return this.props.children;
   }
 }
+
+interface ErrorBoundaryProps {
+  children: any;
+  code: string | undefined;
+  onError?: Function;
+}
+
+interface ErrorBoundaryState {
+  code: string | undefined;
+  error: any;
+}
+
+export default ErrorBoundary;

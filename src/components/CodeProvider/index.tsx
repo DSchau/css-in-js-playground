@@ -20,7 +20,8 @@ const Container = styled.div`
 
 class CodeProvider extends React.Component<CodeProviderProps, CodeProviderState> {
   state = {
-    code: ``
+    code: ``,
+    error: null
   };
 
   static defaultProps = {
@@ -47,11 +48,17 @@ class CodeProvider extends React.Component<CodeProviderProps, CodeProviderState>
     });
   }
 
+  handleError = error => {
+    this.setState({
+      error
+    });
+  }
+
   render() {
     return (
       <Container>
-        <Editor code={this.state.code} onUpdate={this.handleEditorUpdate} />
-        <ErrorBoundary>
+        <Editor code={this.state.code} error={this.state.error} onUpdate={this.handleEditorUpdate} />
+        <ErrorBoundary code={this.state.code} onError={this.handleError}>
           <Preview code={this.state.code} />
         </ErrorBoundary>
       </Container>
@@ -65,6 +72,7 @@ interface CodeProviderProps {
 
 interface CodeProviderState {
   code: string;
+  error: Error;
 }
 
 export default CodeProvider;

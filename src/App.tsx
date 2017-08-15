@@ -4,7 +4,6 @@ import styled, { injectGlobal } from 'styled-components';
 import CodeProvider from './components/CodeProvider/';
 import Footer from './components/Footer/';
 import Header from './components/Header/';
-import SideBar from './components/SideBar/';
 
 const Container = styled.main`
   display: flex;

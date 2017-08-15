@@ -26,6 +26,20 @@ const TextArea = styled.textarea`
   border: none;
 `;
 
+const ErrorContainer = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  z-index: 3;
+`;
+
+const Error = styled.pre`
+  white-space: pre-wrap;
+  color: red;
+`;
+
 export default class Editor extends React.Component<any, any> {
   private editor: any;
   private textArea: HTMLTextAreaElement;
@@ -66,9 +80,14 @@ export default class Editor extends React.Component<any, any> {
   }
 
   render() {
+    const DisplayError = ({ error }) => {
+      return <ErrorContainer><Error>{error.message}</Error></ErrorContainer>;
+    };
+
     return (
       <Container>
-        <TextArea innerRef={node => this.textArea = node}/>
+        <TextArea innerRef={node => this.textArea = node} />
+        {this.props.error && <DisplayError error={this.props.error} />}
       </Container>
     );
   }

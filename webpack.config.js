@@ -1,10 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
+const assign = require('webpack-config-assign');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function webpackConfig() {
-  return {
-    devtool: 'cheap-module-eval-source-map',
+module.exports = function webpackConfig({ environment = 'production' } = {}) {
+  const base = {
+    devtool: 'source-map',
     entry: {
       bundle: ['./src/index']
     },
@@ -42,11 +44,16 @@ module.exports = function webpackConfig() {
     plugins: [
       new HtmlWebpackPlugin({
         template: 'src/index.html'
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(environment)
       })
     ],
     externals: {
       React: 'react',
       ReactDOM: 'react-dom'
     }
-  }
+  };
+
+  return assign(base, require(`./webpack.config.${environment}`));
 };
