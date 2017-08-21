@@ -9,5 +9,5 @@ export function handleOffline() {
     onUpdated() {
       location.reload();
     }
-  })
+  });
 }

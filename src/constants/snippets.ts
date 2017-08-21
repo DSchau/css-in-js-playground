@@ -7,4 +7,13 @@ import * as Aphrodite from '../snippets/aphrodite';
 import * as Cxs from '../snippets/cxs';
 import * as Radium from '../snippets/radium';
 
-export { StyledComponents, Glamor, Glamorous, Glam, Emotion, Aphrodite, Cxs, Radium };
+export {
+  StyledComponents,
+  Glamor,
+  Glamorous,
+  Glam,
+  Emotion,
+  Aphrodite,
+  Cxs,
+  Radium
+};

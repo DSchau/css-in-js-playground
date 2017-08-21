@@ -10,11 +10,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button
-        style={[
-          styles.base,
-          styles[this.props.kind]
-        ]}>
+      <button style={[styles.base, styles[this.props.kind]]}>
         Hello World
       </button>
     );
