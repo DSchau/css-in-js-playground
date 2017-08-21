@@ -8,7 +8,8 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
   const base = {
     devtool: 'source-map',
     entry: {
-      bundle: ['./src/index']
+      bundle: ['./src/index'],
+      vendor: ['react', 'react-dom', 'styled-components', 'buble', 'codemirror']
     },
     output: {
       filename: '[name].js',
@@ -52,6 +53,9 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
     externals: {
       React: 'react',
       ReactDOM: 'react-dom'
+    },
+    stats: {
+      children: false
     }
   };
 

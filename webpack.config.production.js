@@ -1,8 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
+const NameAllModulesPlugin = require('name-all-modules-plugin');
 
 module.exports = {
+  output: {
+    filename: 'scripts/[name].[chunkhash].js',
+    publicPath: '/jss-playground'
+  },
   module: {
     rules: [
       {
@@ -22,5 +28,19 @@ module.exports = {
       sourceMap: true
     }),
     new ExtractTextPlugin('vendor.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime',
+      minChunks: Infinity
+    }),
+    new NameAllModulesPlugin(),
+    new OfflinePlugin({
+      ServiceWorker: {
+        events: true
+      }
+    })
   ]
 };
