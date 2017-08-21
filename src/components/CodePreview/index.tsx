@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
   @media only screen and (min-width: 768px) {
     height: auto;
   }
@@ -18,14 +19,23 @@ const Container = styled.div`
 const CodeContainer = styled.div`
   display: block;
   height: auto;
-  width: auto;
+  width: 100%;
 `;
 
 const LivePreview = ({ code }) => {
   return <pre>{code}</pre>
 };
 
-export default class Preview extends React.Component<any, any> {
+interface Props {
+  code: string;
+}
+
+interface State {
+  loaded: boolean;
+  scope: any;
+}
+
+export default class Preview extends React.Component<Props, State> {
   state = {
     loaded: false,
     scope: {}

@@ -29,7 +29,11 @@ const Link = styled.a`
   text-decoration-skip: ink;
 `;
 
-export default function Footer() {
+interface Props {
+
+}
+
+function Footer(props: Props) {
   return (
     <FooterContainer>
       <Text>
@@ -38,3 +42,5 @@ export default function Footer() {
     </FooterContainer>
   );
 }
+
+export default Footer;

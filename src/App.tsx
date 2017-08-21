@@ -4,6 +4,7 @@ import styled, { injectGlobal } from 'styled-components';
 import CodeProvider from './components/CodeProvider/';
 import Footer from './components/Footer/';
 import Header from './components/Header/';
+import Router, { History } from './Router';
 
 const Container = styled.main`
   display: flex;
@@ -11,7 +12,15 @@ const Container = styled.main`
   height: 100%;
 `;
 
-class App extends React.Component {
+interface Props {
+
+}
+
+interface State {
+  code: string;
+}
+
+class App extends React.Component<Props, State> {
   state = {
     code: ``
   };

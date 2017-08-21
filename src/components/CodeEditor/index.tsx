@@ -16,6 +16,7 @@ const Container = styled.div`
   overflow: auto;
   position: relative;
   -webkit-overflow-scrolling: touch;
+  z-index: 2;
   @media only screen and (min-width: 768px) {
     height: auto;
   }
@@ -40,7 +41,17 @@ const Error = styled.pre`
   color: red;
 `;
 
-export default class Editor extends React.Component<any, any> {
+interface Props {
+  code: string;
+  error: Error;
+  onUpdate(value: string): void;
+}
+
+interface State {
+
+}
+
+export default class Editor extends React.Component<Props, State> {
   private editor: any;
   private textArea: HTMLTextAreaElement;
   private handleChange: Function;
@@ -69,7 +80,8 @@ export default class Editor extends React.Component<any, any> {
     this.editor.toTextArea();
   }
 
-  componentWillReceiveProps({ code }) {
+  componentWillReceiveProps(nextProps) {
+    const { code } = nextProps;
     if (code !== this.editor.getValue()) {
       this.editor.setValue(code);
     }

@@ -5,7 +5,7 @@ import Editor from '../CodeEditor/';
 import ErrorBoundary from '../ErrorBoundary/';
 import Preview from '../CodePreview/';
 
-import { TABLET_UP } from '../../constants/breakpoints';
+import { LARGE_UP } from '../../constants/breakpoints';
 
 const Container = styled.div`
   display: flex;
@@ -13,12 +13,21 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   position: relative;
-  @media only screen and (${TABLET_UP}) {
+  @media only screen and (${LARGE_UP}) {
     flex-direction: row;
   }
 `;
 
-class CodeProvider extends React.Component<CodeProviderProps, CodeProviderState> {
+interface Props {
+  code: string;
+}
+
+interface State {
+  code: string;
+  error: Error;
+}
+
+class CodeProvider extends React.Component<Props, State> {
   state = {
     code: ``,
     error: null
@@ -64,15 +73,6 @@ class CodeProvider extends React.Component<CodeProviderProps, CodeProviderState>
       </Container>
     );
   }
-}
-
-interface CodeProviderProps {
-  code: string;
-}
-
-interface CodeProviderState {
-  code: string;
-  error: Error;
 }
 
 export default CodeProvider;

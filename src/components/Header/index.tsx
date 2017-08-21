@@ -13,6 +13,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: flex-start;
   padding: 0 0.5rem;
+  z-index: 2;
 `;
 
 const Select = styled.select`
@@ -31,7 +32,16 @@ const Select = styled.select`
 const Option = styled.option`
 `;
 
-class Header extends React.Component<HeaderProps, HeaderState> {
+interface Props {
+  defaultSnippet: string;
+  onSelect: Function;
+}
+
+interface State {
+  selected: string;
+}
+
+class Header extends React.Component<Props, State> {
   state = {
     selected: ''
   };
@@ -81,15 +91,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       </HeaderContainer>
     );
   }
-}
-
-interface HeaderProps {
-  defaultSnippet: string;
-  onSelect: Function;
-}
-
-interface HeaderState {
-  selected: string;
 }
 
 export default Header;
