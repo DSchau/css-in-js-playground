@@ -23,16 +23,8 @@ export default code => {
     return import('styled-components').then(exposeExports('styled', false));
   } else if (matches('glamor')) {
     return import('glamor').then(exposeExports('glamor'));
-  } else if (matches('glam')) {
-    return import('glam').then(exposeExports('css'));
   } else if (matches('glamorous')) {
     return import('glamorous').then(exposeExports('glamorous', false));
-  } else if (matches('emotion/react')) {
-    return import('emotion/react').then(({ default: emotion }) => ({
-      css: emotion.css,
-      emotion,
-      styled: emotion
-    }));
   } else if (matches('aphrodite')) {
     return import('aphrodite').then(exposeExports('aphrodite'));
   } else if (matches('cxs')) {

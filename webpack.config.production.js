@@ -4,10 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const NameAllModulesPlugin = require('name-all-modules-plugin');
 
+const { name } = require('./package.json');
+
 module.exports = {
   output: {
     filename: 'scripts/[name].[chunkhash].js',
-    publicPath: '/jss-playground'
+    publicPath: `/${name}/`
   },
   module: {
     rules: [

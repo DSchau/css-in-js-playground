@@ -1,21 +1,23 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
 
-import * as HeartIcon from 'react-icons/lib/fa/heart';
+import * as CodeIcon from 'react-icons/lib/md/code';
 
 const FooterContainer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  background-color: black;
+  background-color: ${props => props.theme[props.theme.primary].base};
+  border-top: 1px solid ${props => darken(0.05, props.theme[props.theme.primary].base)};
   padding: 0.75rem 0.5rem;
 `;
 
 const Text = styled.h1`
   display: inline-block;
   font-size: 0.8rem;
-  color: white;
+  color: ${props => props.theme[props.theme.primary].text};
   margin: 0;
   padding: 0;
   font-family: serif;
@@ -37,7 +39,7 @@ function Footer(props: Props) {
   return (
     <FooterContainer>
       <Text>
-        Made with <HeartIcon color="red" /> by <Link href="https://dustinschau.com" target="_blank" rel="noopener">Dustin Schau</Link>
+        Made with <CodeIcon color="#E74C3C" size={22} /> by <Link href="https://dustinschau.com" target="_blank" rel="noopener">Dustin Schau</Link>
       </Text>
     </FooterContainer>
   );

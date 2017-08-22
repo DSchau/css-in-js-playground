@@ -1,13 +1,15 @@
 import * as OfflinePlugin from 'offline-plugin/runtime';
 
 export function handleOffline() {
-  OfflinePlugin.install({
-    onUpdateReady() {
-      OfflinePlugin.applyUpdate();
-    },
+  if (process.env.NODE_ENV === 'production') {
+    OfflinePlugin.install({
+      onUpdateReady() {
+        OfflinePlugin.applyUpdate();
+      },
 
-    onUpdated() {
-      location.reload();
-    }
-  });
+      onUpdated() {
+        location.reload();
+      }
+    });
+  }
 }

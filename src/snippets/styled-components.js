@@ -6,16 +6,29 @@ const Container = styled.main`
   flex-direction: column;
   min-height: 100%;
   width: 100%;
+	background-color: #f6f9fc;
 `;
 
 const Header = styled.header`
   display: flex;
   flex-direction: column;
   height: 40%;
-  min-height: 225px;
+  min-height: 250px;
   width: 100%;
   position: relative;
   justify-content: center;
+`;
+
+const Logo = styled.div`
+	height: 60px;
+	width: 60px;
+	border-radius: 60px;
+	background-color: white;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	z-index: 2;
 `;
 
 const Stripes = styled.div`
@@ -37,7 +50,7 @@ const Stripe = styled.div`
   overflow: hidden;
   transform: skewY(-8deg);
   transform-origin: 0;
-  background: linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #eee 70%);
+  background: linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%);
 `;
 
 const StripeBottom = styled.div`
@@ -47,10 +60,10 @@ const StripeBottom = styled.div`
   right: 0;
   height: 35%;
   overflow: hidden;
-  background: linear-gradient(150deg, rgba(0, 0, 0, 0) 40%, #acf0b5 70%);
+  background: linear-gradient(150deg, rgba(172, 240, 181, 0) 40%, #acf0b5 70%);
 `;
 
-const TitleContainer = styled.div`padding: 0 1rem;`;
+const TitleContainer = styled.div`padding: 1rem;`;
 
 const Title = styled.h1`
   color: white;
@@ -58,10 +71,11 @@ const Title = styled.h1`
   padding: 0;
   position: relative;
   font-size: 1.5rem;
+	font-weight: 100;
 `;
 
-const SubTitle = styled(Title)`
-	color: black;
+const SubTitle = styled(Title) `
+	color: #025450;
 	margin-top: 0.5rem;
 `;
 
@@ -103,30 +117,26 @@ const SubmitButton = styled.button`
   text-transform: uppercase;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
-  &:hover,
-  &:active,
-  &:focus {
-    outline: none;
-  }
 `;
 
 export default function Login() {
   return (
     <Container>
       <Header>
+        <Logo />
         <Stripes>
           <StripeBottom />
         </Stripes>
         <TitleContainer>
           <Title>Set up your payments</Title>
-          <SubTitle>Fake Company, Inc.</SubTitle>
+          <SubTitle>Rocketship, Inc.</SubTitle>
         </TitleContainer>
       </Header>
       <Stripe />
       <Form onSubmit={ev => ev.preventDefault()}>
         <Input type="text" placeholder="Email" />
         <Input type="text" placeholder="Phone number" />
-        <SubmitButton type="submit">Continue</SubmitButton>
+        <SubmitButton type="submit">Submit</SubmitButton>
       </Form>
     </Container>
   );

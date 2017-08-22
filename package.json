@@ -1,5 +1,5 @@
 {
-  "name": "jss-playground",
+  "name": "css-in-js-playground",
   "version": "1.0.0",
   "author": "Dustin Schau <dustinschau@gmail.com>",
   "main": "index.js",
@@ -50,8 +50,6 @@
     "buble": "^0.15.2",
     "codemirror": "^5.28.0",
     "cxs": "^5.0.0-1",
-    "emotion": "^7.0.13",
-    "glam": "^4.0.5",
     "glamor": "^2.20.40",
     "glamorous": "^4.1.1",
     "history": "^4.6.3",

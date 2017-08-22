@@ -1,10 +1,11 @@
 import * as React from 'react';
-import styled, { injectGlobal } from 'styled-components';
+import styled, { injectGlobal, ThemeProvider } from 'styled-components';
 
 import CodeProvider from './components/CodeProvider/';
 import Footer from './components/Footer/';
 import Header from './components/Header/';
-import Router, { History } from './Router';
+
+import theme from './style/theme';
 
 const Container = styled.main`
   display: flex;
@@ -18,11 +19,13 @@ interface Props {
 
 interface State {
   code: string;
+  theme: any;
 }
 
 class App extends React.Component<Props, State> {
   state = {
-    code: ``
+    code: ``,
+    theme: theme
   };
 
   handleSelect = code => {
@@ -31,13 +34,30 @@ class App extends React.Component<Props, State> {
     });
   }
 
+  handleColorSwitch = primary => {
+    const { theme } = this.state;
+    this.setState({
+      theme: {
+        ...theme,
+        primary
+      }
+    });
+  }
+
   render() {
     return (
-      <Container>
-        <Header defaultSnippet="StyledComponents" onSelect={this.handleSelect} />
-        <CodeProvider code={this.state.code} />
-        <Footer />
-      </Container>
+      <ThemeProvider theme={this.state.theme}>
+        <Container>
+          <Header
+            defaultSnippet="StyledComponents"
+            onSelect={this.handleSelect}
+            primary={this.state.theme.primary}
+            onColorSwitch={this.handleColorSwitch}
+            />
+          <CodeProvider code={this.state.code} />
+          <Footer />
+        </Container>
+      </ThemeProvider>
     );
   }
 }

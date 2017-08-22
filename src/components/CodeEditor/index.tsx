@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { injectGlobal } from 'styled-components';
+import styled, { injectGlobal, withTheme } from 'styled-components';
+import { darken } from 'polished';
 
 import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/jsx/jsx';
@@ -7,6 +8,8 @@ import 'codemirror/keymap/sublime';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 import * as debounce from 'lodash.debounce';
+
+import { Theme } from '../../style/theme';
 
 const Container = styled.div`
   display: flex;
@@ -17,7 +20,14 @@ const Container = styled.div`
   position: relative;
   -webkit-overflow-scrolling: touch;
   z-index: 2;
+  box-sizing: border-box;
+  border-color: ${props => darken(0.1, props.theme[props.theme.primary].base)};
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 2px;
   @media only screen and (min-width: 768px) {
+    border-bottom-width: 0;
+    border-right-width: 2px;
     height: auto;
   }
 `;
@@ -45,13 +55,14 @@ interface Props {
   code: string;
   error: Error;
   onUpdate(value: string): void;
+  theme: Theme;
 }
 
 interface State {
 
 }
 
-export default class Editor extends React.Component<Props, State> {
+class Editor extends React.Component<Props, State> {
   private editor: any;
   private textArea: HTMLTextAreaElement;
   private handleChange: Function;
@@ -81,7 +92,10 @@ export default class Editor extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { code } = nextProps;
+    const { code, theme } = nextProps;
+    if (theme.primary !== this.props.primary) {
+      this.editor.setOption('theme', theme.primary === 'dark' ? 'dracula' : 'default');
+    }
     if (code !== this.editor.getValue()) {
       this.editor.setValue(code);
     }
@@ -115,5 +129,9 @@ injectGlobal`
     right: 0;
     bottom: 0;
     left: 0;
+    font-family: "Operator Mono SSm A","Operator Mono SSm B", monospace;
+    font-size: 12px;
   }
 `;
+
+export default withTheme(Editor);
