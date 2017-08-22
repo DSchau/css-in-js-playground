@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { withTheme } from 'styled-components';
+import styled, { withTheme, StyledComponentClass } from 'styled-components';
 import { darken } from 'polished';
 import * as kebabCase from 'lodash.kebabcase';
 import * as queryString from 'query-string';
@@ -41,7 +41,7 @@ const Select = styled.select`
   }
 `;
 
-const DownIcon = styled(DownIconElement) `
+const DownIcon: StyledComponentClass<any, any> = styled(DownIconElement)`
   position: absolute;
   right: 0;
 `;

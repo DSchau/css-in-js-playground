@@ -21,7 +21,7 @@ const Container = styled.div`
   -webkit-overflow-scrolling: touch;
   z-index: 2;
   box-sizing: border-box;
-  border-color: ${props => darken(0.1, props.theme[props.theme.primary].base)};
+  border-color: ${props => darken(0.05, props.theme[props.theme.primary].base)};
   border-style: solid;
   border-width: 0;
   border-bottom-width: 2px;
@@ -53,9 +53,11 @@ const Error = styled.pre`
 
 interface Props {
   code: string;
+  children?: any;
+  className?: string;
   error: Error;
   onUpdate(value: string): void;
-  theme: Theme;
+  theme?: Theme;
 }
 
 interface State {
@@ -93,7 +95,7 @@ class Editor extends React.Component<Props, State> {
 
   componentWillReceiveProps(nextProps) {
     const { code, theme } = nextProps;
-    if (theme.primary !== this.props.primary) {
+    if (theme.primary !== this.props.theme.primary) {
       this.editor.setOption('theme', theme.primary === 'dark' ? 'dracula' : 'default');
     }
     if (code !== this.editor.getValue()) {
@@ -129,9 +131,9 @@ injectGlobal`
     right: 0;
     bottom: 0;
     left: 0;
-    font-family: "Operator Mono SSm A","Operator Mono SSm B", monospace;
+    font-family: "Operator Mono SSm A", "Operator Mono SSm B", monospace;
     font-size: 12px;
   }
 `;
 
-export default withTheme(Editor);
+export default withTheme(Editor) as React.ComponentClass<any>;
