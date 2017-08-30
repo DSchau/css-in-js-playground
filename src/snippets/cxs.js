@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import cxs from 'cxs/component';
+import Logo from './logo';
 
 const Container = cxs('main')({
   display: 'flex',
@@ -19,7 +20,10 @@ const Header = cxs('header')({
   justifyContent: 'center'
 });
 
-const Logo = cxs('div')({
+const LogoContainer = cxs('div')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   height: 60,
   width: 60,
   borderRadius: 60,
@@ -149,7 +153,9 @@ export default class Login extends Component {
     return (
       <Container>
         <Header>
-          <Logo />
+          <LogoContainer>
+            <Logo color="#25b57f" size={32} />
+          </LogoContainer>
           <Stripes>
             <StripeBottom />
           </Stripes>

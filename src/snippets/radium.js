@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
+import Logo from './logo';
 
 class Login extends Component {
   constructor(props) {
@@ -29,7 +30,9 @@ class Login extends Component {
     return (
       <div style={styles.container}>
         <header style={styles.header}>
-          <div style={styles.logo} />
+          <div style={styles.logoContainer}>
+            <Logo color="#25b57f" size={32} />
+          </div>
           <div style={styles.stripes}>
             <div style={styles.stripeBottom} />
           </div>
@@ -87,7 +90,10 @@ const styles = {
     position: 'relative',
     justifyContent: 'center'
   },
-  logo: {
+  logoContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 60,
     width: 60,
     borderRadius: 60,

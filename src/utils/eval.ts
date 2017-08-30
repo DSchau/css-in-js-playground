@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Logo from 'react-icons/lib/md/home';
 
 export default function evalCode(code = '', scope = {}) {
   const transformed = code
@@ -10,10 +11,11 @@ export default function evalCode(code = '', scope = {}) {
   const makeComponent = new Function(
     'React',
     'Component',
+    'Logo',
     ...scopeKeys,
     transformed
   );
-  const Component = makeComponent(React, React.Component, ...scopeValues);
+  const Component = makeComponent(React, React.Component, Logo, ...scopeValues);
   if (typeof Component !== 'function') {
     return noop;
   }

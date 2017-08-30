@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
+import Logo from './logo';
 
 const Container = glamorous.main({
   display: 'flex',
@@ -19,7 +20,10 @@ const Header = glamorous.header({
   justifyContent: 'center'
 });
 
-const Logo = glamorous.div({
+const LogoContainer = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   height: 60,
   width: 60,
   borderRadius: 60,
@@ -154,7 +158,9 @@ export default class Login extends Component {
     return (
       <Container>
         <Header>
-          <Logo />
+          <LogoContainer>
+            <Logo color="#25b57f" size={32} />
+          </LogoContainer>
           <Stripes>
             <StripeBottom />
           </Stripes>

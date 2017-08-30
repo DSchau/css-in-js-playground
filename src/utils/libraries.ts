@@ -20,12 +20,10 @@ export default code => {
   const matches = matchesExpression.bind(undefined, code);
 
   if (matches('styled-components')) {
-    return import('styled-components').then(({ default: styled, ...rest }) => {
-      return {
-        styled,
-        ...rest
-      };
-    });
+    return import('styled-components').then(({ default: styled, ...rest }) => ({
+      styled,
+      ...rest
+    }));
   } else if (matches('glamor')) {
     return import('glamor').then(exposeExports('glamor'));
   } else if (matches('glamorous')) {

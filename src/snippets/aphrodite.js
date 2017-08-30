@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import Logo from './logo';
 
 class Login extends Component {
   constructor(props) {
@@ -28,7 +29,9 @@ class Login extends Component {
     return (
       <div className={css(styles.container)}>
         <header className={css(styles.header)}>
-          <div className={css(styles.logo)} />
+          <div className={css(styles.logoContainer)}>
+            <Logo color="#25b57f" size={32} />
+          </div>
           <div className={css(styles.stripes)}>
             <div className={css(styles.stripeBottom)} />
           </div>
@@ -90,7 +93,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center'
   },
-  logo: {
+  logoContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 60,
     width: 60,
     borderRadius: 60,

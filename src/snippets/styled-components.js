@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Logo from './logo';
 
 const Container = styled.main`
   display: flex;
@@ -19,7 +20,10 @@ const Header = styled.header`
   justify-content: center;
 `;
 
-const Logo = styled.div`
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 60px;
   width: 60px;
   border-radius: 60px;
@@ -146,7 +150,9 @@ export default class Login extends Component {
     return (
       <Container>
         <Header>
-          <Logo />
+          <LogoContainer>
+            <Logo color="#25b57f" size={32} />
+          </LogoContainer>
           <Stripes>
             <StripeBottom />
           </Stripes>

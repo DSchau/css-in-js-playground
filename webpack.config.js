@@ -16,6 +16,9 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
       path: path.join(__dirname, 'dist')
     },
     resolve: {
+      alias: {
+        assets: path.join(__dirname, 'assets')
+      },
       extensions: ['.js', '.ts', '.tsx', '.json', '.']
     },
     module: {
