@@ -16,6 +16,6 @@ A simple CodeMirror editor showcasing the various CSS in JS (or JSS) styling sol
 
 ## Credits
 
-[Stripe][stripe], from which their simple form mockup I used as the reference material to build each of the examples.
+[Stripe][stripe]: their excellent form mockup served as the basis for each of the current form designs.
 
 [stripe]: https://stripe.com/connect
