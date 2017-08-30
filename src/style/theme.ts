@@ -19,4 +19,4 @@ export default {
     text: '#1E1E20'
   },
   primary: 'dark'
-}
+};

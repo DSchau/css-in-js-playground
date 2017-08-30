@@ -12,6 +12,7 @@ const FooterContainer = styled.footer`
   background-color: ${props => props.theme[props.theme.primary].base};
   border-top: 1px solid ${props => darken(0.05, props.theme[props.theme.primary].base)};
   padding: 0.75rem 0.5rem;
+  transition: 250ms ease-in-out;
 `;
 
 const Text = styled.h1`

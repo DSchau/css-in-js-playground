@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.main`
@@ -6,7 +6,7 @@ const Container = styled.main`
   flex-direction: column;
   min-height: 100%;
   width: 100%;
-	background-color: #f6f9fc;
+  background-color: #f6f9fc;
 `;
 
 const Header = styled.header`
@@ -20,15 +20,15 @@ const Header = styled.header`
 `;
 
 const Logo = styled.div`
-	height: 60px;
-	width: 60px;
-	border-radius: 60px;
-	background-color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 60px;
+  background-color: white;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	z-index: 2;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
 `;
 
 const Stripes = styled.div`
@@ -71,10 +71,10 @@ const Title = styled.h1`
   padding: 0;
   position: relative;
   font-size: 1.5rem;
-	font-weight: 100;
+  font-weight: 100;
 `;
 
-const SubTitle = styled(Title) `
+const SubTitle = styled(Title)`
 	color: #025450;
 	margin-top: 0.5rem;
 `;
@@ -107,7 +107,7 @@ const Input = styled.input`
 
 const SubmitButton = styled.button`
   display: block;
-  background-color: #6772e5;
+  background-color: ${props => (props.disabled ? '#BBB' : '#6772e5')};
   color: white;
   border: none;
   width: 100%;
@@ -119,25 +119,59 @@ const SubmitButton = styled.button`
   margin-top: 1rem;
 `;
 
-export default function Login() {
-  return (
-    <Container>
-      <Header>
-        <Logo />
-        <Stripes>
-          <StripeBottom />
-        </Stripes>
-        <TitleContainer>
-          <Title>Set up your payments</Title>
-          <SubTitle>Rocketship, Inc.</SubTitle>
-        </TitleContainer>
-      </Header>
-      <Stripe />
-      <Form onSubmit={ev => ev.preventDefault()}>
-        <Input type="text" placeholder="Email" />
-        <Input type="text" placeholder="Phone number" />
-        <SubmitButton type="submit">Submit</SubmitButton>
-      </Form>
-    </Container>
-  );
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      phoneNumber: '',
+      fields: ['email', 'phoneNumber'],
+      valid: false
+    };
+  }
+
+  handleInputChange(prop) {
+    return ev => {
+      const { value } = ev.target;
+      this.setState({
+        [prop]: value,
+        valid:
+          value.length > 0 &&
+          this.state.fields.every(field => this.state[field].length > 0)
+      });
+    };
+  }
+
+  render() {
+    return (
+      <Container>
+        <Header>
+          <Logo />
+          <Stripes>
+            <StripeBottom />
+          </Stripes>
+          <TitleContainer>
+            <Title>Set up your payments</Title>
+            <SubTitle>Rocketship, Inc.</SubTitle>
+          </TitleContainer>
+        </Header>
+        <Stripe />
+        <Form onSubmit={ev => ev.preventDefault()}>
+          <Input
+            type="text"
+            placeholder="Email"
+            onChange={this.handleInputChange('email')}
+          />
+          <Input
+            type="text"
+            placeholder="Phone number"
+            onChange={this.handleInputChange('phoneNumber')}
+          />
+          <SubmitButton type="submit" disabled={!this.state.valid}>
+            Submit
+          </SubmitButton>
+        </Form>
+      </Container>
+    );
+  }
 }

@@ -19,6 +19,7 @@ const HeaderContainer = styled.header`
   justify-content: flex-start;
   padding: 0 0.5rem;
   z-index: 2;
+  transition: 250ms ease-in-out;
 `;
 
 const SelectContainer = styled.div`

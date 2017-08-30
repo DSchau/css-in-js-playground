@@ -20,17 +20,24 @@ export default code => {
   const matches = matchesExpression.bind(undefined, code);
 
   if (matches('styled-components')) {
-    return import('styled-components').then(exposeExports('styled', false));
+    return import('styled-components').then(({ default: styled, ...rest }) => {
+      return {
+        styled,
+        ...rest
+      };
+    });
   } else if (matches('glamor')) {
     return import('glamor').then(exposeExports('glamor'));
   } else if (matches('glamorous')) {
     return import('glamorous').then(exposeExports('glamorous', false));
   } else if (matches('aphrodite')) {
     return import('aphrodite').then(exposeExports('aphrodite'));
-  } else if (matches('cxs')) {
-    return import('cxs').then(exposeExports('cxs'));
+  } else if (matches('cxs/component')) {
+    return import('cxs/component').then(exposeExports('cxs'));
   } else if (matches('radium')) {
     return import('radium').then(exposeExports('Radium'));
+  } else if (matches('styletron-react')) {
+    return import('styletron-react').then(exposeExports('styletron'));
   }
   return Promise.resolve({});
 };
