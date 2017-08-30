@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Logo from 'react-icons/lib/fa/rocket';
+import Logo from 'react-icons/lib/go/rocket';
 
 export default function evalCode(code = '', scope = {}) {
   const transformed = code
