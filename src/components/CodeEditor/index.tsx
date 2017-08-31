@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { injectGlobal, withTheme } from 'styled-components';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 
 import * as CodeMirror from 'codemirror';
 import 'codemirror/mode/jsx/jsx';
@@ -42,13 +42,15 @@ const ErrorContainer = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: white;
-  z-index: 3;
+  background-color: ${lighten(0.45, 'red')};
+  border-top: 1px solid ${lighten(0.4, 'red')};
+  z-index: 4;
 `;
 
 const Error = styled.pre`
   white-space: pre-wrap;
-  color: red;
+  color: ${lighten(0.2, 'red')};
+  font-size: 12px;
 `;
 
 interface Props {

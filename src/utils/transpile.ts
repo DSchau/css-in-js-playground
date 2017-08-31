@@ -1,12 +1,13 @@
-import * as buble from 'buble';
+import Worker from '../Worker';
 
-export default function transform(code): string {
-  try {
-    return buble.transform(code, {
-      transforms: {
-        modules: false,
-        templateString: false
-      }
-    }).code;
-  } catch (e) {}
+const worker = new Worker();
+
+export default function transform(code): Promise<any> {
+  return new Promise((resolve, reject) => {
+    worker.onmessage = ev => {
+      resolve(ev.data);
+    };
+
+    worker.postMessage(code);
+  });
 }
