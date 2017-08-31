@@ -40,6 +40,14 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
           include: [path.join(__dirname, 'node_modules')]
         },
         {
+          test: /\.html$/,
+          use: ['html-loader']
+        },
+        {
+          test: /manifest\.json$/,
+          use: ['file-loader']
+        },
+        {
           test: /\.js$/,
           use: ['raw-loader'],
           include: [path.join(__dirname, 'src/snippets')]
@@ -53,6 +61,7 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
     },
     plugins: [
       new HtmlWebpackPlugin({
+        inject: 'body',
         template: 'src/index.html'
       }),
       new webpack.DefinePlugin({
