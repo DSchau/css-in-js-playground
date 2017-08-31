@@ -27,7 +27,10 @@ export default code => {
   } else if (matches('glamor')) {
     return import('glamor').then(exposeExports('glamor'));
   } else if (matches('glamorous')) {
-    return import('glamorous').then(exposeExports('glamorous', false));
+    return import('glamorous').then(({ default: glamorous, ...rest }) => ({
+      glamorous,
+      ...rest
+    }));
   } else if (matches('aphrodite')) {
     return import('aphrodite').then(exposeExports('aphrodite'));
   } else if (matches('cxs/component')) {
