@@ -31,7 +31,8 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
         {
           test: /\.tsx?$/,
           use: 'awesome-typescript-loader',
-          include: [path.join(__dirname, 'src')]
+          include: [path.join(__dirname, 'src')],
+          exclude: [path.join(__dirname, 'src/Worker')]
         },
         {
           test: /\.css$/,
@@ -42,6 +43,11 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
           test: /\.js$/,
           use: ['raw-loader'],
           include: [path.join(__dirname, 'src/snippets')]
+        },
+        {
+          test: /\.ts$/,
+          use: ['worker-loader', 'awesome-typescript-loader'],
+          include: path.join(__dirname, 'src/Worker')
         }
       ]
     },

@@ -31,12 +31,14 @@ interface Props {
 }
 
 interface State {
+  Component: Function;
   loaded: boolean;
   scope: any;
 }
 
 export default class Preview extends React.Component<Props, State> {
   state = {
+    Component: () => null,
     loaded: false,
     scope: {}
   };
@@ -49,8 +51,17 @@ export default class Preview extends React.Component<Props, State> {
         this.setState({
           loaded: true,
           scope: library
+        }, () => {
+          transform(code || '')
+            .then(es5 => {
+              this.setState({
+                Component: evalCode(es5, this.state.scope)
+              })
+            });
         });
       });
+    
+
   }
 
   render() {
@@ -58,7 +69,7 @@ export default class Preview extends React.Component<Props, State> {
     if (!this.state.loaded) {
       return <Container />;
     }
-    const Component = evalCode(transform(code || ''), this.state.scope);
+    const { Component } = this.state;
     return (
       <Container>
         <CodeContainer>
