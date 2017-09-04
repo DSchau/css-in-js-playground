@@ -4,9 +4,6 @@ exports[`it exports common libraries 1`] = `
 Array [
   "Aphrodite",
   "Cxs",
-  "Emotion",
-  "Glam",
-  "Glamor",
   "Glamorous",
   "Radium",
   "StyledComponents",
