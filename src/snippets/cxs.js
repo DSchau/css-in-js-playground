@@ -126,6 +126,10 @@ const SubmitButton = cxs('button')(props => ({
   marginTop: '1rem'
 }));
 
+SubmitButton.defaultProps = {
+  type: 'submit'
+};
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -176,7 +180,7 @@ export default class Login extends Component {
             placeholder="Phone number"
             onChange={this.handleInputChange('phoneNumber')}
           />
-          <SubmitButton type="submit" disabled={!this.state.valid}>
+          <SubmitButton disabled={!this.state.valid}>
             Submit
           </SubmitButton>
         </Form>

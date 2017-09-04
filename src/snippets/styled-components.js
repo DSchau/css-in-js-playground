@@ -109,7 +109,9 @@ const Input = styled.input`
   }
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.button.attrs({
+  type: 'submit'
+})`
   display: block;
   background-color: ${props => (props.disabled ? '#BBB' : '#6772e5')};
   color: white;
@@ -173,7 +175,7 @@ export default class Login extends Component {
             placeholder="Phone number"
             onChange={this.handleInputChange('phoneNumber')}
           />
-          <SubmitButton type="submit" disabled={!this.state.valid}>
+          <SubmitButton disabled={!this.state.valid}>
             Submit
           </SubmitButton>
         </Form>
