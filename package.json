@@ -5,8 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prebuild": "npm run clean && npm run copy",
+    "prebuild": "npm run clean",
     "build": "webpack --hide-modules",
+    "postbuild": "npm run copy",
     "build:production": "npm run build -- --env.environment production --hide-modules",
     "clean": "del-cli \"dist/**/*\"",
     "copy": "cp src/manifest.json dist/manifest.json;",
