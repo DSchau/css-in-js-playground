@@ -13,9 +13,7 @@ const Container = styled.main`
   height: 100%;
 `;
 
-interface Props {
-
-}
+interface Props {}
 
 interface State {
   code: string;

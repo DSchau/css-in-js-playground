@@ -65,7 +65,7 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
         template: 'src/index.html'
       }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(environment)
+        'process.env.NODE_ENV': JSON.stringify('production')
       })
     ],
     externals: {

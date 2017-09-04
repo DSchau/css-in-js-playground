@@ -19,6 +19,10 @@ const Error = styled.pre`
   font-size: 12px;
 `;
 
+const ErrorTitle = styled.strong`
+  display: inline-block;
+`;
+
 interface Props {
   error: Error | null;
   errorInfo: {
@@ -29,7 +33,7 @@ interface Props {
 export default function DisplayError({ error, errorInfo }: Props) {
   return (
     <ErrorContainer>
-      <Error>{error.message}</Error>
+      <Error><ErrorTitle>{error.name}</ErrorTitle>: {error.message}</Error>
       <Error>{errorInfo.componentStack}</Error>
     </ErrorContainer>
   );
