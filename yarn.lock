@@ -2176,9 +2176,9 @@ glamor@^2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.1.1.tgz#df7b2834344e3d3d2252267256cb7c0b52ce1db7"
+glamorous@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.7.0.tgz#4327565f4a65895359e37ff63ec13becccd4fd58"
   dependencies:
     brcast "^3.0.0"
     fast-memoize "^2.2.7"

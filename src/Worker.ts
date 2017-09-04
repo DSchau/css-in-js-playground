@@ -15,4 +15,4 @@ onmessage = ev => {
   }
 };
 
-export default () => { }; // only to get around annoying typescript errors
+export default () => {}; // only to get around annoying typescript errors

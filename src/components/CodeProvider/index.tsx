@@ -24,7 +24,7 @@ interface Props {
 
 interface State {
   code: string;
-  error: Error;
+  error: Error | null;
 }
 
 class CodeProvider extends React.Component<Props, State> {
@@ -53,7 +53,8 @@ class CodeProvider extends React.Component<Props, State> {
 
   handleEditorUpdate = code => {
     this.setState({
-      code
+      code,
+      error: null
     });
   }
 
