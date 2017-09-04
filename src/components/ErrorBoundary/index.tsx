@@ -14,7 +14,6 @@ interface Props {
 
 interface State {
   code: string | undefined;
-  error: any;
 }
 
 class ErrorBoundary extends React.Component<Props, State> {
@@ -26,30 +25,22 @@ class ErrorBoundary extends React.Component<Props, State> {
   componentDidCatch(error, info) {
     if (this.props.onError) {
       this.props.onError({
-        message: info.componentStack
+        error,        
+        info
       });
     }
-    this.setState({
-      error
-    });
   }
 
   componentWillReceiveProps(nextProps) {
     const { code } = nextProps;
     if (code !== this.state.code) {
       this.setState({
-        code,
-        error: undefined
+        code
       })
     }
   }
 
   render() {
-    if (this.state.error) {
-      return (
-        <Container />
-      );
-    }
     return this.props.children;
   }
 }

@@ -6,11 +6,14 @@ import evalCode from '../../utils/eval';
 import transform from '../../utils/transpile';
 import getStylingLibrary from '../../utils/libraries';
 
+import DisplayError from './display-error';
+
 const Container = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  position: relative;
   @media only screen and (min-width: 768px) {
     height: auto;
   }
@@ -28,6 +31,10 @@ const LivePreview = ({ code }) => {
 
 interface Props {
   code: string;
+  error: Error;
+  errorInfo: {
+    componentStack: string;
+  };
 }
 
 interface State {
@@ -60,20 +67,19 @@ export default class Preview extends React.Component<Props, State> {
             });
         });
       });
-    
-
   }
 
   render() {
-    const { code } = this.props;
-    if (!this.state.loaded) {
+    const { code, error, errorInfo } = this.props;
+    if (!this.state.loaded && !error) {
       return <Container />;
     }
     const { Component } = this.state;
     return (
       <Container>
         <CodeContainer>
-          <Component />
+          {this.props.error ? 
+            <DisplayError error={error} errorInfo={errorInfo} /> : <Component /> }
         </CodeContainer>
       </Container>
     );

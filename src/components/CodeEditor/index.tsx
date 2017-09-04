@@ -10,7 +10,6 @@ import 'codemirror/theme/dracula.css';
 import * as debounce from 'lodash.debounce';
 
 import { Theme } from '../../style/theme';
-import DisplayError from './display-error';
 
 const Container = styled.div`
   display: flex;
@@ -38,13 +37,10 @@ const TextArea = styled.textarea`
   border: none;
 `;
 
-
-
 interface Props {
   code: string;
   children?: any;
   className?: string;
-  error: Error;
   onUpdate(value: string): void;
   theme?: Theme;
 }
@@ -100,7 +96,6 @@ class Editor extends React.Component<Props, State> {
     return (
       <Container>
         <TextArea innerRef={node => this.textArea = node} />
-        {this.props.error && <DisplayError error={this.props.error} />}
       </Container>
     );
   }

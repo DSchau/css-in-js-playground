@@ -10,6 +10,7 @@ const ErrorContainer = styled.div`
   background-color: ${lighten(0.45, 'red')};
   border-top: 1px solid ${lighten(0.4, 'red')};
   z-index: 4;
+  padding: 0.5rem;
 `;
 
 const Error = styled.pre`
@@ -19,9 +20,17 @@ const Error = styled.pre`
 `;
 
 interface Props {
-  error: Error | null
+  error: Error | null;
+  errorInfo: {
+    componentStack: string;
+  };
 };
 
-export default function DisplayError({ error }: Props) {
-  return <ErrorContainer><Error>{error.message}</Error></ErrorContainer>;
+export default function DisplayError({ error, errorInfo }: Props) {
+  return (
+    <ErrorContainer>
+      <Error>{error.message}</Error>
+      <Error>{errorInfo.componentStack}</Error>
+    </ErrorContainer>
+  );
 }

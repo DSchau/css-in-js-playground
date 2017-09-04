@@ -25,12 +25,16 @@ interface Props {
 interface State {
   code: string;
   error: Error | null;
+  errorInfo: {
+    componentStack: string
+  };
 }
 
 class CodeProvider extends React.Component<Props, State> {
   state = {
     code: ``,
-    error: null
+    error: null,
+    errorInfo: null
   };
 
   static defaultProps = {
@@ -58,18 +62,20 @@ class CodeProvider extends React.Component<Props, State> {
     });
   }
 
-  handleError = error => {
+  handleError = ({ error, info }) => {
     this.setState({
-      error
+      error,
+      errorInfo: info
     });
   }
 
   render() {
+    const { code, error, errorInfo } = this.state;
     return (
       <Container>
-        <Editor code={this.state.code} error={this.state.error} onUpdate={this.handleEditorUpdate} />
-        <ErrorBoundary code={this.state.code} onError={this.handleError}>
-          <Preview code={this.state.code} />
+        <Editor code={code} error={error} errorInfo={errorInfo} onUpdate={this.handleEditorUpdate} />
+        <ErrorBoundary code={code} onError={this.handleError}>
+          <Preview code={code} error={error} errorInfo={errorInfo} />
         </ErrorBoundary>
       </Container>
     );
