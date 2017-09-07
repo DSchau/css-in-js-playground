@@ -12,6 +12,7 @@ A simple CodeMirror editor showcasing the various CSS in JS (or JSS) styling sol
 - [aphrodite](./src/snippets/aphrodite.js)
 - [cxs](./src/snippets/cxs.js)
 - [glamorous](./src/snippets/glamorous.js)
+- [jss](./src/snippets/jss.js)
 - [radium](./src/snippets/radium.js)
 - [react-jss](./src/snippets/react-jss.js)
 - [styled-components](./src/snippets/styled-components.js)
