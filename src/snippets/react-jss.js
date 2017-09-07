@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import Logo from './logo';
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100%',
-    width: '100%',
-    backgroundColor: '#f6f9fc'
-  },
+const headerStyles = {
   header: {
     display: 'flex',
     flexDirection: 'column',
@@ -46,14 +39,6 @@ const styles = {
     transformOrigin: 0,
     background: 'linear-gradient(-150deg, #25b57f 0%, #acf0b5 70%)'
   },
-  stripe: {
-    height: '10vh',
-    overflow: 'hidden',
-    transform: 'skewY(-8deg)',
-    transformOrigin: 0,
-    background:
-    'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
-  },
   stripeBottom: {
     position: 'absolute',
     bottom: 0,
@@ -78,7 +63,27 @@ const styles = {
     extend: 'title',
     color: '#025450',
     marginTop: '0.5rem'
-  },
+  }
+};
+
+const HeaderRenderer = ({classes}) => (
+  <header className={classes.header}>
+    <div className={classes.logoContainer}>
+      <Logo color="#25b57f" size={32} />
+    </div>
+    <div className={classes.stripes}>
+      <div className={classes.stripeBottom} />
+    </div>
+    <div className={classes.titleContainer}>
+      <h1 className={classes.title}>Set up your payments</h1>
+      <h1 className={classes.subTitle}>Rocketship, Inc.</h1>
+    </div>
+  </header>
+);
+
+const Header = injectSheet(headerStyles)(HeaderRenderer);
+
+const formStyles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -102,13 +107,10 @@ const styles = {
       outline: 'none',
       boxShadow: { x: 0, y: 1, blur: 6, color: 'rgba(103, 114, 229, 0.5)' }
     }
-  }
-}
-
-const buttonStyles = {
-  base: {
+  },
+  button: {
     display: 'block',
-    backgroundColor: props => props.disabled ? '#BBB' : '#6772e5',
+    backgroundColor: props => props.valid ? '#6772e5' : '#BBB',
     color: 'white',
     border: 'none',
     width: '100%',
@@ -121,9 +123,42 @@ const buttonStyles = {
   }
 };
 
-const SubmitButton = injectSheet(buttonStyles)(({ classes, children, disabled }) => (
-  <button type="submit" className={classes.base} disabled={disabled}>{children}</button>
-));
+const FormRenderer = ({classes, onChangeEmail, onChangePhoneNumber, valid}) => (
+  <form className={classes.form} onSubmit={ev => ev.preventDefault()}>
+    <input
+      className={classes.input}
+      type="text"
+      placeholder="Email"
+      onChange={onChangeEmail}
+    />
+    <input
+      className={classes.input}
+      type="text"
+      placeholder="Phone number"
+      onChange={onChangePhoneNumber}
+    />
+    <button type="submit" className={classes.button} disabled={!valid}>Submit</button>
+  </form>
+);
+
+const Form = injectSheet(formStyles)(FormRenderer);
+
+const loginStyles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100%',
+    width: '100%',
+    backgroundColor: '#f6f9fc'
+  },
+  stripe: {
+    height: '10vh',
+    overflow: 'hidden',
+    transform: 'skewY(-8deg)',
+    transformOrigin: 0,
+    background: 'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
+  }
+};
 
 class Login extends Component {
   constructor(props) {
@@ -153,37 +188,16 @@ class Login extends Component {
 
     return (
       <main className={classes.container}>
-        <header className={classes.header}>
-          <div className={classes.logoContainer}>
-            <Logo color="#25b57f" size={32} />
-          </div>
-          <div className={classes.stripes}>
-            <div className={classes.stripeBottom} />
-          </div>
-          <div className={classes.titleContainer}>
-            <h1 className={classes.title}>Set up your payments</h1>
-            <h1 className={classes.subTitle}>Rocketship, Inc.</h1>
-          </div>
-        </header>
+        <Header />
         <div className={classes.stripe} />
-        <form className={classes.form} onSubmit={ev => ev.preventDefault()}>
-          <input
-            className={classes.input}
-            type="text"
-            placeholder="Email"
-            onChange={this.handleInputChange('email')}
-          />
-          <input
-            className={classes.input}
-            type="text"
-            placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
-          />
-          <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
-        </form>
+        <Form
+          onChangeEmail={this.handleInputChange('email')}
+          onChangePhoneNumber={this.handleInputChange('phoneNumber')}
+          valid={this.state.valid}
+        />
       </main>
     );
   }
-}
+};
 
-export default injectSheet(styles)(Login);
+export default injectSheet(loginStyles)(Login);
