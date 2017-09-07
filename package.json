@@ -80,7 +80,7 @@
       "git add"
     ],
     "src/snippets/*.js": [
-      "npm run markdown",
+      "npm run markdown & npm run format:js",
       "git add"
     ]
   }
