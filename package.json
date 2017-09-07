@@ -70,6 +70,7 @@
     "react": "next",
     "react-dom": "next",
     "react-icons": "^2.2.5",
+    "react-jss": "^7.1.0",
     "styled-components": "^2.1.2",
     "styletron-react": "^2.5.8",
     "webfontloader": "^1.6.28"

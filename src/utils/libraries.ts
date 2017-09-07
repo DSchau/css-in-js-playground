@@ -39,6 +39,10 @@ export default code => {
     return import('radium').then(exposeExports('Radium'));
   } else if (matches('styletron-react')) {
     return import('styletron-react').then(exposeExports('styletron'));
+  } else if (matches('react-jss')) {
+    return import('react-jss').then(reactJSS => ({
+      injectSheet: (reactJSS as any).default
+    }));
   }
   return Promise.resolve({});
 };
