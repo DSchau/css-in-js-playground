@@ -34,7 +34,7 @@ const styles = {
     position: 'absolute',
     top: '1rem',
     left: '1rem',
-    zIndex: '2'
+    zIndex: 2
   },
   stripes: {
     position: 'absolute',
