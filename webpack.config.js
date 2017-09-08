@@ -65,12 +65,16 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
         template: 'src/index.html'
       }),
       new webpack.DefinePlugin({
+        'process.env': JSON.stringify({}),
         'process.env.NODE_ENV': JSON.stringify('production')
       })
     ],
     externals: {
       React: 'react',
       ReactDOM: 'react-dom'
+    },
+    node: {
+      fs: 'empty'
     },
     stats: {
       children: false

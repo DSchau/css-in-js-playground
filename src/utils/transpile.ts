@@ -10,7 +10,17 @@ export default function transform(code): Promise<any> {
 
     worker.postMessage({
       code,
-      plugins: code.match(/['"]emotion['"]/) ? ['emotion'] : []
+      plugins: code.match(/['"]emotion['"]/)
+        ? [
+            [
+              'emotion/babel',
+              {
+                inline: true,
+                autoImportCssProp: false
+              }
+            ]
+          ]
+        : []
     });
   });
 }

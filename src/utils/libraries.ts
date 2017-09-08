@@ -51,6 +51,16 @@ export default code => {
     return import('react-jss').then(reactJSS => ({
       injectSheet: (reactJSS as any).default
     }));
+  } else if (matches('emotion')) {
+    return Promise.all([
+      import('emotion'),
+      import('react-emotion')
+    ]).then(([emotion, styled]) => {
+      return {
+        ...exposeExports('emotion')(emotion),
+        styled: (styled as any).default
+      };
+    });
   }
   return Promise.resolve({});
 };

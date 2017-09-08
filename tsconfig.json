@@ -5,7 +5,7 @@
     "sourceMap": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "lib": ["dom", "es5", "es2015", "webworker"],
+    "lib": ["dom", "es5", "es2015", "es2016", "webworker"],
     "target": "es5",
     "jsx": "react"
   },
