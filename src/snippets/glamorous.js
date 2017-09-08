@@ -132,12 +132,15 @@ const SubmitButton = glamorous.button(
 ).withProps({type: 'submit'});
 
 export default class Login extends Component {
-  state = {
-    email: '',
-    phoneNumber: '',
-    fields: ['email', 'phoneNumber'],
-    valid: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      phoneNumber: '',
+      fields: ['email', 'phoneNumber'],
+      valid: false
+    };
+  }
 
   handleInputChange = ev => {
     const { value } = ev.target
