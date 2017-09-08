@@ -2,11 +2,10 @@ import * as Babel from 'babel-standalone';
 
 onmessage = ev => {
   const { data = {} } = ev;
-  const { code = '', plugins = [] } = data;
+  const { code = '' } = data;
   try {
     const { code: transformed } = Babel.transform(code, {
-      presets: [['es2015', { modules: false }], 'stage-2', 'react'],
-      plugins: ['transform-class-properties'].concat(plugins)
+      presets: [['es2015', { modules: false }], 'stage-2', 'react']
     });
     (postMessage as any)(transformed);
   } catch (e) {

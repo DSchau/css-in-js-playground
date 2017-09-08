@@ -169,14 +169,14 @@ export default class Login extends Component {
         <Form onSubmit={ev => ev.preventDefault()}>
           <Input
             type="text"
-            placeholder="Email"
             name="email"
+            placeholder="Email"
             onChange={this.handleInputChange}
           />
           <Input
             type="text"
-            placeholder="Phone number"
             name="phoneNumber"
+            placeholder="Phone number"
             onChange={this.handleInputChange}
           />
           <SubmitButton disabled={!this.state.valid}>

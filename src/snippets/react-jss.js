@@ -128,12 +128,14 @@ const FormRenderer = ({classes, onChangeEmail, onChangePhoneNumber, valid}) => (
     <input
       className={classes.input}
       type="text"
+      name="email"
       placeholder="Email"
       onChange={onChangeEmail}
     />
     <input
       className={classes.input}
       type="text"
+      name="phoneNumber"
       placeholder="Phone number"
       onChange={onChangePhoneNumber}
     />
@@ -168,16 +170,15 @@ class Login extends Component {
     valid: false
   };
 
-  handleInputChange(prop) {
-    return ev => {
-      const { value } = ev.target;
-      this.setState({
-        [prop]: value,
-        valid:
-        value.length > 0 &&
-        this.state.fields.every(field => this.state[field].length > 0)
-      });
-    };
+  handleInputChange = ev => {
+    const { value } = ev.target;
+    const prop = ev.target.getAttribute('name');
+    this.setState({
+      [prop]: value,
+      valid:
+      value.length > 0 &&
+      this.state.fields.every(field => this.state[field].length > 0)
+    });
   }
 
   render() {
@@ -188,8 +189,8 @@ class Login extends Component {
         <Header />
         <div className={classes.stripe} />
         <Form
-          onChangeEmail={this.handleInputChange('email')}
-          onChangePhoneNumber={this.handleInputChange('phoneNumber')}
+          onChangeEmail={this.handleInputChange}
+          onChangePhoneNumber={this.handleInputChange}
           valid={this.state.valid}
         />
       </main>

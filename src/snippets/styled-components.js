@@ -133,16 +133,15 @@ export default class Login extends Component {
     valid: false
   };
 
-  handleInputChange(prop) {
-    return ev => {
-      const { value } = ev.target;
-      this.setState({
-        [prop]: value,
-        valid:
-        value.length > 0 &&
-        this.state.fields.every(field => this.state[field].length > 0)
-      });
-    };
+  handleInputChange = ev => {
+    const { value } = ev.target;
+    const prop = ev.target.getAttribute('name');
+    this.setState({
+      [prop]: value,
+      valid:
+      value.length > 0 &&
+      this.state.fields.every(field => this.state[field].length > 0)
+    });
   }
 
   render() {
@@ -164,13 +163,15 @@ export default class Login extends Component {
         <Form onSubmit={ev => ev.preventDefault()}>
           <Input
             type="text"
+            name="email"
             placeholder="Email"
-            onChange={this.handleInputChange('email')}
+            onChange={this.handleInputChange}
           />
           <Input
             type="text"
+            name="phoneNumber"
             placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
+            onChange={this.handleInputChange}
           />
           <SubmitButton disabled={!this.state.valid}>
             Submit

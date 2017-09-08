@@ -53,7 +53,6 @@
   "dependencies": {
     "aphrodite": "^1.2.3",
     "babel-standalone": "^6.26.0",
-    "buble": "^0.15.2",
     "codemirror": "^5.28.0",
     "cxs": "^5.0.0-1",
     "glamor": "^2.20.40",
