@@ -55,7 +55,7 @@ const Stripe = glamorous.div({
   transform: 'skewY(-8deg)',
   transformOrigin: 0,
   background:
-    'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
+  'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
 });
 
 const StripeBottom = glamorous.div({
@@ -129,7 +129,7 @@ const SubmitButton = glamorous.button(
   props => ({
     backgroundColor: props.disabled ? '#BBB' : null
   })
-).withProps({type: 'submit'});
+).withProps({ type: 'submit' });
 
 export default class Login extends Component {
   constructor(props) {
@@ -142,15 +142,17 @@ export default class Login extends Component {
     };
   }
 
-  handleInputChange = ev => {
-    const { value } = ev.target
-    const prop = ev.target.getAttribute('name')
-    this.setState({
-      [prop]: value,
-      valid:
+  handleInputChange() {
+    return ev => {
+      const { value } = ev.target
+      const prop = ev.target.getAttribute('name')
+      this.setState({
+        [prop]: value,
+        valid:
         value.length > 0 &&
         this.state.fields.every(field => this.state[field].length > 0)
-    });
+      });
+    };
   }
 
   render() {
@@ -174,13 +176,13 @@ export default class Login extends Component {
             type="text"
             placeholder="Email"
             name="email"
-            onChange={this.handleInputChange}
+            onChange={this.handleInputChange()}
           />
           <Input
             type="text"
             placeholder="Phone number"
             name="phoneNumber"
-            onChange={this.handleInputChange}
+            onChange={this.handleInputChange()}
           />
           <SubmitButton disabled={!this.state.valid}>
             Submit
