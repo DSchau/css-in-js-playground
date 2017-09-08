@@ -1,13 +1,12 @@
-import * as buble from 'buble';
+import * as Babel from 'babel-standalone';
 
 onmessage = ev => {
-  const { data: code } = ev;
+  const { data = {} } = ev;
+  const { code = '', plugins = [] } = data;
   try {
-    const { code: transformed } = buble.transform(code, {
-      transforms: {
-        modules: false,
-        templateString: false
-      }
+    const { code: transformed } = Babel.transform(code, {
+      presets: [['es2015', { modules: false }], 'stage-2', 'react'],
+      plugins: ['transform-class-properties'].concat(plugins)
     });
     (postMessage as any)(transformed);
   } catch (e) {

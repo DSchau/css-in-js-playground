@@ -8,6 +8,9 @@ export default function transform(code): Promise<any> {
       resolve(ev.data);
     };
 
-    worker.postMessage(code);
+    worker.postMessage({
+      code,
+      plugins: code.match(/['"]emotion['"]/) ? ['emotion'] : []
+    });
   });
 }

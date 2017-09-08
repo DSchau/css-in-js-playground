@@ -78,7 +78,7 @@ const Title = styled.h1`
   font-weight: 100;
 `;
 
-const SubTitle = styled(Title)`
+const SubTitle = styled(Title) `
 	color: #025450;
 	margin-top: 0.5rem;
 `;
@@ -111,7 +111,7 @@ const Input = styled.input`
 
 const SubmitButton = styled.button.attrs({
   type: 'submit'
-})`
+}) `
   display: block;
   background-color: ${props => (props.disabled ? '#BBB' : '#6772e5')};
   color: white;
@@ -126,15 +126,12 @@ const SubmitButton = styled.button.attrs({
 `;
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      phoneNumber: '',
-      fields: ['email', 'phoneNumber'],
-      valid: false
-    };
-  }
+  state = {
+    email: '',
+    phoneNumber: '',
+    fields: ['email', 'phoneNumber'],
+    valid: false
+  };
 
   handleInputChange(prop) {
     return ev => {
@@ -142,8 +139,8 @@ export default class Login extends Component {
       this.setState({
         [prop]: value,
         valid:
-          value.length > 0 &&
-          this.state.fields.every(field => this.state[field].length > 0)
+        value.length > 0 &&
+        this.state.fields.every(field => this.state[field].length > 0)
       });
     };
   }

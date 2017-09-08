@@ -3,15 +3,12 @@ import { StyleSheet, css } from 'aphrodite';
 import Logo from './logo';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      phoneNumber: '',
-      fields: ['email', 'phoneNumber'],
-      valid: false
-    };
-  }
+  state = {
+    email: '',
+    phoneNumber: '',
+    fields: ['email', 'phoneNumber'],
+    valid: false
+  };
 
   handleInputChange(prop) {
     return ev => {

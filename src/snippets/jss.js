@@ -127,15 +127,12 @@ const styles = {
 const { classes } = jss.createStyleSheet(styles).attach();
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      phoneNumber: '',
-      fields: ['email', 'phoneNumber'],
-      valid: false
-    };
-  }
+  state = {
+    email: '',
+    phoneNumber: '',
+    fields: ['email', 'phoneNumber'],
+    valid: false
+  };
 
   handleInputChange(prop) {
     return ev => {
