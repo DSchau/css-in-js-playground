@@ -21,13 +21,13 @@ const Container = styled.div`
   -webkit-overflow-scrolling: touch;
   z-index: 2;
   box-sizing: border-box;
-  border-color: ${props => darken(0.05, props.theme[props.theme.primary].base)};
+  border-color: ${props => darken(0.15, props.theme[props.theme.primary].base)};
   border-style: solid;
   border-width: 0;
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
   @media only screen and (min-width: 768px) {
     border-bottom-width: 0;
-    border-right-width: 2px;
+    border-right-width: 1px;
     height: auto;
   }
 `;

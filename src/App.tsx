@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled, { injectGlobal, ThemeProvider } from 'styled-components';
 
+import queryString from 'query-string';
+
 import CodeProvider from './components/CodeProvider/';
 import Footer from './components/Footer/';
 import Header from './components/Header/';
@@ -25,6 +27,17 @@ class App extends React.Component<Props, State> {
     code: ``,
     theme: theme
   };
+
+  componentWillMount() {
+    const params = queryString.parse(location.search);
+    const theme = this.state.theme;
+    this.setState({
+      theme: {
+        ...theme,
+        primary: params.dark === 'false' ? 'light' : 'dark'
+      }
+    });
+  }
 
   handleSelect = code => {
     this.setState({

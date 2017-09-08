@@ -101,15 +101,25 @@ class Header extends React.Component<Props, State> {
   handleColorSwitch = () => {
     if (this.props.onColorSwitch) {
       const { primary } = this.props;
-      this.props.onColorSwitch(primary === 'dark' ? 'light' : 'dark');
+      const theme = primary === 'dark' ? 'light' : 'dark';
+      const path = this.getPath({
+        ...(queryString.parse(location.search) || {}),
+        dark: theme === 'dark'
+      });
+      history.replaceState({ path }, '', path);
+      this.props.onColorSwitch(theme);
     }
   };
 
   pushState(params) {
     if (history.pushState) {
-      const path = `${location.origin}${location.pathname}?${queryString.stringify(params)}`;
+      const path = this.getPath(params);
       history.pushState({ path }, '', path);
     }
+  }
+
+  getPath(params) {
+    return `${location.origin}${location.pathname}?${queryString.stringify(params)}`;
   }
 
   render() {
