@@ -78,7 +78,7 @@ const Title = styled.h1`
   font-weight: 100;
 `;
 
-const SubTitle = styled(Title)`
+const SubTitle = Title.extend`
 	color: #025450;
 	margin-top: 0.5rem;
 `;
