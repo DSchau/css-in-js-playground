@@ -127,35 +127,27 @@ const SubmitButton = glamorous.button(
     marginTop: '1rem'
   },
   props => ({
-    backgroundColor: props.disabled ? '#BBB' : undefined
+    backgroundColor: props.disabled ? '#BBB' : null
   })
-);
-
-SubmitButton.defaultProps = {
-  type: 'submit'
-};
+).withProps({type: 'submit'});
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      phoneNumber: '',
-      fields: ['email', 'phoneNumber'],
-      valid: false
-    };
-  }
+  state = {
+    email: '',
+    phoneNumber: '',
+    fields: ['email', 'phoneNumber'],
+    valid: false
+  };
 
-  handleInputChange(prop) {
-    return ev => {
-      const { value } = ev.target;
-      this.setState({
-        [prop]: value,
-        valid:
-          value.length > 0 &&
-          this.state.fields.every(field => this.state[field].length > 0)
-      });
-    };
+  handleInputChange = ev => {
+    const { value } = ev.target
+    const prop = ev.target.getAttribute('name')
+    this.setState({
+      [prop]: value,
+      valid:
+        value.length > 0 &&
+        this.state.fields.every(field => this.state[field].length > 0)
+    });
   }
 
   render() {
@@ -178,12 +170,14 @@ export default class Login extends Component {
           <Input
             type="text"
             placeholder="Email"
-            onChange={this.handleInputChange('email')}
+            name="email"
+            onChange={this.handleInputChange}
           />
           <Input
             type="text"
             placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
+            name="phoneNumber"
+            onChange={this.handleInputChange}
           />
           <SubmitButton disabled={!this.state.valid}>
             Submit
