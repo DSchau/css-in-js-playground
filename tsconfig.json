@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": ".",
     "outDir": "./dist/",
     "sourceMap": true,
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["dom", "es5", "es2015", "webworker"],
+    "paths": {
+      "style/*": [
+        "./src/style/*"
+      ]
+    },
     "target": "es5",
     "jsx": "react"
   },

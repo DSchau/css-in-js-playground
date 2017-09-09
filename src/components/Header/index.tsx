@@ -7,7 +7,7 @@ import * as InvertedIcon from 'react-icons/lib/md/lightbulb-outline';
 import * as DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
 import * as snippets from '../../constants/snippets';
-import { Theme } from '../../style/theme';
+import { Theme, SANS_SERIF } from '../../style/';
 
 const HeaderContainer = styled.header`
   flex: 0 0 auto;
@@ -16,10 +16,11 @@ const HeaderContainer = styled.header`
   border-bottom: 1px solid ${props => darken(0.05, props.theme[props.theme.primary].base)};
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0 0.5rem;
   z-index: 2;
   transition: 250ms ease-in-out;
+  position: relative;
 `;
 
 const SelectContainer = styled.div`
@@ -37,9 +38,7 @@ const Select = styled.select`
   appearance: none;
   font-size: 1.3rem;
   padding-right: 1.3rem;
-  .wf-active & {
-    font-family: 'Montserrat', sans-serif;
-  }
+  ${SANS_SERIF};
 `;
 
 const DownIcon: StyledComponentClass<any, any> = styled(DownIconElement)`
@@ -49,7 +48,6 @@ const DownIcon: StyledComponentClass<any, any> = styled(DownIconElement)`
 
 const IconContainer = styled.div`
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: flex-end;
 `;

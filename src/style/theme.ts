@@ -9,7 +9,7 @@ export interface Theme {
   primary: 'dark' | 'light';
 }
 
-export default {
+export const THEME = {
   dark: {
     base: '#1E1E20',
     text: '#ddd'

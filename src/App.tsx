@@ -6,27 +6,39 @@ import queryString from 'query-string';
 import CodeProvider from './components/CodeProvider/';
 import Footer from './components/Footer/';
 import Header from './components/Header/';
+import Timer from './components/Timer/';
 
-import theme from './style/theme';
+import { THEME } from './style';
+
+import { withOffline } from './utils/offline';
 
 const Container = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 `;
 
-interface Props {}
+interface Props {
+  updated: boolean;
+}
 
 interface State {
   code: string;
   theme: any;
+  updated: boolean;
 }
 
 class App extends React.Component<Props, State> {
-  state = {
-    code: ``,
-    theme: theme
-  };
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      code: ``,
+      theme: THEME,
+      updated: props.updated
+    };
+  }
 
   componentWillMount() {
     const params = queryString.parse(location.search);
@@ -55,6 +67,14 @@ class App extends React.Component<Props, State> {
     });
   }
 
+  handleTimerComplete = () => {
+    this.setState({
+      updated: false
+    }, () => {
+      location.reload();
+    });
+  }
+
   render() {
     return (
       <ThemeProvider theme={this.state.theme}>
@@ -64,9 +84,10 @@ class App extends React.Component<Props, State> {
             onSelect={this.handleSelect}
             primary={this.state.theme.primary}
             onColorSwitch={this.handleColorSwitch}
-            />
+          />
           <CodeProvider code={this.state.code} />
           <Footer />
+          {this.props.updated && <Timer duration={5000} onElapsed={this.handleTimerComplete} />}
         </Container>
       </ThemeProvider>
     );
@@ -91,4 +112,4 @@ injectGlobal`
   }
 `;
 
-export default App;
+export default withOffline(App);

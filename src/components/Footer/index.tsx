@@ -4,8 +4,11 @@ import { darken } from 'polished';
 
 import * as CodeIcon from 'react-icons/lib/md/code';
 
+import { SERIF } from '../../style';
+
 const FooterContainer = styled.footer`
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
@@ -21,10 +24,7 @@ const Text = styled.h1`
   color: ${props => props.theme[props.theme.primary].text};
   margin: 0;
   padding: 0;
-  font-family: serif;
-  .wf-active & {
-    font-family: 'Bitter', serif;
-  }
+  ${SERIF};
 `;
 
 const Link = styled.a`
