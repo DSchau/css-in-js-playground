@@ -87,7 +87,7 @@ class App extends React.Component<Props, State> {
           />
           <CodeProvider code={this.state.code} />
           <Footer />
-          {this.props.updated && <Timer duration={5000} onElapsed={this.handleTimerComplete} />}
+          {this.props.updated && <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
         </Container>
       </ThemeProvider>
     );
