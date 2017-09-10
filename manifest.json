@@ -1,0 +1,10 @@
+{
+  "name": "CSS in JS Playground",
+  "short_name": "CSSPlayground",
+  "start_url": ".",
+  "display": "standalone",
+  "description": "A CSS in JS playground demoing some common libraries",
+  "background_color": "white",
+  "theme_color": "#1E1E20",
+  "orientation": "portrait"
+}
