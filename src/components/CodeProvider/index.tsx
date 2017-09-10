@@ -76,7 +76,9 @@ class CodeProvider extends React.Component<Props, State> {
   };
 
   handleEditorUpdate = code => {
-    this.persistToQueryString(code);
+    if (code !== this.props.snippet) {
+      this.persistToQueryString(code);
+    }
     this.setState({
       code,
       error: null
