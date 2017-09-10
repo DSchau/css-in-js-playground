@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const NameAllModulesPlugin = require('name-all-modules-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const { name } = require('./package.json');
 const isNetlify = typeof process.env.CONTEXT !== 'undefined';
@@ -44,6 +45,11 @@ module.exports = {
       ServiceWorker: {
         events: true
       }
+    }),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.(js(on)?|html|css)$/
     })
   ]
 };
