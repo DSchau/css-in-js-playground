@@ -1,46 +1,56 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import { darken } from 'polished';
 
 import * as CodeIcon from 'react-icons/lib/md/code';
 
-import { SERIF } from '../../style';
+import { SERIF, Theme, ThemeProps } from '../../style';
 
-const FooterContainer = styled.footer`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  background-color: ${props => props.theme[props.theme.primary].base};
-  border-top: 1px solid ${props => darken(0.05, props.theme[props.theme.primary].base)};
-  padding: 0.75rem 0.5rem;
-  transition: 250ms ease-in-out;
-`;
+const FooterContainer = glamorous.footer<ThemeProps>(
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: '0 0 auto',
+    padding: '0.75rem 0.5rem',
+    transition: '250ms ease-in-out'
+  },
+  ({ theme }) => ({
+    backgroundColor: theme[theme.primary].base,
+    borderTop: `1px solid ${darken(0.05, theme[theme.primary].base)}`
+  })
+);
 
-const Text = styled.h1`
-  display: inline-block;
-  font-size: 0.8rem;
-  color: ${props => props.theme[props.theme.primary].text};
-  margin: 0;
-  padding: 0;
-  ${SERIF};
-`;
+const Text = glamorous.h1<ThemeProps>(
+  {
+    display: 'inline-block',
+    fontSize: '0.8rem',
+    color: '${props => props.theme[props.theme.primary].text}',
+    margin: 0,
+    padding: 0
+  },
+  SERIF,
+  ({ theme }) => ({
+    color: theme[theme.primary].text
+  })
+);
 
-const Link = styled.a`
-  color: inherit;
-  text-decoration-skip: ink;
-`;
+const Link = glamorous.a({
+  color: 'inherit',
+  textDecorationSkip: 'ink'
+});
 
-interface Props {
-
-}
+interface Props extends ThemeProps {}
 
 function Footer(props: Props) {
   return (
     <FooterContainer>
       <Text>
-        Made with <CodeIcon color="#E74C3C" size={22} /> by <Link href="https://dustinschau.com" target="_blank" rel="noopener">Dustin Schau</Link>
+        Made with <CodeIcon color="#E74C3C" size={22} /> by{' '}
+        <Link href="https://dustinschau.com" target="_blank" rel="noopener">
+          Dustin Schau
+        </Link>
       </Text>
     </FooterContainer>
   );

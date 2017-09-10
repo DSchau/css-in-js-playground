@@ -1,15 +1,13 @@
-import { css } from 'styled-components';
-
-export const SANS_SERIF = css`
-  font-family: sans-serif;
-  .wf-active & {
-    font-family: 'Montserrat', sans-serif;
+export const SANS_SERIF = {
+  fontFamily: 'sans-serif',
+  '.wf-active &': {
+    fontFamily: `"Montserrat", sans-serif`
   }
-`;
+};
 
-export const SERIF = css`
-  font-family: serif;
-  .wf-active & {
-    font-family: 'Bitter', serif;
+export const SERIF = {
+  fontFamily: 'serif',
+  '.wf-active &': {
+    fontFamily: `"Bitter", serif`
   }
-`;
+};

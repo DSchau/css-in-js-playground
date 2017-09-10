@@ -55,7 +55,7 @@ const Stripe = glamorous.div({
   transform: 'skewY(-8deg)',
   transformOrigin: 0,
   background:
-  'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
+    'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
 });
 
 const StripeBottom = glamorous.div({
@@ -112,24 +112,26 @@ const Input = glamorous.input({
   }
 });
 
-const SubmitButton = glamorous.button(
-  {
-    display: 'block',
-    backgroundColor: '#6772e5',
-    color: 'white',
-    border: 'none',
-    width: '100%',
-    padding: '1.25rem 1rem',
-    boxSizing: 'border-box',
-    borderRadius: '0.25rem',
-    textTransform: 'uppercase',
-    boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
-    marginTop: '1rem'
-  },
-  props => ({
-    backgroundColor: props.disabled ? '#BBB' : null
-  })
-).withProps({ type: 'submit' });
+const SubmitButton = glamorous
+  .button(
+    {
+      display: 'block',
+      backgroundColor: '#6772e5',
+      color: 'white',
+      border: 'none',
+      width: '100%',
+      padding: '1.25rem 1rem',
+      boxSizing: 'border-box',
+      borderRadius: '0.25rem',
+      textTransform: 'uppercase',
+      boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
+      marginTop: '1rem'
+    },
+    props => ({
+      backgroundColor: props.disabled ? '#BBB' : null
+    })
+  )
+  .withProps({ type: 'submit' });
 
 export default class Login extends Component {
   constructor(props) {
@@ -144,13 +146,13 @@ export default class Login extends Component {
 
   handleInputChange() {
     return ev => {
-      const { value } = ev.target
-      const prop = ev.target.getAttribute('name')
+      const { value } = ev.target;
+      const prop = ev.target.getAttribute('name');
       this.setState({
         [prop]: value,
         valid:
-        value.length > 0 &&
-        this.state.fields.every(field => this.state[field].length > 0)
+          value.length > 0 &&
+          this.state.fields.every(field => this.state[field].length > 0)
       });
     };
   }
@@ -184,9 +186,7 @@ export default class Login extends Component {
             name="phoneNumber"
             onChange={this.handleInputChange()}
           />
-          <SubmitButton disabled={!this.state.valid}>
-            Submit
-          </SubmitButton>
+          <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
         </Form>
       </Container>
     );

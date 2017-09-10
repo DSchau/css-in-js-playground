@@ -180,9 +180,7 @@ export default class Login extends Component {
             placeholder="Phone number"
             onChange={this.handleInputChange('phoneNumber')}
           />
-          <SubmitButton disabled={!this.state.valid}>
-            Submit
-          </SubmitButton>
+          <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
         </Form>
       </Container>
     );

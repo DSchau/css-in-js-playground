@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled, { injectGlobal, ThemeProvider } from 'styled-components';
-
+import glamorous, { ThemeProvider } from 'glamorous';
+import { css } from 'glamor';
 import queryString from 'query-string';
 
 import CodeProvider from './components/CodeProvider/';
@@ -12,12 +12,12 @@ import { THEME } from './style';
 
 import { withOffline } from './utils/offline';
 
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-`;
+const Container = glamorous.main({
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  position: 'relative'
+});
 
 interface Props {
   updated: boolean;
@@ -55,7 +55,7 @@ class App extends React.Component<Props, State> {
     this.setState({
       code
     });
-  }
+  };
 
   handleColorSwitch = primary => {
     const { theme } = this.state;
@@ -65,15 +65,18 @@ class App extends React.Component<Props, State> {
         primary
       }
     });
-  }
+  };
 
   handleTimerComplete = () => {
-    this.setState({
-      updated: false
-    }, () => {
-      location.reload();
-    });
-  }
+    this.setState(
+      {
+        updated: false
+      },
+      () => {
+        location.reload();
+      }
+    );
+  };
 
   render() {
     return (
@@ -87,14 +90,15 @@ class App extends React.Component<Props, State> {
           />
           <CodeProvider code={this.state.code} />
           <Footer />
-          {this.props.updated && <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
+          {this.props.updated &&
+            <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
         </Container>
       </ThemeProvider>
     );
   }
 }
 
-injectGlobal`
+`
   html, body {
     font-family: sans-serif;
   }
@@ -110,6 +114,10 @@ injectGlobal`
   .wf-active {
     font-family: 'Bitter', sans-serif;
   }
-`;
+`
+  .split(/\n{2}/)
+  .forEach(rule => {
+    css.insert(rule);
+  });
 
 export default withOffline(App);

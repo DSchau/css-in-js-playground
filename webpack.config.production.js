@@ -5,11 +5,12 @@ const OfflinePlugin = require('offline-plugin');
 const NameAllModulesPlugin = require('name-all-modules-plugin');
 
 const { name } = require('./package.json');
+const isNetlify = typeof process.env.CONTEXT !== 'undefined';
 
 module.exports = {
   output: {
     filename: 'scripts/[name].[chunkhash].js',
-    publicPath: `/${name}/`
+    publicPath: isNetlify ? '/' : `/${name}/`
   },
   module: {
     rules: [

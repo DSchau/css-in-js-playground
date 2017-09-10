@@ -9,6 +9,10 @@ export interface Theme {
   primary: 'dark' | 'light';
 }
 
+export interface ThemeProps {
+  theme?: Theme;
+}
+
 export const THEME = {
   dark: {
     base: '#1E1E20',

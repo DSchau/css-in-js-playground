@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, { injectGlobal, withTheme } from 'styled-components';
+import glamorous, { withTheme } from 'glamorous';
+import { css } from 'glamor';
 import { darken, lighten } from 'polished';
 
 import * as CodeMirror from 'codemirror';
@@ -9,45 +10,47 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 import * as debounce from 'lodash.debounce';
 
-import { Theme } from '../../style/theme';
+import { Theme, ThemeProps } from '../../style/theme';
+import { LARGE_UP } from '../../constants';
 
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  overflow: auto;
-  position: relative;
-  -webkit-overflow-scrolling: touch;
-  z-index: 2;
-  box-sizing: border-box;
-  border-color: ${props => darken(0.15, props.theme[props.theme.primary].base)};
-  border-style: solid;
-  border-width: 0;
-  border-bottom-width: 1px;
-  @media only screen and (min-width: 768px) {
-    border-bottom-width: 0;
-    border-right-width: 1px;
-    height: auto;
-  }
-`;
+const Container = glamorous.div<ThemeProps>(
+  {
+    display: 'flex',
+    width: '100%',
+    maxWidth: '100%',
+    height: '100%',
+    overflow: 'auto',
+    position: 'relative',
+    WebkitOverflowScrolling: 'touch',
+    zIndex: 2,
+    boxSizing: 'border-box',
+    borderStyle: 'solid',
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    [`@media only screen and (${LARGE_UP})`]: {
+      borderBottomWidth: 0,
+      borderRightWidth: 1,
+      height: 'auto'
+    }
+  },
+  ({ theme }) => ({
+    borderColor: darken(0.15, theme[theme.primary].base)
+  })
+);
 
-const TextArea = styled.textarea`
-  width: 100%;
-  border: none;
-`;
+const TextArea = glamorous.textarea({
+  width: '100%',
+  border: 'none'
+});
 
-interface Props {
+interface Props extends ThemeProps {
   code: string;
   children?: any;
   className?: string;
   onUpdate(value: string): void;
-  theme?: Theme;
 }
 
-interface State {
-
-}
+interface State {}
 
 class Editor extends React.Component<Props, State> {
   private editor: any;
@@ -81,39 +84,42 @@ class Editor extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps) {
     const { code, theme } = nextProps;
     if (theme.primary !== this.props.theme.primary) {
-      this.editor.setOption('theme', theme.primary === 'dark' ? 'dracula' : 'default');
+      this.editor.setOption(
+        'theme',
+        theme.primary === 'dark' ? 'dracula' : 'default'
+      );
     }
     if (code !== this.editor.getValue()) {
       this.editor.setValue(code);
     }
   }
 
-  onChange = (codeMirrorEv) => {
+  onChange = codeMirrorEv => {
     this.props.onUpdate(codeMirrorEv.getValue());
-  }
+  };
 
   render() {
     return (
       <Container>
-        <TextArea innerRef={node => this.textArea = node} />
+        <TextArea innerRef={node => (this.textArea = node)} />
       </Container>
     );
   }
 }
 
-injectGlobal`
-  .CodeMirror {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    font-family: "Operator Mono SSm A", "Operator Mono SSm B", monospace;
-    font-size: 12px;
-  }
-`;
+css.insert(`
+div.CodeMirror {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-family: "Operator Mono SSm A", "Operator Mono SSm B", monospace;
+  font-size: 12px;
+}
+`);
 
 export default withTheme(Editor) as React.ComponentClass<any>;

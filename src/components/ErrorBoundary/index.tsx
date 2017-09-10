@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-`;
+const Container = glamorous.div({
+  display: 'flex',
+  width: '100%'
+});
 
 interface Props {
   children: any;
@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   componentDidCatch(error, info) {
     if (this.props.onError) {
       this.props.onError({
-        error,        
+        error,
         info
       });
     }
@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component<Props, State> {
     if (code !== this.state.code) {
       this.setState({
         code
-      })
+      });
     }
   }
 

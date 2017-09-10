@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it contains a SANS_SERIF font 1`] = `
+Object {
+  ".wf-active &": Object {
+    "fontFamily": "\\"Montserrat\\", sans-serif",
+  },
+  "fontFamily": "sans-serif",
+}
+`;
+
+exports[`it contains a SERIF font 1`] = `
+Object {
+  ".wf-active &": Object {
+    "fontFamily": "\\"Bitter\\", serif",
+  },
+  "fontFamily": "serif",
+}
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it contains expected exports 1`] = `
+Array [
+  "SLIDE_UP",
+  "SANS_SERIF",
+  "SERIF",
+  "THEME",
+]
+`;

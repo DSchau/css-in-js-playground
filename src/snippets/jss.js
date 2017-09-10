@@ -55,7 +55,7 @@ const styles = {
     transform: 'skewY(-8deg)',
     transformOrigin: 0,
     background:
-    'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
+      'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
   },
   stripeBottom: {
     position: 'absolute',
@@ -64,7 +64,8 @@ const styles = {
     right: 0,
     height: '35%',
     overflow: 'hidden',
-    background: 'linear-gradient(150deg, rgba(172, 240, 181, 0) 40%, #acf0b5 70%)'
+    background:
+      'linear-gradient(150deg, rgba(172, 240, 181, 0) 40%, #acf0b5 70%)'
   },
   titleContainer: {
     padding: '1rem'
@@ -143,8 +144,8 @@ export default class Login extends Component {
       this.setState({
         [prop]: value,
         valid:
-        value.length > 0 &&
-        this.state.fields.every(field => this.state[field].length > 0)
+          value.length > 0 &&
+          this.state.fields.every(field => this.state[field].length > 0)
       });
     };
   }
@@ -166,7 +167,7 @@ export default class Login extends Component {
             <h1 className={classes.subTitle}>Rocketship, Inc.</h1>
           </div>
         </header>
-        <div className={classes.stripe}/>
+        <div className={classes.stripe} />
         <form className={classes.form} onSubmit={ev => ev.preventDefault()}>
           <input
             className={classes.input}
@@ -180,11 +181,18 @@ export default class Login extends Component {
             placeholder="Phone number"
             onChange={this.handleInputChange('phoneNumber')}
           />
-          <button type="submit" className={[classes.submitButton, !valid && classes.submitButtonDisabled].join(' ')} disabled={!valid}>
+          <button
+            type="submit"
+            className={[
+              classes.submitButton,
+              !valid && classes.submitButtonDisabled
+            ].join(' ')}
+            disabled={!valid}
+          >
             Submit
           </button>
         </form>
       </main>
     );
   }
-};
+}

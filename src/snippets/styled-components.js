@@ -79,8 +79,8 @@ const Title = styled.h1`
 `;
 
 const SubTitle = Title.extend`
-	color: #025450;
-	margin-top: 0.5rem;
+  color: #025450;
+  margin-top: 0.5rem;
 `;
 
 const Form = styled.form`
@@ -175,9 +175,7 @@ export default class Login extends Component {
             placeholder="Phone number"
             onChange={this.handleInputChange('phoneNumber')}
           />
-          <SubmitButton disabled={!this.state.valid}>
-            Submit
-          </SubmitButton>
+          <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
         </Form>
       </Container>
     );

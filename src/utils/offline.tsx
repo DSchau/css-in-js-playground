@@ -2,14 +2,13 @@ import * as React from 'react';
 import * as OfflinePlugin from 'offline-plugin/runtime';
 declare let process: any;
 
-interface Props {
-}
+interface Props {}
 
 interface State {
   updated: boolean;
 }
 
-export function handleOffline({ onUpdated = () => { } }) {
+export function handleOffline({ onUpdated = () => {} }) {
   if (process.env.NODE_ENV === 'production') {
     OfflinePlugin.install({
       onUpdateReady() {
@@ -30,7 +29,7 @@ export function withOffline(Component) {
     componentWillMount() {
       handleOffline({
         onUpdated: this.handleOnUpdate
-      })
+      });
     }
 
     handleOnUpdate = () => {
@@ -38,11 +37,9 @@ export function withOffline(Component) {
         updated: true
       });
     };
-  
+
     render() {
-      return (
-        <Component updated={this.state.updated} />
-      )
+      return <Component updated={this.state.updated} />;
     }
-  }
+  };
 }

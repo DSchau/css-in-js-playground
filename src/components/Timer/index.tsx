@@ -1,48 +1,62 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import { darken } from 'polished';
 
-import { SANS_SERIF, SLIDE_UP } from '../../style';
+import { SANS_SERIF, SLIDE_UP, ThemeProps } from '../../style';
 
-const Container = styled.div`
-  position: absolute;
-  bottom: 7.5%;
-  right: 2.5%;
-  width: auto;
-  padding: 0.5rem 1rem;
-  margin: 0 auto;
-  box-sizing: border-box;
-  background-color: ${props => props.theme[props.theme.primary].base};
-  border: 1px solid transparent;
-  border-color: ${props => props.theme.primary === 'light' ? darken(0.05, props.theme.light.base) : 'transparent'};
-  animation: ${SLIDE_UP} 325ms cubic-bezier(0.390, 0.575, 0.565, 1.000);
-`;
+const Container = glamorous.div<ThemeProps>(
+  {
+    position: 'absolute',
+    bottom: '7.5%',
+    right: '2.5%',
+    width: 'auto',
+    padding: '0.5rem 1rem',
+    margin: '0 auto',
+    boxSizing: 'border-box',
+    border: '1px solid transparent',
+    animation: `${SLIDE_UP} 325ms cubic-bezier(0.390, 0.575, 0.565, 1.000)`
+  },
+  ({ theme }) => ({
+    backgroundColor: theme[theme.primary].base,
+    borderColor: darken(0.05, theme[theme.primary].base)
+  })
+);
 
-const TimerContainer = styled.div`
-  text-align: center;
-`;
+const TimerContainer = glamorous.div({
+  textAlign: 'center'
+});
 
-const Title = styled.h1`
-  margin: 0;
-  padding: 0;
-  color: ${props => props.theme[props.theme.primary].text};
-  font-size: 12px;
-  display: inline-block;
-  text-transform: uppercase;
-  ${SANS_SERIF};
-`;
+const Title = glamorous.h1<ThemeProps>(
+  {
+    margin: 0,
+    padding: 0,
+    fontSize: 12,
+    display: 'inline-block',
+    textTransform: 'uppercase'
+  },
+  SANS_SERIF,
+  ({ theme }) => ({
+    color: theme[theme.primary].text
+  })
+);
 
-const Button = styled.button`
-  background-color: ${props => props.theme[props.theme.primary].text};
-  color: ${props => props.theme[props.theme.primary].base};
-  outline: none;
-  border-width: 0;
-  border-radius: 0.125rem;
-  margin-left: 1rem;
-  padding: 0.25rem 0.5rem;
-  box-sizing: border-box;
-  ${SANS_SERIF};
-`;
+const Button = glamorous.button<ThemeProps>(
+  {
+    backgroundColor: '${props => }',
+    color: '${props => ',
+    outline: 'none',
+    borderWidth: 0,
+    borderRadius: '0.125rem',
+    marginLeft: '1rem',
+    padding: '0.25rem 0.5rem',
+    boxSizing: 'border-box'
+  },
+  SANS_SERIF,
+  ({ theme }) => ({
+    backgroundColor: theme[theme.primary].text,
+    color: theme[theme.primary].base
+  })
+);
 
 interface Props {
   duration: number;
@@ -66,14 +80,17 @@ export default class Timer extends React.Component<Props, State> {
   componentDidMount() {
     this.interval = setInterval(() => {
       const seconds = this.state.seconds - 1;
-      let stateUpdatedCallback = () => { };
+      let stateUpdatedCallback = () => {};
       if (seconds === 0) {
         clearInterval(this.interval);
         stateUpdatedCallback = this.handleElapsed;
       }
-      this.setState({
-        seconds
-      }, stateUpdatedCallback);
+      this.setState(
+        {
+          seconds
+        },
+        stateUpdatedCallback
+      );
     }, 1000);
   }
 
@@ -94,8 +111,7 @@ export default class Timer extends React.Component<Props, State> {
         <TimerContainer>
           <Title>Content Updated</Title>
           <Button onClick={this.handleElapsed}>
-            Refresh? 
-            ({this.state.seconds})
+            Refresh? ({this.state.seconds})
           </Button>
         </TimerContainer>
       </Container>

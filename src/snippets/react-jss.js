@@ -46,7 +46,8 @@ const headerStyles = {
     right: 0,
     height: '35%',
     overflow: 'hidden',
-    background: 'linear-gradient(150deg, rgba(172, 240, 181, 0) 40%, #acf0b5 70%)'
+    background:
+      'linear-gradient(150deg, rgba(172, 240, 181, 0) 40%, #acf0b5 70%)'
   },
   titleContainer: {
     padding: '1rem'
@@ -66,7 +67,7 @@ const headerStyles = {
   }
 };
 
-const HeaderRenderer = ({classes}) => (
+const HeaderRenderer = ({ classes }) =>
   <header className={classes.header}>
     <div className={classes.logoContainer}>
       <Logo color="#25b57f" size={32} />
@@ -78,8 +79,7 @@ const HeaderRenderer = ({classes}) => (
       <h1 className={classes.title}>Set up your payments</h1>
       <h1 className={classes.subTitle}>Rocketship, Inc.</h1>
     </div>
-  </header>
-);
+  </header>;
 
 const Header = injectSheet(headerStyles)(HeaderRenderer);
 
@@ -110,7 +110,7 @@ const formStyles = {
   },
   button: {
     display: 'block',
-    backgroundColor: props => props.valid ? '#6772e5' : '#BBB',
+    backgroundColor: props => (props.valid ? '#6772e5' : '#BBB'),
     color: 'white',
     border: 'none',
     width: '100%',
@@ -123,7 +123,7 @@ const formStyles = {
   }
 };
 
-const FormRenderer = ({classes, onChangeEmail, onChangePhoneNumber, valid}) => (
+const FormRenderer = ({ classes, onChangeEmail, onChangePhoneNumber, valid }) =>
   <form className={classes.form} onSubmit={ev => ev.preventDefault()}>
     <input
       className={classes.input}
@@ -137,9 +137,10 @@ const FormRenderer = ({classes, onChangeEmail, onChangePhoneNumber, valid}) => (
       placeholder="Phone number"
       onChange={onChangePhoneNumber}
     />
-    <button type="submit" className={classes.button} disabled={!valid}>Submit</button>
-  </form>
-);
+    <button type="submit" className={classes.button} disabled={!valid}>
+      Submit
+    </button>
+  </form>;
 
 const Form = injectSheet(formStyles)(FormRenderer);
 
@@ -156,7 +157,8 @@ const loginStyles = {
     overflow: 'hidden',
     transform: 'skewY(-8deg)',
     transformOrigin: 0,
-    background: 'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
+    background:
+      'linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)'
   }
 };
 
@@ -177,8 +179,8 @@ class Login extends Component {
       this.setState({
         [prop]: value,
         valid:
-        value.length > 0 &&
-        this.state.fields.every(field => this.state[field].length > 0)
+          value.length > 0 &&
+          this.state.fields.every(field => this.state[field].length > 0)
       });
     };
   }
@@ -198,6 +200,6 @@ class Login extends Component {
       </main>
     );
   }
-};
+}
 
 export default injectSheet(loginStyles)(Login);
