@@ -9,7 +9,6 @@ import Header from './components/Header/';
 import Timer from './components/Timer/';
 
 import { THEME } from './style';
-
 import { withOffline } from './utils/offline';
 
 const Container = glamorous.main({

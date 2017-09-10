@@ -16,9 +16,11 @@
     "target": "es5"
   },
   "files": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "!node_modules/@types"
   ]
 }
