@@ -8,12 +8,11 @@ before_deploy: yarn build:production
 deploy:
   provider: s3
   skip_cleanup: true
-  access_key_id: AKIAI4PI5BIQBD4P3EQA
-  secret_access_key:
-    secure: VAiQ//7u+UWnh4s6lWTNLLtFVziTg3qP+ySN/AN0Gu880cBUYVrqRZkwBCGKtjNwlaeg3sfHP7omA7MqQw1h+HCjWiwZYTxk2rpOiS8YhznxbIQXpwY7wj/BzlsFSK6tVeG7/ovr4eQLSQWjYa4saM/UCSrw46cXjawc776v+7CDehyWYHfTQmIF8MMEcqACeF09D7x7GDTu9mVzXUWV5tnJJQyCEtueuqVdbnGr346OPlFTSl0acg434AENMx6nq0Vmg35CAVbm2AfejpvizoJI3o1AKuQQ+anMV4N3kdNAQ+quKQWv4oFeTfJrUdWhdYPIQ73dRaofTmvaJ9hfzjehu5WB7FPQ288kGcJFYcad2jVulxls25t+htgjIxg9n1qBvrV6I7bpfMTxOHq5LiPvb4lQO9YUAlw1Um9z2JpySqR+v8NqdXWzLdiLEvpB/6eNtLNbkjnwgHxEsDlccscCWGj331QtJEqlyj+UV6bVzbim7HOvie91tV4SlfQ4DBpqgKMsBFiAgNdkDNUmIcZGjkGP0efTgs72CTNrUAfEgiR3SuZanYvGjEDfVWZ74xyTpeGefebi93swQcPhLeVu30XpN/vKAH2uPaISoS+E2oV3R8DehJx658f2YulNjR/BMu/h4y2F6QOBxD8RgAerTkCpVOrlEuaMLrAqyhU=
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: css-in-js-playground.com
   local-dir: dist
-  acl: public
+  acl: public_read
   detect_encoding: true
   on:
     branch: master
