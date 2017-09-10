@@ -12,7 +12,7 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: css-in-js-playground.com
   local-dir: dist
-  acl: public_read
+  acl: public
   detect_encoding: true
   on:
     branch: master
