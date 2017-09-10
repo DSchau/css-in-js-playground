@@ -5,13 +5,10 @@ const OfflinePlugin = require('offline-plugin');
 const NameAllModulesPlugin = require('name-all-modules-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 
-const { name } = require('./package.json');
-const isNetlify = typeof process.env.CONTEXT !== 'undefined';
-
 module.exports = {
   output: {
     filename: 'scripts/[name].[chunkhash].js',
-    publicPath: isNetlify ? '/' : `/${name}/`
+    publicPath: '/'
   },
   module: {
     rules: [
