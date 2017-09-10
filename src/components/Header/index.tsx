@@ -49,18 +49,27 @@ const Select = glamorous.select<ThemeProps>(
   })
 );
 
-const DownIcon = (withTheme as any)(glamorous(DownIconElement)<{
-  size: number;
-} & ThemeProps>({
-  position: 'absolute',
-  right: '0'
-  }, ({ theme }) => ({
-    color: theme[theme.primary].text
-  })));
+const DownIcon = (withTheme as any)(
+  glamorous(DownIconElement)<
+    {
+      size: number;
+    } & ThemeProps
+  >(
+    {
+      position: 'absolute',
+      right: '0'
+    },
+    ({ theme }) => ({
+      color: theme[theme.primary].text
+    })
+  )
+);
 
-const LightBulb = (withTheme as any)(glamorous(InvertedIcon)<ThemeProps>(({ theme }) => ({
-  color: theme[theme.primary].text
-})));
+const LightBulb = (withTheme as any)(
+  glamorous(InvertedIcon)<ThemeProps>(({ theme }) => ({
+    color: theme[theme.primary].text
+  }))
+);
 
 const IconContainer = glamorous.div({
   display: 'flex',
@@ -152,10 +161,7 @@ class Header extends React.Component<Props, State> {
           <DownIcon size={20} />
         </SelectContainer>
         <IconContainer>
-          <LightBulb
-            size={24}
-            onClick={this.handleColorSwitch}
-          />
+          <LightBulb size={24} onClick={this.handleColorSwitch} />
         </IconContainer>
       </HeaderContainer>
     );

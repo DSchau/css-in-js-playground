@@ -58,11 +58,13 @@ class CodeProvider extends React.Component<Props, State> {
 
   componentWillReceiveProps({ snippet }: Props) {
     if (snippet) {
-      const update = this.state.hydrated ? {
-        hydrated: false
-      } : {
-          code: snippet
-        };
+      const update = this.state.hydrated
+        ? {
+            hydrated: false
+          }
+        : {
+            code: snippet
+          };
       this.setState(update);
     }
   }
@@ -95,7 +97,9 @@ class CodeProvider extends React.Component<Props, State> {
       ...search,
       code: compressed
     };
-    const path = `${location.origin}${location.pathname}?${queryString.stringify(params)}`
+    const path = `${location.origin}${location.pathname}?${queryString.stringify(
+      params
+    )}`;
     history.replaceState({ path }, '', path);
   }
 
