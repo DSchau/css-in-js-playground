@@ -122,10 +122,8 @@ class Header extends React.Component<Props, State> {
   };
 
   pushState(params) {
-    if (history.pushState) {
-      const path = this.getPath(params);
-      history.pushState({ path }, '', path);
-    }
+    const path = this.getPath(params);
+    history.pushState({ path }, '', path);
   }
 
   getPath(params) {

@@ -88,7 +88,7 @@ class App extends React.Component<Props, State> {
             primary={this.state.theme.primary}
             onColorSwitch={this.handleColorSwitch}
           />
-          <CodeProvider code={this.state.code} />
+          <CodeProvider snippet={this.state.code} />
           <Footer />
           {this.props.updated &&
             <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
