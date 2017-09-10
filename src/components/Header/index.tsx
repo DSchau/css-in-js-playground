@@ -115,7 +115,9 @@ class Header extends React.Component<Props, State> {
       this.setState({
         selected: library
       });
+      const { code, ...rest } = queryString.parse(location.search);
       this.pushState({
+        ...rest,
         library
       });
       this.props.onSelect(snippet);
