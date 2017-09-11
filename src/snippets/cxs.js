@@ -14,7 +14,7 @@ const Header = cxs('header')({
   display: 'flex',
   flexDirection: 'column',
   height: '40%',
-  minHeight: 250,
+  minHeight: '250px',
   width: '100%',
   position: 'relative',
   justifyContent: 'center'
@@ -24,9 +24,9 @@ const LogoContainer = cxs('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: 60,
-  width: 60,
-  borderRadius: 60,
+  height: '60px',
+  width: '60px',
+  borderRadius: '60px',
   backgroundColor: 'white',
   boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
   position: 'absolute',
@@ -141,9 +141,10 @@ export default class Login extends Component {
     };
   }
 
-  handleInputChange(prop) {
+  handleInputChange() {
     return ev => {
       const { value } = ev.target;
+      const prop = ev.target.getAttribute('name');
       this.setState({
         [prop]: value,
         valid:
@@ -172,13 +173,15 @@ export default class Login extends Component {
         <Form onSubmit={ev => ev.preventDefault()}>
           <Input
             type="text"
+            name="email"
             placeholder="Email"
-            onChange={this.handleInputChange('email')}
+            onChange={this.handleInputChange()}
           />
           <Input
             type="text"
+            name="phoneNumber"
             placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
+            onChange={this.handleInputChange()}
           />
           <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
         </Form>

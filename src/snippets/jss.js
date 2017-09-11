@@ -138,9 +138,10 @@ export default class Login extends Component {
     };
   }
 
-  handleInputChange(prop) {
+  handleInputChange() {
     return ev => {
       const { value } = ev.target;
+      const prop = ev.target.getAttribute('name');
       this.setState({
         [prop]: value,
         valid:
@@ -170,16 +171,18 @@ export default class Login extends Component {
         <div className={classes.stripe} />
         <form className={classes.form} onSubmit={ev => ev.preventDefault()}>
           <input
-            className={classes.input}
             type="text"
+            name="email"
+            className={classes.input}
             placeholder="Email"
-            onChange={this.handleInputChange('email')}
+            onChange={this.handleInputChange()}
           />
           <input
-            className={classes.input}
             type="text"
+            name="phoneNumber"
+            className={classes.input}
             placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
+            onChange={this.handleInputChange()}
           />
           <button
             type="submit"

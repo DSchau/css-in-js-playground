@@ -116,7 +116,7 @@ class Header extends React.Component<Props, State> {
         selected: library
       });
       const { code, ...rest } = queryString.parse(location.search);
-      this.pushState({
+      this.augmentHistory({
         ...rest,
         library
       });
@@ -137,9 +137,9 @@ class Header extends React.Component<Props, State> {
     }
   };
 
-  pushState(params) {
+  augmentHistory(params) {
     const path = this.getPath(params);
-    history.pushState({ path }, '', path);
+    history.replaceState({ path }, '', path);
   }
 
   getPath(params) {

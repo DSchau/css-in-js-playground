@@ -13,9 +13,10 @@ class Login extends Component {
     };
   }
 
-  handleInputChange(prop) {
+  handleInputChange() {
     return ev => {
       const { value } = ev.target;
+      const prop = ev.target.getAttribute('name');
       this.setState({
         [prop]: value,
         valid:
@@ -46,15 +47,17 @@ class Login extends Component {
         <div className={css(styles.form)} onSubmit={ev => ev.preventDefault()}>
           <input
             type="text"
+            name="email"
             className={css(styles.input)}
             placeholder="Email"
-            onChange={this.handleInputChange('email')}
+            onChange={this.handleInputChange()}
           />
           <input
             type="text"
+            name="phoneNumber"
             className={css(styles.input)}
             placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
+            onChange={this.handleInputChange()}
           />
           <button
             type="submit"

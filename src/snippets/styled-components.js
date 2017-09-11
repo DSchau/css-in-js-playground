@@ -139,6 +139,7 @@ export default class Login extends Component {
   handleInputChange(prop) {
     return ev => {
       const { value } = ev.target;
+      const prop = ev.target.getAttribute('name');
       this.setState({
         [prop]: value,
         valid:
@@ -167,13 +168,15 @@ export default class Login extends Component {
         <Form onSubmit={ev => ev.preventDefault()}>
           <Input
             type="text"
+            name="email"
             placeholder="Email"
-            onChange={this.handleInputChange('email')}
+            onChange={this.handleInputChange()}
           />
           <Input
             type="text"
+            name="phoneNumber"
             placeholder="Phone number"
-            onChange={this.handleInputChange('phoneNumber')}
+            onChange={this.handleInputChange()}
           />
           <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
         </Form>

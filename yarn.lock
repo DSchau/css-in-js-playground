@@ -1402,9 +1402,9 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-cxs@^5.0.0-1:
-  version "5.0.0-1"
-  resolved "https://registry.yarnpkg.com/cxs/-/cxs-5.0.0-1.tgz#226cfef204aa551a15c1807be7343b549568afed"
+cxs@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cxs/-/cxs-6.0.0.tgz#d87be2c5ba20523cb381cfb8986a353b24b408b4"
   dependencies:
     objss "^1.0.3"
     tag-hoc "^1.0.0-0"
