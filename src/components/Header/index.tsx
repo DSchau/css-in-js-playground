@@ -57,7 +57,9 @@ const DownIcon = (withTheme as any)(
   >(
     {
       position: 'absolute',
-      right: '0'
+      right: '0',
+      top: '50%',
+      transform: `translateY(-50%)`
     },
     ({ theme }) => ({
       color: theme[theme.primary].text
