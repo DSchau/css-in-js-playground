@@ -21,6 +21,7 @@ const Container = glamorous.div({
 });
 
 interface Props {
+  library: string;
   snippet: string;
 }
 
@@ -33,7 +34,7 @@ interface State {
   hydrated?: boolean;
 }
 
-class CodeProvider extends React.Component<Props, State> {
+class CodeProvider extends React.PureComponent<Props, State> {
   state = {
     code: ``,
     error: null,
@@ -56,15 +57,13 @@ class CodeProvider extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps({ snippet }: Props) {
-    if (snippet) {
-      const update = this.state.hydrated
-        ? {
-            hydrated: false
-          }
-        : {
-            code: snippet
-          };
+  componentWillReceiveProps({ library, snippet }: Props) {
+    if (this.props.library !== library) {
+      const update = this.state.hydrated ? {
+        hydrated: false
+      } : {
+          code: snippet
+        };
       this.setState(update);
     }
   }

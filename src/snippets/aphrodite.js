@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     padding: '2rem',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    zIndex: 2
   },
   input: {
     display: 'block',

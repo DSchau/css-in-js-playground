@@ -93,7 +93,8 @@ const Form = glamorous.form({
   justifyContent: 'center',
   width: '100%',
   padding: '2rem',
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  zIndex: 2
 });
 
 const Input = glamorous.input({

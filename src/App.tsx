@@ -24,6 +24,7 @@ interface Props {
 
 interface State {
   code: string;
+  library: string;
   theme: any;
   updated: boolean;
 }
@@ -33,7 +34,8 @@ class App extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      code: ``,
+      code: '',
+      library: '',
       theme: THEME,
       updated: props.updated
     };
@@ -50,9 +52,10 @@ class App extends React.Component<Props, State> {
     });
   }
 
-  handleSelect = code => {
+  handleSelect = ({ library, snippet: code }) => {
     this.setState({
-      code
+      code,
+      library
     });
   };
 
@@ -87,7 +90,7 @@ class App extends React.Component<Props, State> {
             primary={this.state.theme.primary}
             onColorSwitch={this.handleColorSwitch}
           />
-          <CodeProvider snippet={this.state.code} />
+          <CodeProvider library={this.state.library} snippet={this.state.code} />
           <Footer />
           {this.props.updated &&
             <Timer duration={10000} onElapsed={this.handleTimerComplete} />}

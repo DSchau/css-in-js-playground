@@ -106,7 +106,10 @@ class Header extends React.Component<Props, State> {
       this.setState({
         selected: library
       });
-      this.props.onSelect(snippet);
+      this.props.onSelect({
+        library,
+        snippet
+      });
     }
   }
 
@@ -122,7 +125,10 @@ class Header extends React.Component<Props, State> {
         ...rest,
         library
       });
-      this.props.onSelect(snippet);
+      this.props.onSelect({
+        library,        
+        snippet
+      });
     }
   };
 

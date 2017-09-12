@@ -91,6 +91,7 @@ const Form = styled.form`
   width: 100%;
   padding: 2rem;
   box-sizing: border-box;
+  z-index: 2;
 `;
 
 const Input = styled.input`

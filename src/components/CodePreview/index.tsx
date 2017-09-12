@@ -22,7 +22,8 @@ const Container = glamorous.div({
 const CodeContainer = glamorous.div({
   display: 'flex',
   height: 'auto',
-  width: '100%'
+  width: '100%',
+  WebkitOverflowScrolling: 'touch'
 });
 
 const LivePreview = ({ code }) => {
