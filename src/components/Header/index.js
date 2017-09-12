@@ -1,31 +1,34 @@
-import * as React from 'react';
+import React from 'react';
 import glamorous, { withTheme } from 'glamorous';
 import { darken } from 'polished';
-import * as kebabCase from 'lodash.kebabcase';
-import * as queryString from 'query-string';
-import * as InvertedIcon from 'react-icons/lib/md/lightbulb-outline';
-import * as DownIconElement from 'react-icons/lib/md/arrow-drop-down';
+import kebabCase from 'lodash.kebabcase';
+import queryString from 'query-string';
+import InvertedIcon from 'react-icons/lib/md/lightbulb-outline';
+import DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
 import * as snippets from '../../constants/snippets';
 import { Theme, ThemeProps, SANS_SERIF } from '../../style/';
 
-const HeaderContainer = glamorous.header<ThemeProps>(
-  {
-    flex: '0 0 auto',
-    height: '44px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '0 0.5rem',
-    zIndex: 2,
-    transition: '250ms ease-in-out',
-    position: 'relative'
-  },
-  ({ theme }) => ({
-    backgroundColor: theme[theme.primary].base,
-    borderBottom: `1px solid ${darken(0.05, theme[theme.primary].base)}`
-  })
-);
+const HeaderContainer =
+  glamorous.header <
+  ThemeProps >
+  (
+    {
+      flex: '0 0 auto',
+      height: '44px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '0 0.5rem',
+      zIndex: 2,
+      transition: '250ms ease-in-out',
+      position: 'relative'
+    },
+    ({ theme }) => ({
+      backgroundColor: theme[theme.primary].base,
+      borderBottom: `1px solid ${darken(0.05, theme[theme.primary].base)}`
+    })
+  );
 
 const SelectContainer = glamorous.div({
   display: 'flex',
@@ -33,42 +36,48 @@ const SelectContainer = glamorous.div({
   position: 'relative'
 });
 
-const Select = glamorous.select<ThemeProps>(
-  {
-    height: '32px',
-    backgroundColor: 'transparent',
-    border: 'none',
-    boxShadow: 'none',
-    appearance: 'none',
-    fontSize: '1.3rem',
-    paddingRight: '1.3rem'
-  },
-  SANS_SERIF,
-  ({ theme }) => ({
-    color: theme[theme.primary].text
-  })
-);
-
-const DownIcon = (withTheme as any)(
-  glamorous(DownIconElement)<
+const Select =
+  glamorous.select <
+  ThemeProps >
+  (
     {
-      size: number;
-    } & ThemeProps
-  >(
-    {
-      position: 'absolute',
-      right: '0'
+      height: '32px',
+      backgroundColor: 'transparent',
+      border: 'none',
+      boxShadow: 'none',
+      appearance: 'none',
+      fontSize: '1.3rem',
+      paddingRight: '1.3rem'
     },
+    SANS_SERIF,
     ({ theme }) => ({
       color: theme[theme.primary].text
     })
-  )
+  );
+
+const DownIcon = withTheme(
+  (glamorous(DownIconElement) <
+    {
+      size: number
+    }) &
+    (ThemeProps >
+      (
+        {
+          position: 'absolute',
+          right: '0'
+        },
+        ({ theme }) => ({
+          color: theme[theme.primary].text
+        })
+      ))
 );
 
-const LightBulb = (withTheme as any)(
-  glamorous(InvertedIcon)<ThemeProps>(({ theme }) => ({
-    color: theme[theme.primary].text
-  }))
+const LightBulb = withTheme(
+  glamorous(InvertedIcon) <
+    ThemeProps >
+    (({ theme }) => ({
+      color: theme[theme.primary].text
+    }))
 );
 
 const IconContainer = glamorous.div({
@@ -80,14 +89,14 @@ const IconContainer = glamorous.div({
 const Option = glamorous.option();
 
 interface Props extends ThemeProps {
-  defaultSnippet: string;
-  primary: string;
-  onSelect: Function;
-  onColorSwitch?: Function;
+  defaultSnippet: string,
+  primary: string,
+  onSelect: Function,
+  onColorSwitch?: Function
 }
 
 interface State {
-  selected: string;
+  selected: string
 }
 
 class Header extends React.Component<Props, State> {
@@ -129,7 +138,7 @@ class Header extends React.Component<Props, State> {
       const { primary } = this.props;
       const theme = primary === 'dark' ? 'light' : 'dark';
       const path = this.getPath({
-        ...queryString.parse(location.search) || {},
+        ...(queryString.parse(location.search) || {}),
         dark: theme === 'dark'
       });
       history.replaceState({ path }, '', path);

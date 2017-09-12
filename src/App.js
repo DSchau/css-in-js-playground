@@ -1,4 +1,5 @@
-import * as React from 'react';
+// @flow
+import React, { Component } from 'react';
 import glamorous, { ThemeProvider } from 'glamorous';
 import { css } from 'glamor';
 import queryString from 'query-string';
@@ -18,17 +19,17 @@ const Container = glamorous.main({
   position: 'relative'
 });
 
-interface Props {
-  updated: boolean;
-}
+type Props = {
+  updated: boolean
+};
 
-interface State {
-  code: string;
-  theme: any;
-  updated: boolean;
-}
+type State = {
+  code: string,
+  theme: any,
+  updated: boolean
+};
 
-class App extends React.Component<Props, State> {
+class App extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 

@@ -32,10 +32,20 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
           use: 'source-map-loader'
         },
         {
-          test: /\.tsx?$/,
-          use: 'awesome-typescript-loader',
+          test: /\.js$/,
+          use: ['babel-loader'],
           include: [path.join(__dirname, 'src')],
           exclude: [path.join(__dirname, 'src/Worker')]
+        },
+        {
+          test: /\.js$/,
+          use: ['raw-loader'],
+          include: [path.join(__dirname, 'src/snippets')]
+        },
+        {
+          test: /\.js$/,
+          use: ['worker-loader', 'babel-loader'],
+          include: path.join(__dirname, 'src/Worker')
         },
         {
           test: /\.css$/,
@@ -49,16 +59,6 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
         {
           test: /manifest\.json$/,
           use: ['file-loader']
-        },
-        {
-          test: /\.js$/,
-          use: ['raw-loader'],
-          include: [path.join(__dirname, 'src/snippets')]
-        },
-        {
-          test: /\.ts$/,
-          use: ['worker-loader', 'awesome-typescript-loader'],
-          include: path.join(__dirname, 'src/Worker')
         }
       ]
     },

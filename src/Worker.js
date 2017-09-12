@@ -1,4 +1,5 @@
-import * as buble from 'buble';
+// @flow
+import buble from 'buble';
 
 onmessage = ev => {
   const { data } = ev;
@@ -10,7 +11,7 @@ onmessage = ev => {
         templateString: false
       }
     });
-    (postMessage as any)(transformed);
+    postMessage(transformed);
   } catch (e) {
     console.warn(e);
   }

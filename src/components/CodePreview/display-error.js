@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import glamorous from 'glamorous';
 import { lighten } from 'polished';
 
@@ -24,10 +24,10 @@ const ErrorTitle = glamorous.strong({
 });
 
 interface Props {
-  error: Error | null;
+  error: Error | null,
   errorInfo: {
-    componentStack: string;
-  };
+    componentStack: string
+  }
 }
 
 export default function DisplayError({ error, errorInfo }: Props) {

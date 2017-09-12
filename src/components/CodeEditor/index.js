@@ -1,42 +1,46 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import glamorous, { withTheme } from 'glamorous';
 import { css } from 'glamor';
 import { darken, lighten } from 'polished';
 
-import * as CodeMirror from 'codemirror';
+import CodeMirror from 'codemirror';
+import debounce from 'lodash.debounce';
+
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/keymap/sublime';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
-import * as debounce from 'lodash.debounce';
 
 import { Theme, ThemeProps } from '../../style/theme';
 import { LARGE_UP } from '../../constants';
 
-const Container = glamorous.div<ThemeProps>(
-  {
-    display: 'flex',
-    width: '100%',
-    maxWidth: '100%',
-    height: '100%',
-    overflow: 'auto',
-    position: 'relative',
-    WebkitOverflowScrolling: 'touch',
-    zIndex: 2,
-    boxSizing: 'border-box',
-    borderStyle: 'solid',
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    [`@media only screen and (${LARGE_UP})`]: {
-      borderBottomWidth: 0,
-      borderRightWidth: 1,
-      height: 'auto'
-    }
-  },
-  ({ theme }) => ({
-    borderColor: darken(0.15, theme[theme.primary].base)
-  })
-);
+const Container =
+  glamorous.div <
+  ThemeProps >
+  (
+    {
+      display: 'flex',
+      width: '100%',
+      maxWidth: '100%',
+      height: '100%',
+      overflow: 'auto',
+      position: 'relative',
+      WebkitOverflowScrolling: 'touch',
+      zIndex: 2,
+      boxSizing: 'border-box',
+      borderStyle: 'solid',
+      borderWidth: 0,
+      borderBottomWidth: 1,
+      [`@media only screen and (${LARGE_UP})`]: {
+        borderBottomWidth: 0,
+        borderRightWidth: 1,
+        height: 'auto'
+      }
+    },
+    ({ theme }) => ({
+      borderColor: darken(0.15, theme[theme.primary].base)
+    })
+  );
 
 const TextArea = glamorous.textarea({
   width: '100%',
@@ -44,18 +48,18 @@ const TextArea = glamorous.textarea({
 });
 
 interface Props extends ThemeProps {
-  code: string;
-  children?: any;
-  className?: string;
-  onUpdate(value: string): void;
+  code: string,
+  children?: any,
+  className?: string,
+  onUpdate(value: string): void
 }
 
 interface State {}
 
-export class CodeEditor extends React.Component<Props, State> {
-  private editor: any;
-  private textArea: HTMLTextAreaElement;
-  private handleChange: Function;
+export class CodeEditor extends Component<Props, State> {
+  editor: any;
+  textArea: HTMLTextAreaElement;
+  handleChange: Function;
 
   constructor(props) {
     super(props);
@@ -122,4 +126,4 @@ div.CodeMirror {
 }
 `);
 
-export default withTheme(CodeEditor) as React.ComponentClass<any>;
+export default withTheme(CodeEditor);

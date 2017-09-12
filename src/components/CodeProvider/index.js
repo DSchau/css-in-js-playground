@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import glamorous from 'glamorous';
-import * as queryString from 'query-string';
+import queryString from 'query-string';
 
 import Editor from '../CodeEditor/';
 import ErrorBoundary from '../ErrorBoundary/';
@@ -21,19 +21,19 @@ const Container = glamorous.div({
 });
 
 interface Props {
-  snippet: string;
+  snippet: string
 }
 
 interface State {
-  code?: string;
-  error: Error | null;
+  code?: string,
+  error: Error | null,
   errorInfo: {
-    componentStack: string;
-  };
-  hydrated?: boolean;
+    componentStack: string
+  },
+  hydrated?: boolean
 }
 
-class CodeProvider extends React.Component<Props, State> {
+class CodeProvider extends Component<Props, State> {
   state = {
     code: ``,
     error: null,

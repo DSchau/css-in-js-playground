@@ -1,3 +1,4 @@
+// @flow
 const expr = library => new RegExp(`["']${library}["']`);
 
 const matchesExpression = (text, library) => text.match(expr(library));
@@ -44,12 +45,12 @@ export default code => {
       import('jss'),
       import('jss-preset-default')
     ]).then(([jss, preset]) => ({
-      jss: (jss as any).default,
+      jss: jss.default,
       preset: preset.default
     }));
   } else if (matches('react-jss')) {
-    return import('react-jss').then(reactJSS => ({
-      injectSheet: (reactJSS as any).default
+    return import('react-jss').then(({ default: injectSheet }) => ({
+      injectSheet
     }));
   }
   return Promise.resolve({});

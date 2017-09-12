@@ -1,11 +1,11 @@
-import * as React from 'react';
-import * as OfflinePlugin from 'offline-plugin/runtime';
-declare let process: any;
+// @flow
+import React from 'react';
+import OfflinePlugin from 'offline-plugin/runtime';
 
 interface Props {}
 
 interface State {
-  updated: boolean;
+  updated: boolean
 }
 
 export function handleOffline({ onUpdated = () => {} }) {

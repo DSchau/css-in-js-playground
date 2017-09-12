@@ -1,4 +1,5 @@
-import * as React from 'react';
+// @flow
+import React, { Component } from 'react';
 import Logo from 'react-icons/lib/go/rocket';
 
 export const noop = () => null;
@@ -16,7 +17,7 @@ export default function evalCode(code = '', scope = {}) {
     ...scopeKeys,
     transformed
   );
-  const Component = makeComponent(React, React.Component, Logo, ...scopeValues);
+  const Component = makeComponent(React, Component, Logo, ...scopeValues);
   if (typeof Component !== 'function') {
     return noop;
   }

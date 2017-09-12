@@ -1,3 +1,4 @@
+// @flow
 export const SANS_SERIF = {
   fontFamily: 'sans-serif',
   '.wf-active &': {

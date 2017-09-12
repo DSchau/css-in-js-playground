@@ -1,3 +1,4 @@
+// @flow
 import { keyframes } from 'glamor';
 
 export const SLIDE_UP = keyframes({

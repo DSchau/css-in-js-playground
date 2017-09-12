@@ -1,3 +1,4 @@
+// @flow
 /*
  * https://css-tricks.com/loading-web-fonts-with-the-web-font-loader/
  */

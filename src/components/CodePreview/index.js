@@ -1,5 +1,4 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
 import evalCode from '../../utils/eval';
@@ -34,20 +33,20 @@ const LivePreview = ({ code }) => {
 };
 
 interface Props {
-  code: string;
-  error: Error;
+  code: string,
+  error: Error,
   errorInfo: {
-    componentStack: string;
-  };
+    componentStack: string
+  }
 }
 
 interface State {
-  Component: Function;
-  loaded: boolean;
-  scope: any;
+  Component: Function,
+  loaded: boolean,
+  scope: any
 }
 
-export default class Preview extends React.Component<Props, State> {
+export default class Preview extends Component<Props, State> {
   state = {
     Component: () => null,
     loaded: false,

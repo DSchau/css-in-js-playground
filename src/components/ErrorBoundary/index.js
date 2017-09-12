@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
 const Container = glamorous.div({
@@ -6,17 +6,17 @@ const Container = glamorous.div({
   width: '100%'
 });
 
-interface Props {
-  children: any;
-  code: string | undefined;
-  onError?: Function;
-}
+type Props = {
+  children: any,
+  code: string | undefined,
+  onError?: Function
+};
 
-interface State {
-  code: string | undefined;
-}
+type State = {
+  code: string | undefined
+};
 
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   state = {
     code: ``,
     error: undefined

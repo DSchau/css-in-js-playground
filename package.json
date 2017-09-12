@@ -12,21 +12,20 @@
     "build:production": "npm run build -- --env.environment production",
     "clean": "del-cli \"dist/**/*\"",
     "copy": "cp src/manifest.json dist/manifest.json;",
-    "format": "npm run format:js & npm run format:ts",
-    "format:js": "prettier --write --single-quote \"src/snippets/*.js\"",
-    "format:ts": "prettier --write --single-quote --parser typescript \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "format": "prettier --write --single-quote \"src/**/*.js\"",
     "markdown": "md-magic",
     "start": "webpack-dev-server --env.environment development --hot --host 0.0.0.0 --port 8000",
     "test": "jest",
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
-    "@types/codemirror": "^0.0.43",
-    "@types/jest": "^20.0.8",
-    "@types/prop-types": "^15.5.1",
-    "@types/react": "^16.0.5",
-    "@types/react-dom": "^15.5.4",
-    "awesome-typescript-loader": "^3.2.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "compression-webpack-plugin": "^1.0.0",
     "css-loader": "^0.28.4",
     "del-cli": "^1.1.0",
@@ -34,6 +33,7 @@
     "enzyme-to-json": "^1.5.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "flow-bin": "^0.54.1",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
@@ -50,8 +50,6 @@
     "react-test-renderer": "^16.0.0-rc.2",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
-    "ts-jest": "^20.0.10",
-    "typescript": "^2.4.2",
     "webpack": "^3.5.4",
     "webpack-config-assign": "^1.0.0",
     "webpack-dev-server": "^2.7.1",
@@ -86,12 +84,8 @@
     "webfontloader": "^1.6.28"
   },
   "lint-staged": {
-    "src/**/*.ts": [
-      "npm run format:ts",
-      "git add"
-    ],
-    "src/snippets/*.js": [
-      "npm run markdown & npm run format:js",
+    "src/**/*.js": [
+      "npm run format",
       "git add"
     ]
   }
