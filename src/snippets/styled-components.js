@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Logo from './logo';
 
 const Container = styled.main`
@@ -109,9 +109,12 @@ const Input = styled.input`
   }
 `;
 
-const SubmitButton = styled.button.attrs({
-  type: 'submit'
-})`
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const Button = styled.button`
   display: block;
   background-color: ${props => (props.disabled ? '#BBB' : '#6772e5')};
   color: white;
@@ -120,9 +123,20 @@ const SubmitButton = styled.button.attrs({
   padding: 1.25rem 1rem;
   box-sizing: border-box;
   border-radius: 0.25rem;
+  border: 2px solid transparent;
   text-transform: uppercase;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
+  font-weight: bold;
+  ${props =>
+    props.secondary &&
+    css`
+    background-color: transparent;
+    border-color: #6772e5;
+    color: #6772e5;
+    font-weight: normal;
+    margin-right: 1rem;
+  `};
 `;
 
 export default class Login extends Component {
@@ -149,6 +163,25 @@ export default class Login extends Component {
     };
   }
 
+  resetForm() {
+    return () => {
+      const resetState = this.state.fields.reduce(
+        (stateUpdate, field) => {
+          stateUpdate[field] = '';
+          return stateUpdate;
+        },
+        {
+          valid: false
+        }
+      );
+      this.setState(resetState, () => {
+        if (this.form) {
+          this.form.reset();
+        }
+      });
+    };
+  }
+
   render() {
     return (
       <Container>
@@ -165,7 +198,10 @@ export default class Login extends Component {
           </TitleContainer>
         </Header>
         <Stripe />
-        <Form onSubmit={ev => ev.preventDefault()}>
+        <Form
+          innerRef={node => (this.form = node)}
+          onSubmit={ev => ev.preventDefault()}
+        >
           <Input
             type="text"
             name="email"
@@ -178,7 +214,14 @@ export default class Login extends Component {
             placeholder="Phone number"
             onChange={this.handleInputChange()}
           />
-          <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
+          <ButtonContainer>
+            <Button onClick={this.resetForm()} secondary>
+              Reset
+            </Button>
+            <Button type="submit" disabled={!this.state.valid}>
+              Submit
+            </Button>
+          </ButtonContainer>
         </Form>
       </Container>
     );

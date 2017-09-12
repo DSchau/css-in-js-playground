@@ -20,7 +20,7 @@ const Container = glamorous.div({
 });
 
 const CodeContainer = glamorous.div({
-  display: 'block',
+  display: 'flex',
   height: 'auto',
   width: '100%'
 });

@@ -112,26 +112,39 @@ const Input = glamorous.input({
   }
 });
 
-const SubmitButton = glamorous
+const ButtonContainer = glamorous.div({
+  display: 'flex',
+  width: '100%'
+});
+
+const Button = glamorous
   .button(
-    {
-      display: 'block',
-      backgroundColor: '#6772e5',
-      color: 'white',
-      border: 'none',
-      width: '100%',
-      padding: '1.25rem 1rem',
-      boxSizing: 'border-box',
-      borderRadius: '0.25rem',
-      textTransform: 'uppercase',
-      boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
-      marginTop: '1rem'
-    },
-    props => ({
-      backgroundColor: props.disabled ? '#BBB' : null
-    })
-  )
-  .withProps({ type: 'submit' });
+  {
+    display: 'block',
+    backgroundColor: '#6772e5',
+    color: 'white',
+    border: 'none',
+    width: '100%',
+    padding: '1.25rem 1rem',
+    boxSizing: 'border-box',
+    fontWeight: 'bold',
+    border: '2px solid transparent',
+    borderRadius: '0.25rem',
+    textTransform: 'uppercase',
+    boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
+    marginTop: '1rem'
+  },
+  props => ({
+    backgroundColor: props.disabled ? '#BBB' : null
+  }),
+  props => props.secondary ? ({
+    backgroundColor: 'transparent',
+    borderColor: '#6772e5',
+    color: '#6772e5',
+    fontWeight: 'normal',
+    marginRight: '1rem'
+  }) : ({})
+  );
 
 export default class Login extends Component {
   constructor(props) {
@@ -157,6 +170,25 @@ export default class Login extends Component {
     };
   }
 
+  resetForm() {
+    return () => {
+      const resetState = this.state.fields.reduce(
+        (stateUpdate, field) => {
+          stateUpdate[field] = '';
+          return stateUpdate;
+        },
+        {
+          valid: false
+        }
+      );
+      this.setState(resetState, () => {
+        if (this.form) {
+          this.form.reset();
+        }
+      });
+    };
+  }
+
   render() {
     return (
       <Container>
@@ -173,7 +205,7 @@ export default class Login extends Component {
           </TitleContainer>
         </Header>
         <Stripe />
-        <Form onSubmit={ev => ev.preventDefault()}>
+        <Form innerRef={node => this.form = node} onSubmit={ev => ev.preventDefault()}>
           <Input
             type="text"
             placeholder="Email"
@@ -186,7 +218,10 @@ export default class Login extends Component {
             name="phoneNumber"
             onChange={this.handleInputChange()}
           />
-          <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
+          <ButtonContainer>
+            <Button onClick={this.resetForm()} secondary>Reset</Button>
+            <Button type="submit" disabled={!this.state.valid}>Submit</Button>
+          </ButtonContainer>
         </Form>
       </Container>
     );
