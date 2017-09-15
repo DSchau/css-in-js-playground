@@ -51,7 +51,7 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",
     "ts-jest": "^20.0.10",
-    "typescript": "^2.4.2",
+    "typescript": "^2.5.2",
     "webpack": "^3.5.4",
     "webpack-config-assign": "^1.0.0",
     "webpack-dev-server": "^2.7.1",
