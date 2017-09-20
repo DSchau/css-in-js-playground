@@ -2,9 +2,7 @@ import * as React from 'react';
 import glamorous from 'glamorous';
 import * as queryString from 'query-string';
 
-import Editor from '../CodeEditor/';
-import ErrorBoundary from '../ErrorBoundary/';
-import Preview from '../CodePreview/';
+import { CodeEditor, ErrorBoundary, CodePreview } from '../';
 
 import { LARGE_UP } from '../../constants/breakpoints';
 import { compress, decompress } from '../../utils/uri-utils';
@@ -34,7 +32,7 @@ interface State {
   hydrated?: boolean;
 }
 
-class CodeProvider extends React.PureComponent<Props, State> {
+export class CodeProvider extends React.PureComponent<Props, State> {
   state = {
     code: ``,
     error: null,
@@ -108,18 +106,16 @@ class CodeProvider extends React.PureComponent<Props, State> {
     const { code, error, errorInfo } = this.state;
     return (
       <Container>
-        <Editor
+        <CodeEditor
           code={code}
           error={error}
           errorInfo={errorInfo}
           onUpdate={this.handleEditorUpdate}
         />
         <ErrorBoundary code={code} onError={this.handleError}>
-          <Preview code={code} error={error} errorInfo={errorInfo} />
+          <CodePreview code={code} error={error} errorInfo={errorInfo} />
         </ErrorBoundary>
       </Container>
     );
   }
 }
-
-export default CodeProvider;

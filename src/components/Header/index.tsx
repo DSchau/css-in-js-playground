@@ -3,7 +3,7 @@ import glamorous, { withTheme } from 'glamorous';
 import { darken } from 'polished';
 import * as kebabCase from 'lodash.kebabcase';
 import * as queryString from 'query-string';
-import * as InvertedIcon from 'react-icons/lib/md/lightbulb-outline';
+import * as InvertedIcon from 'react-icons/lib/go/light-bulb';
 import * as DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
 import * as snippets from '../../constants/snippets';
@@ -12,7 +12,7 @@ import { Theme, ThemeProps, SANS_SERIF } from '../../style/';
 const HeaderContainer = glamorous.header<ThemeProps>(
   {
     flex: '0 0 auto',
-    height: '44px',
+    height: 44,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -35,7 +35,7 @@ const SelectContainer = glamorous.div({
 
 const Select = glamorous.select<ThemeProps>(
   {
-    height: '32px',
+    height: 32,
     backgroundColor: 'transparent',
     border: 'none',
     boxShadow: 'none',
@@ -68,9 +68,14 @@ const DownIcon = (withTheme as any)(
 );
 
 const LightBulb = (withTheme as any)(
-  glamorous(InvertedIcon)<ThemeProps>(({ theme }) => ({
-    color: theme[theme.primary].text
-  }))
+  glamorous(InvertedIcon)<ThemeProps>(
+    {
+      cursor: 'pointer'
+    },
+    ({ theme }) => ({
+      color: theme[theme.primary].text
+    })
+  )
 );
 
 const IconContainer = glamorous.div({
@@ -92,7 +97,7 @@ interface State {
   selected: string;
 }
 
-class Header extends React.Component<Props, State> {
+export class Header extends React.Component<Props, State> {
   state = {
     selected: ''
   };
@@ -177,5 +182,3 @@ class Header extends React.Component<Props, State> {
     );
   }
 }
-
-export default Header;

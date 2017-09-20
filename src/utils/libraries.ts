@@ -37,8 +37,6 @@ export default code => {
     return import('cxs/component').then(exposeExports('cxs'));
   } else if (matches('radium')) {
     return import('radium').then(exposeExports('Radium'));
-  } else if (matches('styletron-react')) {
-    return import('styletron-react').then(exposeExports('styletron'));
   } else if (matches('jss')) {
     return Promise.all([
       import('jss'),

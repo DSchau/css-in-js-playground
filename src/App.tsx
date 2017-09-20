@@ -3,10 +3,7 @@ import glamorous, { ThemeProvider } from 'glamorous';
 import { css } from 'glamor';
 import queryString from 'query-string';
 
-import CodeProvider from './components/CodeProvider/';
-import Footer from './components/Footer/';
-import Header from './components/Header/';
-import Timer from './components/Timer/';
+import { CodeProvider, Footer, Header, Timer } from './components';
 
 import { THEME } from './style';
 import { withOffline } from './utils/offline';

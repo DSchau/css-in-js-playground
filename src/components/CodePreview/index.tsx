@@ -48,7 +48,7 @@ interface State {
   scope: any;
 }
 
-export default class Preview extends React.Component<Props, State> {
+export class CodePreview extends React.Component<Props, State> {
   state = {
     Component: () => null,
     loaded: false,

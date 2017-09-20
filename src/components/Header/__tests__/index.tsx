@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import Header from '../';
+import { Header } from '../';
 
 test('it can be rendered', () => {
   expect(() =>

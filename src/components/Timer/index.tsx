@@ -67,7 +67,7 @@ interface State {
   seconds: number;
 }
 
-export default class Timer extends React.Component<Props, State> {
+export class Timer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 

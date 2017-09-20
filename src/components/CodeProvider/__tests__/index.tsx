@@ -7,7 +7,7 @@ jest.mock('../../../utils/libraries', () => {
 
 global.onmessage = jest.fn();
 
-import CodeProvider from '../';
+import { CodeProvider } from '../';
 
 test('it can be rendered', () => {
   expect(() => shallow(<CodeProvider snippet="var a = 'b';" />)).not.toThrow();

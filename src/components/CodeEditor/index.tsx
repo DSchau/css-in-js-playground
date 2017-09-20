@@ -52,7 +52,7 @@ interface Props extends ThemeProps {
 
 interface State {}
 
-export class CodeEditor extends React.Component<Props, State> {
+export class CodeEditorBase extends React.Component<Props, State> {
   private editor: any;
   private textArea: HTMLTextAreaElement;
   private handleChange: Function;
@@ -122,4 +122,4 @@ div.CodeMirror {
 }
 `);
 
-export default withTheme(CodeEditor) as React.ComponentClass<any>;
+export const CodeEditor = withTheme(CodeEditorBase) as React.ComponentClass<any>;

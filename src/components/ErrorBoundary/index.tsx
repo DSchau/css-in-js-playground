@@ -16,7 +16,7 @@ interface State {
   code: string | undefined;
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends React.Component<Props, State> {
   state = {
     code: ``,
     error: undefined
@@ -44,5 +44,3 @@ class ErrorBoundary extends React.Component<Props, State> {
     return this.props.children;
   }
 }
-
-export default ErrorBoundary;

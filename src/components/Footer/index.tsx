@@ -1,8 +1,9 @@
 import * as React from 'react';
-import glamorous from 'glamorous';
+import glamorous, { A } from 'glamorous';
 import { darken } from 'polished';
 
 import * as CodeIcon from 'react-icons/lib/md/code';
+import * as GithubIcon from 'react-icons/lib/go/mark-github';
 
 import { SERIF, Theme, ThemeProps } from '../../style';
 
@@ -28,7 +29,9 @@ const Text = glamorous.h1<ThemeProps>(
     fontSize: '0.8rem',
     color: '${props => props.theme[props.theme.primary].text}',
     margin: 0,
-    padding: 0
+    padding: 0,
+    width: '100%',
+    textAlign: 'center'
   },
   SERIF,
   ({ theme }) => ({
@@ -36,14 +39,32 @@ const Text = glamorous.h1<ThemeProps>(
   })
 );
 
-const Link = glamorous.a({
+const Link = glamorous.a<{
+  paddingTop?: number;
+  paddingRight?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+}>({
   color: 'inherit',
   textDecorationSkip: 'ink'
-});
+}, ({ paddingTop = 0, paddingRight = 0, paddingBottom = 0, paddingLeft = 0 }) => ({
+  paddingTop,
+  paddingRight,
+  paddingBottom,
+  paddingLeft
+}));
+
+const StyledGithubIcon = glamorous(GithubIcon)<ThemeProps & {
+  size?: number;
+}>(
+  ({ theme }) => ({
+    color: theme[theme.primary].text
+  })
+);
 
 interface Props extends ThemeProps {}
 
-function Footer(props: Props) {
+export function Footer(props: Props) {
   return (
     <FooterContainer>
       <Text>
@@ -52,8 +73,15 @@ function Footer(props: Props) {
           Dustin Schau
         </Link>
       </Text>
+      <Link
+        href="https://github.com/dschau/css-in-js-playground"
+        target="_blank"
+        rel="noopener"
+        paddingLeft={8}
+        paddingRight={8}
+       >
+        <StyledGithubIcon size={20} />
+      </Link>
     </FooterContainer>
   );
 }
-
-export default Footer;
