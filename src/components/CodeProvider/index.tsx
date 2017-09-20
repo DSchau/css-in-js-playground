@@ -57,11 +57,13 @@ export class CodeProvider extends React.PureComponent<Props, State> {
 
   componentWillReceiveProps({ library, snippet }: Props) {
     if (this.props.library !== library) {
-      const update = this.state.hydrated ? {
-        hydrated: false
-      } : {
-          code: snippet
-        };
+      const update = this.state.hydrated
+        ? {
+            hydrated: false
+          }
+        : {
+            code: snippet
+          };
       this.setState(update);
     }
   }

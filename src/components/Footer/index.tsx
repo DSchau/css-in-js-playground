@@ -44,23 +44,31 @@ const Link = glamorous.a<{
   paddingRight?: number;
   paddingBottom?: number;
   paddingLeft?: number;
-}>({
-  color: 'inherit',
-  textDecorationSkip: 'ink'
-}, ({ paddingTop = 0, paddingRight = 0, paddingBottom = 0, paddingLeft = 0 }) => ({
-  paddingTop,
-  paddingRight,
-  paddingBottom,
-  paddingLeft
-}));
-
-const StyledGithubIcon = glamorous(GithubIcon)<ThemeProps & {
-  size?: number;
 }>(
-  ({ theme }) => ({
-    color: theme[theme.primary].text
+  {
+    color: 'inherit',
+    textDecorationSkip: 'ink'
+  },
+  ({
+    paddingTop = 0,
+    paddingRight = 0,
+    paddingBottom = 0,
+    paddingLeft = 0
+  }) => ({
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft
   })
 );
+
+const StyledGithubIcon = glamorous(GithubIcon)<
+  ThemeProps & {
+    size?: number;
+  }
+>(({ theme }) => ({
+  color: theme[theme.primary].text
+}));
 
 interface Props extends ThemeProps {}
 
@@ -79,7 +87,7 @@ export function Footer(props: Props) {
         rel="noopener"
         paddingLeft={8}
         paddingRight={8}
-       >
+      >
         <StyledGithubIcon size={20} />
       </Link>
     </FooterContainer>

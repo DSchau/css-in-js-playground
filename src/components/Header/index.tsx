@@ -131,7 +131,7 @@ export class Header extends React.Component<Props, State> {
         library
       });
       this.props.onSelect({
-        library,        
+        library,
         snippet
       });
     }

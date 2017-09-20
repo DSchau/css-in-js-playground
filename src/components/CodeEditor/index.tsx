@@ -122,4 +122,6 @@ div.CodeMirror {
 }
 `);
 
-export const CodeEditor = withTheme(CodeEditorBase) as React.ComponentClass<any>;
+export const CodeEditor = withTheme(CodeEditorBase) as React.ComponentClass<
+  any
+>;
