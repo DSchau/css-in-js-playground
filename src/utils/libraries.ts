@@ -33,6 +33,11 @@ export default code => {
     }));
   } else if (matches('aphrodite')) {
     return import('aphrodite').then(exposeExports('aphrodite'));
+  } else if (matches('react-emotion')) {
+    return import('react-emotion').then(({ default: styled, ...rest }) => ({
+      styled,
+      ...rest
+    }));
   } else if (matches('cxs/component')) {
     return import('cxs/component').then(exposeExports('cxs'));
   } else if (matches('radium')) {
