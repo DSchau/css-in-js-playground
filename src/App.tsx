@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 import { CodeProvider, Footer, Header, Timer } from './components';
 
-import { GLOBAL, THEME } from './style';
+import { THEME } from './style';
 import { withOffline } from './utils/offline';
 
 const Container = glamorous.main({
@@ -100,7 +100,23 @@ class App extends React.Component<Props, State> {
   }
 }
 
-GLOBAL
+`
+  html, body {
+    font-family: sans-serif;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .wf-active {
+    font-family: 'Bitter', sans-serif;
+  }
+`
   .split(/\n{2}/)
   .forEach(rule => {
     css.insert(rule);
