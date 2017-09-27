@@ -9,7 +9,7 @@ module.exports = function webpackConfig({ environment = 'production' } = {}) {
     devtool: 'source-map',
     entry: {
       bundle: ['./src/index'],
-      vendor: ['react', 'react-dom', 'styled-components', 'buble', 'codemirror']
+      vendor: ['react', 'react-dom', 'glamorous', 'buble', 'codemirror']
     },
     output: {
       filename: '[name].js',
