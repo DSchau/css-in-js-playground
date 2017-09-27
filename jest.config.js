@@ -6,7 +6,8 @@ module.exports = {
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|tsx|js)?$',
   setupFiles: [
     'raf/polyfill',
-    'mock-local-storage'
+    'mock-local-storage',
+    '<rootDir>/jest.setup.js'
   ],
   moduleFileExtensions: [
     'ts',

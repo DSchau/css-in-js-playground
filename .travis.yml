@@ -3,10 +3,16 @@ node_js:
 - stable
 cache:
   yarn: true
+
+before_install: yarn global add greenkeeper-lockfile@1
 install:
   - yarn global add travis-ci-cloudfront-invalidation
   - yarn
+
+before_script: greenkeeper-lockfile-update
 script: yarn test
+after_script: greenkeeper-lockfile-upload
+
 before_deploy: yarn build:production
 deploy:
   provider: s3
