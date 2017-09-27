@@ -100,8 +100,10 @@ class App extends React.Component<Props, State> {
   }
 }
 
-GLOBAL.split(/\n{2}/).forEach(rule => {
-  css.insert(rule);
-});
+GLOBAL
+  .split(/\n{2}/)
+  .forEach(rule => {
+    css.insert(rule);
+  });
 
 export default withOffline(App);
