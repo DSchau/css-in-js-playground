@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import { CodeProvider, Footer, Header, Timer } from './components';
 
 import { GLOBAL, THEME } from './style';
-import { withOffline } from './utils/offline';
+import { OfflineContainer } from './utils/offline';
 
 const Container = glamorous.main({
   display: 'flex',
@@ -15,15 +15,12 @@ const Container = glamorous.main({
   position: 'relative'
 });
 
-interface Props {
-  updated: boolean;
-}
+interface Props {}
 
 interface State {
   code: string;
   library: string;
   theme: any;
-  updated: boolean;
 }
 
 class App extends React.Component<Props, State> {
@@ -33,8 +30,7 @@ class App extends React.Component<Props, State> {
     this.state = {
       code: '',
       library: '',
-      theme: THEME,
-      updated: props.updated
+      theme: THEME
     };
   }
 
@@ -67,43 +63,37 @@ class App extends React.Component<Props, State> {
   };
 
   handleTimerComplete = () => {
-    this.setState(
-      {
-        updated: false
-      },
-      () => {
-        location.reload();
-      }
-    );
+    location.reload();
   };
 
   render() {
     return (
-      <ThemeProvider theme={this.state.theme}>
-        <Container>
-          <Header
-            defaultSnippet="StyledComponents"
-            onSelect={this.handleSelect}
-            primary={this.state.theme.primary}
-            onColorSwitch={this.handleColorSwitch}
-          />
-          <CodeProvider
-            library={this.state.library}
-            snippet={this.state.code}
-          />
-          <Footer />
-          {this.props.updated &&
-            <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
-        </Container>
-      </ThemeProvider>
+      <OfflineContainer>
+        {updated =>
+          <ThemeProvider theme={this.state.theme}>
+            <Container>
+              <Header
+                defaultSnippet="StyledComponents"
+                onSelect={this.handleSelect}
+                primary={this.state.theme.primary}
+                onColorSwitch={this.handleColorSwitch}
+              />
+              <CodeProvider
+                library={this.state.library}
+                snippet={this.state.code}
+              />
+              <Footer />
+              {updated &&
+                <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
+            </Container>
+          </ThemeProvider>}
+      </OfflineContainer>
     );
   }
 }
 
-GLOBAL
-  .split(/\n{2}/)
-  .forEach(rule => {
-    css.insert(rule);
-  });
+GLOBAL.split(/\n{2}/).forEach(rule => {
+  css.insert(rule);
+});
 
-export default withOffline(App);
+export default App;
