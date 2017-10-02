@@ -45,7 +45,7 @@
     "name-all-modules-plugin": "~1.0.1",
     "prettier": "~1.7.3",
     "raf": "~3.3.2",
-    "raw-loader": "~0.5.1",
+    "raw-loader": "~1.0.0-beta.0",
     "react-addons-test-utils": "~15.6.2",
     "react-test-renderer": "16",
     "source-map-loader": "~0.2.2",
