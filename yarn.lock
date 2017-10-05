@@ -1835,7 +1835,13 @@ enzyme-matchers@^4.0.0:
   dependencies:
     deep-equal-ident "^1.1.1"
 
-enzyme-to-json@^3.0.0, enzyme-to-json@~3.0.1:
+enzyme-to-json@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.1.0.tgz#1941eded2f3a64f12f3aff6356878af9515a7088"
+  dependencies:
+    lodash "^4.17.4"
+
+enzyme-to-json@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.0.1.tgz#16468e2ff3e4db817d84f9df38760abbc322273d"
   dependencies:
