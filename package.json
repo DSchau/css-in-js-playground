@@ -24,7 +24,7 @@
     "@types/codemirror": "~0.0.47",
     "@types/jest": "~21.1.1",
     "@types/react": "~16.0.7",
-    "@types/react-dom": "~15.5.5",
+    "@types/react-dom": "~16.0.0",
     "awesome-typescript-loader": "~3.2.3",
     "compression-webpack-plugin": "~1.0.1",
     "css-loader": "~0.28.7",
