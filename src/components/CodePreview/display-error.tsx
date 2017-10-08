@@ -36,9 +36,7 @@ export default function DisplayError({ error, errorInfo }: Props) {
       <Error>
         <ErrorTitle>{error.name}</ErrorTitle>: {error.message}
       </Error>
-      <Error>
-        {errorInfo.componentStack}
-      </Error>
+      <Error>{errorInfo.componentStack}</Error>
     </ErrorContainer>
   );
 }

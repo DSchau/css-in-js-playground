@@ -142,7 +142,7 @@ export class Header extends React.Component<Props, State> {
       const { primary } = this.props;
       const theme = primary === 'dark' ? 'light' : 'dark';
       const path = this.getPath({
-        ...queryString.parse(location.search) || {},
+        ...(queryString.parse(location.search) || {}),
         dark: theme === 'dark'
       });
       history.replaceState({ path }, '', path);
@@ -167,11 +167,11 @@ export class Header extends React.Component<Props, State> {
       <HeaderContainer>
         <SelectContainer>
           <Select value={this.state.selected} onChange={this.handleChange}>
-            {options.map(option =>
+            {options.map(option => (
               <Option key={option} value={option}>
                 {kebabCase(option)}
               </Option>
-            )}
+            ))}
           </Select>
           <DownIcon size={20} />
         </SelectContainer>

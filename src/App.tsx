@@ -69,7 +69,7 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <OfflineContainer>
-        {updated =>
+        {updated => (
           <ThemeProvider theme={this.state.theme}>
             <Container>
               <Header
@@ -83,10 +83,12 @@ class App extends React.Component<Props, State> {
                 snippet={this.state.code}
               />
               <Footer />
-              {updated &&
-                <Timer duration={10000} onElapsed={this.handleTimerComplete} />}
+              {updated && (
+                <Timer duration={10000} onElapsed={this.handleTimerComplete} />
+              )}
             </Container>
-          </ThemeProvider>}
+          </ThemeProvider>
+        )}
       </OfflineContainer>
     );
   }

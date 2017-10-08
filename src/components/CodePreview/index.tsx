@@ -27,11 +27,7 @@ const CodeContainer = glamorous.div({
 });
 
 const LivePreview = ({ code }) => {
-  return (
-    <pre>
-      {code}
-    </pre>
-  );
+  return <pre>{code}</pre>;
 };
 
 interface Props {
@@ -84,9 +80,11 @@ export class CodePreview extends React.Component<Props, State> {
     return (
       <Container>
         <CodeContainer>
-          {this.props.error
-            ? <DisplayError error={error} errorInfo={errorInfo} />
-            : <Component />}
+          {this.props.error ? (
+            <DisplayError error={error} errorInfo={errorInfo} />
+          ) : (
+            <Component />
+          )}
         </CodeContainer>
       </Container>
     );
