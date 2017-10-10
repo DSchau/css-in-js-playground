@@ -1,3 +1,5 @@
+import { Module } from '../interfaces';
+
 const expr = library => new RegExp(`["']${library}["']`);
 
 const matchesExpression = (text, library) => text.match(expr(library));
@@ -16,8 +18,8 @@ const exposeExports = (name, includeAll = true) => {
   };
 };
 
-export default code => {
-  const matches = matchesExpression.bind(undefined, code);
+export default (code: Module) => {
+  const matches = matchesExpression.bind(undefined, code.Index);
 
   if (matches('styled-components')) {
     return import('styled-components').then(({ default: styled, ...rest }) => ({

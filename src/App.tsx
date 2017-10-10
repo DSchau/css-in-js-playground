@@ -4,6 +4,7 @@ import { css } from 'glamor';
 import queryString from 'query-string';
 
 import { CodeProvider, Footer, Header, Timer } from './components';
+import * as snippets from './snippets';
 
 import { GLOBAL, THEME } from './style';
 import { OfflineContainer } from './utils/offline';
@@ -35,17 +36,17 @@ class App extends React.Component<Props, State> {
   }
 
   componentWillMount() {
-    const params = queryString.parse(location.search);
+    const { theme: persistedTheme } = queryString.parse(location.search);
     const theme = this.state.theme;
     this.setState({
       theme: {
         ...theme,
-        primary: params.dark === 'false' ? 'light' : 'dark'
+        primary: persistedTheme || 'dark' 
       }
     });
   }
 
-  handleSelect = ({ library, snippet: code }) => {
+  handleSelect = ({ library, code }) => {
     this.setState({
       code,
       library
@@ -77,10 +78,12 @@ class App extends React.Component<Props, State> {
                 onSelect={this.handleSelect}
                 primary={this.state.theme.primary}
                 onColorSwitch={this.handleColorSwitch}
+                files={Object.keys(this.state.code)}
+                modules={snippets}
               />
               <CodeProvider
                 library={this.state.library}
-                snippet={this.state.code}
+                code={this.state.code}
               />
               <Footer />
               {updated && (

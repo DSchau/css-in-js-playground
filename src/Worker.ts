@@ -1,15 +1,28 @@
 import * as buble from 'buble';
 
-onmessage = ev => {
+import { Module } from './interfaces';
+
+interface MessageEvent {
+  data: {
+    code: Module;
+  };
+}
+
+onmessage = (ev: MessageEvent) => {
   const { data } = ev;
   const { code } = data;
   try {
-    const { code: transformed } = buble.transform(code, {
-      transforms: {
-        modules: false,
-        templateString: false
-      }
-    });
+    const transformed = Object.keys(code).reduce((components, name) => {
+      components[name] = buble.transform(code[name], {
+        transforms: {
+          modules: false,
+          templateString: false
+        },
+        sourcemap: false
+      });
+
+      return components;
+    }, {});
     (postMessage as any)(transformed);
   } catch (e) {
     console.warn(e);

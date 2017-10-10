@@ -2,8 +2,8 @@ import * as React from 'react';
 import glamorous, { A } from 'glamorous';
 import { darken } from 'polished';
 
-import * as CodeIcon from 'react-icons/lib/md/code';
-import * as GithubIcon from 'react-icons/lib/go/mark-github';
+import CodeIcon from 'react-icons/lib/md/code';
+import GithubIcon from 'react-icons/lib/go/mark-github';
 
 import { SERIF, Theme, ThemeProps } from '../../style';
 

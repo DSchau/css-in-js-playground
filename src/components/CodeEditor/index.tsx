@@ -4,12 +4,16 @@ import { css } from 'glamor';
 import { darken, lighten } from 'polished';
 
 import * as CodeMirror from 'codemirror';
+import { EditorConfiguration } from 'codemirror';
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/keymap/sublime';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
-import * as debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 
+import { Module } from '../../interfaces';
 import { Theme, ThemeProps } from '../../style/theme';
 import { LARGE_UP } from '../../constants';
 
@@ -44,10 +48,11 @@ const TextArea = glamorous.textarea({
 });
 
 interface Props extends ThemeProps {
-  code: string;
+  activeModule: string;
+  code: Module;
   children?: any;
   className?: string;
-  onUpdate(value: string): void;
+  onUpdate(value: string, active: string): void;
 }
 
 interface State {}
@@ -66,12 +71,14 @@ export class CodeEditorBase extends React.Component<Props, State> {
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.textArea, {
       autofocus: true,
+      autoCloseBrackets: true,
       mode: 'text/jsx',
       keyMap: 'sublime',
       lineNumbers: true,
+      matchBrackets: true,
       tabSize: 2,
       theme: 'dracula'
-    });
+    } as EditorConfiguration);
 
     this.editor.on('change', this.handleChange);
   }
@@ -82,20 +89,21 @@ export class CodeEditorBase extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { code, theme } = nextProps;
+    const { activeModule, code: codeModule, theme } = nextProps;
     if (theme.primary !== this.props.theme.primary) {
       this.editor.setOption(
         'theme',
         theme.primary === 'dark' ? 'dracula' : 'default'
       );
     }
+    const code = codeModule[activeModule];
     if (code !== this.editor.getValue()) {
       this.editor.setValue(code);
     }
   }
 
   onChange = codeMirrorEv => {
-    this.props.onUpdate(codeMirrorEv.getValue());
+    this.props.onUpdate(codeMirrorEv.getValue(), this.props.activeModule);
   };
 
   render() {

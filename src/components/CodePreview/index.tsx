@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import glamorous from 'glamorous';
 
 import evalCode from '../../utils/eval';
@@ -7,6 +6,8 @@ import transform from '../../utils/transpile';
 import getStylingLibrary from '../../utils/libraries';
 
 import DisplayError from './display-error';
+
+import { Module } from '../../interfaces';
 
 const Container = glamorous.div({
   display: 'flex',
@@ -31,7 +32,7 @@ const LivePreview = ({ code }) => {
 };
 
 interface Props {
-  code: string;
+  code: Module;
   error: Error;
   errorInfo: {
     componentStack: string;
@@ -51,7 +52,7 @@ export class CodePreview extends React.Component<Props, State> {
     scope: {}
   };
 
-  componentWillReceiveProps({ code }) {
+  componentWillReceiveProps({ code }: Props) {
     this.setState({ loaded: false, scope: {} });
 
     getStylingLibrary(code).then(library => {
@@ -61,7 +62,7 @@ export class CodePreview extends React.Component<Props, State> {
           scope: library
         },
         () => {
-          transform(code || '').then(es5 => {
+          transform(code).then(es5 => {
             this.setState({
               Component: evalCode(es5, this.state.scope)
             });

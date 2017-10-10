@@ -1,12 +1,13 @@
 import * as React from 'react';
 import glamorous, { withTheme } from 'glamorous';
 import { darken } from 'polished';
-import * as kebabCase from 'lodash.kebabcase';
-import * as queryString from 'query-string';
-import * as InvertedIcon from 'react-icons/lib/go/light-bulb';
-import * as DownIconElement from 'react-icons/lib/md/arrow-drop-down';
+import kebabCase from 'lodash.kebabcase';
+import queryString from 'query-string';
+import InvertedIcon from 'react-icons/lib/go/light-bulb';
+import DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
-import * as snippets from '../../constants/snippets';
+import Toolbar from './Toolbar';
+
 import { Theme, ThemeProps, SANS_SERIF } from '../../style/';
 
 const HeaderContainer = glamorous.header<ThemeProps>(
@@ -23,7 +24,7 @@ const HeaderContainer = glamorous.header<ThemeProps>(
   },
   ({ theme }) => ({
     backgroundColor: theme[theme.primary].base,
-    borderBottom: `1px solid ${darken(0.05, theme[theme.primary].base)}`
+    borderBottom: `1px solid ${darken(0.1, theme[theme.primary].base)}`
   })
 );
 
@@ -87,10 +88,13 @@ const IconContainer = glamorous.div({
 const Option = glamorous.option();
 
 interface Props extends ThemeProps {
+  activeModule?: string;
   defaultSnippet: string;
+  files: string[];
   primary: string;
   onSelect: Function;
   onColorSwitch?: Function;
+  modules: any;
 }
 
 interface State {
@@ -102,37 +106,41 @@ export class Header extends React.Component<Props, State> {
     selected: ''
   };
 
+  static defaultProps = {
+    activeModule: 'index'
+  };
+
   componentDidMount() {
     const { library = this.props.defaultSnippet } = queryString.parse(
       location.search
     );
-    const snippet = snippets[library];
-    if (snippet) {
+    const code = this.props.modules[library];
+    if (code) {
       this.setState({
         selected: library
       });
       this.props.onSelect({
         library,
-        snippet
+        code
       });
     }
   }
 
   handleChange = ev => {
     const { value: library } = ev.target;
-    const snippet = snippets[library];
-    if (snippet) {
+    const code = this.props.modules[library];
+    if (code) {
       this.setState({
         selected: library
       });
-      const { code, ...rest } = queryString.parse(location.search);
-      this.augmentHistory({
-        ...rest,
-        library
-      });
+      // const { code, ...rest } = queryString.parse(location.search);
+      // this.augmentHistory({
+      //   ...rest,
+      //   library
+      // });
       this.props.onSelect({
         library,
-        snippet
+        code
       });
     }
   };
@@ -143,7 +151,7 @@ export class Header extends React.Component<Props, State> {
       const theme = primary === 'dark' ? 'light' : 'dark';
       const path = this.getPath({
         ...(queryString.parse(location.search) || {}),
-        dark: theme === 'dark'
+        theme
       });
       history.replaceState({ path }, '', path);
       this.props.onColorSwitch(theme);
@@ -162,23 +170,26 @@ export class Header extends React.Component<Props, State> {
   }
 
   render() {
-    const options = Object.keys(snippets);
+    const options = Object.keys(this.props.modules);
     return (
-      <HeaderContainer>
-        <SelectContainer>
-          <Select value={this.state.selected} onChange={this.handleChange}>
-            {options.map(option => (
-              <Option key={option} value={option}>
-                {kebabCase(option)}
-              </Option>
-            ))}
-          </Select>
-          <DownIcon size={20} />
-        </SelectContainer>
-        <IconContainer>
-          <LightBulb size={24} onClick={this.handleColorSwitch} />
-        </IconContainer>
-      </HeaderContainer>
+      <glamorous.Div>
+        <HeaderContainer>
+          <SelectContainer>
+            <Select value={this.state.selected} onChange={this.handleChange}>
+              {options.map(option => (
+                <Option key={option} value={option}>
+                  {kebabCase(option)}
+                </Option>
+              ))}
+            </Select>
+            <DownIcon size={20} />
+          </SelectContainer>
+          <IconContainer>
+            <LightBulb size={24} onClick={this.handleColorSwitch} />
+          </IconContainer>
+        </HeaderContainer>
+        <Toolbar files={this.props.files}/>
+      </glamorous.Div>
     );
   }
 }
