@@ -41,7 +41,7 @@ class App extends React.Component<Props, State> {
     this.setState({
       theme: {
         ...theme,
-        primary: persistedTheme || 'dark' 
+        primary: persistedTheme || 'dark'
       }
     });
   }

@@ -188,7 +188,7 @@ export class Header extends React.Component<Props, State> {
             <LightBulb size={24} onClick={this.handleColorSwitch} />
           </IconContainer>
         </HeaderContainer>
-        <Toolbar files={this.props.files}/>
+        <Toolbar files={this.props.files} />
       </glamorous.Div>
     );
   }
