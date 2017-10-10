@@ -67,7 +67,7 @@ const headerStyles = {
   }
 };
 
-const HeaderRenderer = ({ classes }) =>
+const HeaderRenderer = ({ classes }) => (
   <header className={classes.header}>
     <div className={classes.logoContainer}>
       <Logo color="#25b57f" size={32} />
@@ -79,7 +79,8 @@ const HeaderRenderer = ({ classes }) =>
       <h1 className={classes.title}>Set up your payments</h1>
       <h1 className={classes.subTitle}>Rocketship, Inc.</h1>
     </div>
-  </header>;
+  </header>
+);
 
 const Header = injectSheet(headerStyles)(HeaderRenderer);
 
@@ -124,7 +125,12 @@ const formStyles = {
   }
 };
 
-const FormRenderer = ({ classes, onChangeEmail, onChangePhoneNumber, valid }) =>
+const FormRenderer = ({
+  classes,
+  onChangeEmail,
+  onChangePhoneNumber,
+  valid
+}) => (
   <form className={classes.form} onSubmit={ev => ev.preventDefault()}>
     <input
       type="text"
@@ -143,7 +149,8 @@ const FormRenderer = ({ classes, onChangeEmail, onChangePhoneNumber, valid }) =>
     <button type="submit" className={classes.button} disabled={!valid}>
       Submit
     </button>
-  </form>;
+  </form>
+);
 
 const Form = injectSheet(formStyles)(FormRenderer);
 

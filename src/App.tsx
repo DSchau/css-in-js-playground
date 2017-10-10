@@ -4,10 +4,12 @@ import { css } from 'glamor';
 import queryString from 'query-string';
 
 import { CodeProvider, Footer, Header, Timer } from './components';
-import * as snippets from './snippets';
+import snippets from './snippets';
 
 import { GLOBAL, THEME } from './style';
 import { OfflineContainer } from './utils/offline';
+
+import { Module } from './interfaces';
 
 const Container = glamorous.main({
   display: 'flex',
@@ -19,7 +21,8 @@ const Container = glamorous.main({
 interface Props {}
 
 interface State {
-  code: string;
+  activeModule: string;
+  code: Module;
   library: string;
   theme: any;
 }
@@ -29,7 +32,8 @@ class App extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      code: '',
+      activeModule: 'index',
+      code: {} as Module,
       library: '',
       theme: THEME
     };
@@ -50,6 +54,12 @@ class App extends React.Component<Props, State> {
     this.setState({
       code,
       library
+    });
+  };
+
+  handleActiveChange = active => {
+    this.setState({
+      activeModule: active
     });
   };
 
@@ -74,14 +84,16 @@ class App extends React.Component<Props, State> {
           <ThemeProvider theme={this.state.theme}>
             <Container>
               <Header
-                defaultSnippet="StyledComponents"
+                defaultLibrary="styled-components"
                 onSelect={this.handleSelect}
                 primary={this.state.theme.primary}
+                onActiveChange={this.handleActiveChange}
                 onColorSwitch={this.handleColorSwitch}
                 files={Object.keys(this.state.code)}
-                modules={snippets}
+                snippets={snippets}
               />
               <CodeProvider
+                activeModule={this.state.activeModule}
                 library={this.state.library}
                 code={this.state.code}
               />

@@ -67,7 +67,7 @@ const SubTitle = Title.extend`
   margin-top: 0.5rem;
 `;
 
-export default () =>
+export default () => (
   <Header>
     <LogoContainer>
       <Logo color="#25b57f" size={32} />
@@ -80,3 +80,4 @@ export default () =>
       <SubTitle>Rocketship, Inc.</SubTitle>
     </TitleContainer>
   </Header>
+);

@@ -32,17 +32,33 @@ const Files = glamorous.ul<ThemeProps>({
   width: '100%'
 });
 
-const File = glamorous.li<ThemeProps>(
+const File = glamorous.li<ThemeProps>({
+  margin: 0,
+  listStyleType: 'none',
+  position: 'relative'
+});
+
+const FileButton = glamorous.button<
+  ThemeProps & {
+    active: boolean;
+    name: string;
+  }
+>(
   {
+    backgroundColor: 'transparent',
+    border: 'none',
+    boxSizing: 'border-box',
     fontSize: 14,
-    margin: 0,
-    listStyleType: 'none',
-    padding: 12
+    padding: 8,
+    outline: 'none'
   },
   SANS_SERIF,
-  ({ theme }) => ({
-    color: theme[theme.primary].text
-  })
+  ({ active, theme }) => {
+    const fn = theme.primary === 'dark' ? darken : lighten;
+    return {
+      color: fn(active ? 0 : 0.3, theme[theme.primary].text)
+    };
+  }
 );
 
 const AddFileButton = glamorous.button<ThemeProps>(
@@ -60,23 +76,77 @@ const AddFileButton = glamorous.button<ThemeProps>(
   })
 );
 
+const ActiveIndicator = glamorous.span<ThemeProps>({
+  position: 'absolute',
+  bottom: 2,
+  left: 0,
+  width: '100%',
+  color: 'white',
+  fontSize: 16,
+  lineHeight: 0,
+  textAlign: 'center'
+});
+
 interface Props {
+  activeModule: string;
   files: string[];
+  onActiveChange(active: string): void;
 }
 
-function Toolbar({ files }: Props) {
-  return (
-    <ToolbarContainer>
-      <Files>
-        {files.map((file, index) => (
-          <File key={file}>{`${kebab(file)}.js`}</File>
-        ))}
-      </Files>
-      <AddFileButton>
-        <AddIcon />
-      </AddFileButton>
-    </ToolbarContainer>
-  );
+interface State {
+  active: string;
+}
+
+class Toolbar extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      active: props.activeModule
+    };
+  }
+
+  handleActiveClick = ({ target }) => {
+    const active = target.getAttribute('name');
+    this.setState({
+      active: active
+    });
+    this.props.onActiveChange(active);
+  };
+
+  render() {
+    const { files, onActiveChange } = this.props;
+    const { active } = this.state;
+    return (
+      <ToolbarContainer>
+        <Files>
+          {files
+            .sort((a, b) => {
+              if (a === 'index' || b === 'index') {
+                return 1;
+              }
+              return 0;
+            })
+            .map((file, index) => {
+              const isActive = file === active;
+              return (
+                <File key={file}>
+                  <FileButton
+                    active={isActive}
+                    name={file}
+                    onClick={this.handleActiveClick}
+                  >{`${kebab(file)}.js`}</FileButton>
+                  {isActive && <ActiveIndicator>&middot;</ActiveIndicator>}
+                </File>
+              );
+            })}
+        </Files>
+        <AddFileButton>
+          <AddIcon />
+        </AddFileButton>
+      </ToolbarContainer>
+    );
+  }
 }
 
 export default Toolbar;

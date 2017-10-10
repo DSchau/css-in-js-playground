@@ -1,21 +1,22 @@
-// import Aphrodite from './aphrodite'
-// import CXS from './cxs';
-// import Emotion from './emotion';
-// import Glamorous from './glamorous';
-// import JSS from './jss';
-// import Radium from './radium';
-// import ReactJSS from './react-jss';
-// import StyledComponents from './styled-components';
+const context = require.context('.', true, /\.js$/);
+const keys = context.keys();
 
-export * from './styled-components';
+const libraries = keys.reduce((libraries, path) => {
+  let [, library, fileName] = path.split('/');
+  const [file] = fileName.split('.js');
+  libraries[library] = {
+    ...(libraries[library] || {}),
+    [file]: context(path)
+  };
+  return libraries;
+}, {});
 
-// export {
-//   Aphrodite,
-//   CXS,
-//   Emotion,
-//   Glamorous,
-//   JSS,
-//   Radium,
-//   ReactJSS,
-//   StyledComponents
-// }
+export default keys.reduce((libraries, path) => {
+  let [, library, fileName] = path.split('/');
+  const [file] = fileName.split('.js');
+  libraries[library] = {
+    ...(libraries[library] || {}),
+    [file]: context(path)
+  };
+  return libraries;
+}, {});

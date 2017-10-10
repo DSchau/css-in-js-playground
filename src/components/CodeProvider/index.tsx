@@ -20,12 +20,13 @@ const Container = glamorous.div({
 });
 
 interface Props {
-  library: string;
+  activeModule: string;
   code: Module;
+  library: string;
 }
 
 interface State {
-  code: Module | any;
+  code: Module;
   error: Error | null;
   errorInfo: {
     componentStack: string;
@@ -35,7 +36,7 @@ interface State {
 
 export class CodeProvider extends React.PureComponent<Props, State> {
   state = {
-    code: {},
+    code: {} as Module,
     error: null,
     errorInfo: null,
     hydrated: false
@@ -61,7 +62,7 @@ export class CodeProvider extends React.PureComponent<Props, State> {
       const update = this.state.hydrated
         ? {
             hydrated: false
-          }
+          } as State
         : {
             code
           };
@@ -108,7 +109,7 @@ export class CodeProvider extends React.PureComponent<Props, State> {
     return (
       <Container>
         <CodeEditor
-          activeModule="Index"
+          activeModule={this.props.activeModule}
           code={code}
           error={error}
           errorInfo={errorInfo}

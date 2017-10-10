@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImport": true,
     "baseUrl": ".",
-    "outDir": "./dist/",
+    "outDir": "dist",
     "sourceMap": true,
     "module": "esnext",
     "moduleResolution": "node",

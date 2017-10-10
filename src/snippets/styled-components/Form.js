@@ -47,7 +47,7 @@ const SubmitButton = styled.button.attrs({
 export default class extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       email: '',
       phoneNumber: '',
@@ -71,21 +71,21 @@ export default class extends Component {
 
   render() {
     return (
-    <Form onSubmit={ev => ev.preventDefault()}>
-    <Input
-      type="text"
-      name="email"
-      placeholder="Email"
-      onChange={this.handleInputChange()}
-    />
-    <Input
-      type="text"
-      name="phoneNumber"
-      placeholder="Phone number"
-      onChange={this.handleInputChange()}
-    />
-    <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
-  </Form>
+      <Form onSubmit={ev => ev.preventDefault()}>
+        <Input
+          type="text"
+          name="email"
+          placeholder="Email"
+          onChange={this.handleInputChange()}
+        />
+        <Input
+          type="text"
+          name="phoneNumber"
+          placeholder="Phone number"
+          onChange={this.handleInputChange()}
+        />
+        <SubmitButton disabled={!this.state.valid}>Submit</SubmitButton>
+      </Form>
     );
   }
 }

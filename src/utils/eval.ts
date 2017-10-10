@@ -19,10 +19,14 @@ export const inject = (Component: string, scope) => {
   };
 };
 
-export default function evalCode(code: TransformedModule, scope) {
-  const { Index: Component } = Object.keys(code)
+export default function evalCode(
+  code: TransformedModule,
+  scope,
+  defaultModule = 'index'
+) {
+  const { [defaultModule]: Component } = Object.keys(code)
     .sort((a, b) => {
-      if (a === 'Index') {
+      if (a === defaultModule) {
         return 1;
       }
       return a.localeCompare(b);
@@ -39,7 +43,7 @@ export default function evalCode(code: TransformedModule, scope) {
     .reduce((components, { component, name }) => {
       const Component = inject(component, {
         ...scope,
-        ...name === 'Index' ? components : {}
+        ...name === defaultModule ? components : {}
       })();
       components[name] = Component;
       return components;

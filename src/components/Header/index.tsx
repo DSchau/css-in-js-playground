@@ -89,12 +89,13 @@ const Option = glamorous.option();
 
 interface Props extends ThemeProps {
   activeModule?: string;
-  defaultSnippet: string;
+  defaultLibrary: string;
   files: string[];
   primary: string;
+  onActiveChange(active: string): any;
   onSelect: Function;
   onColorSwitch?: Function;
-  modules: any;
+  snippets: any;
 }
 
 interface State {
@@ -111,10 +112,10 @@ export class Header extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    const { library = this.props.defaultSnippet } = queryString.parse(
+    const { library = this.props.defaultLibrary } = queryString.parse(
       location.search
     );
-    const code = this.props.modules[library];
+    const code = this.props.snippets[library];
     if (code) {
       this.setState({
         selected: library
@@ -128,7 +129,7 @@ export class Header extends React.Component<Props, State> {
 
   handleChange = ev => {
     const { value: library } = ev.target;
-    const code = this.props.modules[library];
+    const code = this.props.snippets[library];
     if (code) {
       this.setState({
         selected: library
@@ -170,7 +171,7 @@ export class Header extends React.Component<Props, State> {
   }
 
   render() {
-    const options = Object.keys(this.props.modules);
+    const options = Object.keys(this.props.snippets);
     return (
       <glamorous.Div>
         <HeaderContainer>
@@ -188,7 +189,11 @@ export class Header extends React.Component<Props, State> {
             <LightBulb size={24} onClick={this.handleColorSwitch} />
           </IconContainer>
         </HeaderContainer>
-        <Toolbar files={this.props.files} />
+        <Toolbar
+          activeModule="index"
+          files={this.props.files}
+          onActiveChange={this.props.onActiveChange}
+        />
       </glamorous.Div>
     );
   }

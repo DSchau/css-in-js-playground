@@ -18,8 +18,8 @@ const exposeExports = (name, includeAll = true) => {
   };
 };
 
-export default (code: Module) => {
-  const matches = matchesExpression.bind(undefined, code.Index);
+export default (code: Module, defaultModule = 'index') => {
+  const matches = matchesExpression.bind(undefined, code[defaultModule]);
 
   if (matches('styled-components')) {
     return import('styled-components').then(({ default: styled, ...rest }) => ({
