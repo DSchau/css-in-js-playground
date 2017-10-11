@@ -15,12 +15,14 @@ const Input = glamorous
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'transparent',
+      borderRadius: 4,
       fontSize: 14,
-      minWidth: 0,
-      paddingTop: 8,
-      paddingRight: 0,
-      paddingBottom: 8,
-      paddingLeft: 0
+      marginLeft: 12,
+      paddingTop: 6,
+      paddingRight: 4,
+      paddingBottom: 6,
+      paddingLeft: 4,
+      width: 100
     },
     SANS_SERIF,
     ({ theme, valid }) => ({
@@ -36,7 +38,7 @@ const Input = glamorous
 interface Props {
   files: string[];
   onAdd(file: string): any;
-  ref?(node): any;
+  innerRef?(node): any;
 }
 
 interface State {
@@ -47,7 +49,7 @@ interface State {
 
 export class FileInput extends React.Component<Props, State> {
   static defaultProps = {
-    ref: () => {}
+    innerRef: () => {}
   };
 
   static readonly ENTER_KEY_CODE = 13;
@@ -90,12 +92,12 @@ export class FileInput extends React.Component<Props, State> {
   }
 
   render() {
-    const { ref } = this.props;
+    const { innerRef } = this.props;
     const { touched, valid } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <Input
-          innerRef={ref}
+          innerRef={innerRef}
           onChange={this.handleInputFileNameChange}
           valid={valid || !touched}
         />

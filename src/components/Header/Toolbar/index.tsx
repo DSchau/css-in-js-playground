@@ -1,8 +1,8 @@
 import * as React from 'react';
-import glamorous from 'glamorous';
+import glamorous, { withTheme } from 'glamorous';
 import { darken, lighten } from 'polished';
-import AddIcon from 'react-icons/lib/md/note-add';
-import CancelIcon from 'react-icons/lib/md/cancel';
+import AddIcon from 'react-icons/lib/fa/plus-square';
+import CancelIcon from 'react-icons/lib/fa/ban';
 import kebab from 'lodash.kebabcase';
 
 import { Theme, ThemeProps, SANS_SERIF } from '../../../style/';
@@ -17,9 +17,10 @@ const ToolbarContainer = glamorous.div<ThemeProps>(
     overflowX: 'auto',
     maxWidth: '100%',
     width: '100%',
-    paddingRight: 4,
-    paddingLeft: 4,
-    boxSizing: 'border-box'
+    paddingRight: 8,
+    paddingLeft: 8,
+    boxSizing: 'border-box',
+    transition: '175ms ease-in-out'
   },
   ({ theme }) => ({
     backgroundColor: darken(0.05, theme[theme.primary].base),
@@ -38,9 +39,7 @@ const Files = glamorous.ul<ThemeProps>({
 
 const File = glamorous.li<ThemeProps>({
   margin: 0,
-  listStyleType: 'none',
-  position: 'relative',
-  overflowY: 'hidden'
+  listStyleType: 'none'
 });
 
 const FileButton = glamorous.button<
@@ -56,7 +55,9 @@ const FileButton = glamorous.button<
     cursor: 'pointer',
     fontSize: 14,
     padding: 8,
-    outline: 'none'
+    position: 'relative',
+    outline: 'none',
+    whiteSpace: 'nowrap'
   },
   SANS_SERIF,
   ({ active, theme }) => {
@@ -67,19 +68,11 @@ const FileButton = glamorous.button<
   }
 );
 
-const Button = glamorous.button<ThemeProps>(
-  {
-    border: 'none',
-    boxSizing: 'border-box',
-    margin: 0,
-    marginLeft: 12,
-    paddingRight: 12,
-    paddingLeft: 12
-  },
-  SANS_SERIF,
-  ({ theme }) => ({
-    backgroundColor: lighten(0.1, theme[theme.primary].base),
-    color: theme[theme.primary].text
+const Button = withTheme(({ children, theme }) =>
+  children({
+    color: theme[theme.primary].text,
+    size: 20,
+    theme
   })
 );
 
@@ -112,6 +105,8 @@ interface State {
 }
 
 class Toolbar extends React.Component<Props, State> {
+  fileInput: HTMLInputElement;
+
   constructor(props: Props) {
     super(props);
 
@@ -130,9 +125,14 @@ class Toolbar extends React.Component<Props, State> {
   };
 
   handleAddFileClick = () => {
-    this.setState({
-      addingFile: true
-    });
+    this.setState(
+      {
+        addingFile: true
+      },
+      () => {
+        this.fileInput.focus();
+      }
+    );
   };
 
   handleCancelAddFileClick = () => {
@@ -154,18 +154,24 @@ class Toolbar extends React.Component<Props, State> {
     return (
       <ToolbarContainer>
         {addingFile && (
-          <Button onClick={this.handleCancelAddFileClick}>
-            <CancelIcon />
+          <Button>
+            {({ color, size }) => (
+              <CancelIcon
+                color={color}
+                onClick={this.handleCancelAddFileClick}
+                size={size}
+              />
+            )}
           </Button>
         )}
         <Files>
           {files
-            .sort((a, b) => {
-              if (a === 'index' || b === 'index') {
-                return 1;
+            .reduce((acc, file) => {
+              if (file === 'index') {
+                return [file, ...acc];
               }
-              return 0;
-            })
+              return [...acc, file];
+            }, [])
             .map((file, index) => {
               const isActive = file === active;
               return (
@@ -174,19 +180,31 @@ class Toolbar extends React.Component<Props, State> {
                     active={isActive}
                     name={file}
                     onClick={this.handleActiveClick}
-                  >{`${kebab(file)}.js`}</FileButton>
-                  {isActive && <ActiveIndicator>&middot;</ActiveIndicator>}
+                  >
+                    {`${kebab(file)}.js`}
+                    {isActive && <ActiveIndicator>&middot;</ActiveIndicator>}
+                  </FileButton>
                 </File>
               );
             })}
           {addingFile && (
             <File>
-              <FileInput files={files} onAdd={this.handleOnAdd} />
+              <FileInput
+                files={files}
+                onAdd={this.handleOnAdd}
+                innerRef={node => (this.fileInput = node)}
+              />
             </File>
           )}
         </Files>
-        <Button onClick={this.handleAddFileClick}>
-          <AddIcon />
+        <Button>
+          {({ color, size }) => (
+            <AddIcon
+              color={color}
+              onClick={this.handleAddFileClick}
+              size={20}
+            />
+          )}
         </Button>
       </ToolbarContainer>
     );

@@ -88,7 +88,7 @@ const IconContainer = glamorous.div({
 const Option = glamorous.option();
 
 interface Props extends ThemeProps {
-  activeModule?: string;
+  activeModule: string;
   defaultLibrary: string;
   files: string[];
   primary: string;
@@ -106,10 +106,6 @@ interface State {
 export class Header extends React.Component<Props, State> {
   state = {
     selected: ''
-  };
-
-  static defaultProps = {
-    activeModule: 'index'
   };
 
   componentDidMount() {
@@ -151,10 +147,6 @@ export class Header extends React.Component<Props, State> {
     if (this.props.onColorSwitch) {
       const { primary } = this.props;
       const theme = primary === 'dark' ? 'light' : 'dark';
-      console.log({
-        ...(queryString.parse(location.search) || {}),
-        theme
-      });
       const path = this.getPath({
         ...(queryString.parse(location.search) || {}),
         theme
@@ -195,7 +187,7 @@ export class Header extends React.Component<Props, State> {
           </IconContainer>
         </HeaderContainer>
         <Toolbar
-          activeModule="index"
+          activeModule={this.props.activeModule}
           files={this.props.files}
           onActiveChange={this.props.onActiveChange}
           onFileAdd={this.props.onFileAdd}

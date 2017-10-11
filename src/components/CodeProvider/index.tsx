@@ -47,7 +47,9 @@ export class CodeProvider extends React.PureComponent<Props, State> {
   };
 
   componentWillMount() {
-    const { library, theme, ...rest } = queryString.parse(location.search);
+    const { activeModule, library, theme, ...rest } = queryString.parse(
+      location.search
+    );
     const code = Object.keys(rest || {}).reduce((decompressed, key) => {
       decompressed[key] = decompress(rest[key]);
       return decompressed;

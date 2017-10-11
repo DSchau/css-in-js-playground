@@ -10,5 +10,13 @@ import { CodeProvider } from '../';
 (global as any).onmessage = () => {};
 
 test('it can be rendered', () => {
-  expect(() => shallow(<CodeProvider activeModule="index" code={{ index: '', header: '', login: '' }} library="styled-components" />)).not.toThrow();
+  expect(() =>
+    shallow(
+      <CodeProvider
+        activeModule="index"
+        code={{ index: '', header: '', login: '' }}
+        library="styled-components"
+      />
+    )
+  ).not.toThrow();
 });
