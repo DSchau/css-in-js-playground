@@ -28,6 +28,7 @@ const makeNameVariants = components =>
     return allComponents;
   }, {});
 
+// TODO: Figure out how to inject each component with each component
 export function evalCode(
   code: TransformedModule,
   scope,
