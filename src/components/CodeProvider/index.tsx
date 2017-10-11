@@ -48,7 +48,8 @@ export class CodeProvider extends React.PureComponent<Props, State> {
 
   // TODO: Improve this
   componentWillReceiveProps({ library, code }: Props) {
-    const containsNewFile = Object.keys(code).length !== Object.keys(this.state.code).length;
+    const containsNewFile =
+      Object.keys(code).length !== Object.keys(this.state.code).length;
     if (this.props.library !== library && !containsNewFile) {
       const update = this.state.hydrated
         ? {

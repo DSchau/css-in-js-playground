@@ -60,6 +60,7 @@ export class Provider extends React.Component<Props, State> {
   }
 
   // TODO: Revisit this algorithm and improve it
+  // TODO: Remove items from query params that match local snippets
   handleSelect = ({ library, code, init }) => {
     const {
       activeModule,
@@ -76,9 +77,10 @@ export class Provider extends React.Component<Props, State> {
           return merged;
         }, {})
       : {};
+    const activeModuleFound = code[activeModule] || persistedCode[activeModule];
     this.setState(
       {
-        ...((code[activeModule] && {}) || {
+        ...((activeModuleFound && {}) || {
           activeModule: 'index'
         }),
         code: {
@@ -124,6 +126,7 @@ export class Provider extends React.Component<Props, State> {
     const fileContent = `import React from 'react';\n\nexport default () => null;\n`;
     this.setState(
       {
+        activeModule: file,
         code: {
           ...this.state.code,
           [file]: fileContent
@@ -131,6 +134,7 @@ export class Provider extends React.Component<Props, State> {
       },
       () => {
         replaceHistory({
+          activeModule: file,
           [file]: compress(fileContent)
         });
       }

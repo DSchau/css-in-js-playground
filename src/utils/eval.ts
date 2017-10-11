@@ -21,7 +21,7 @@ export const inject = (Component: string, scope) => {
   };
 };
 
-const makeCapitalAvailable = components =>
+const makeNameVariants = components =>
   Object.keys(components).reduce((allComponents, name) => {
     const component = components[name];
     allComponents[name] = allComponents[capitalize(name)] = component;
@@ -52,7 +52,7 @@ export function evalCode(
     .reduce((components, { component, name }) => {
       const Component = inject(component, {
         ...scope,
-        ...name === defaultModule ? makeCapitalAvailable(components) : {}
+        ...name === defaultModule ? makeNameVariants(components) : {}
       })();
       components[name] = Component;
       return components;
