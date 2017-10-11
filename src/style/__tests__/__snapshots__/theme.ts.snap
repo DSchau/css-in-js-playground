@@ -5,10 +5,12 @@ Object {
   "dark": Object {
     "base": "#1E1E20",
     "text": "#ddd",
+    "textSecondary": "#aaa",
   },
   "light": Object {
     "base": "#ECF0F1",
     "text": "#1E1E20",
+    "textSecondary": "#4f4f55",
   },
   "primary": "dark",
 }

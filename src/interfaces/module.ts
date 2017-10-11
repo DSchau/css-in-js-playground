@@ -1,8 +1,8 @@
 export interface Module {
   [key: string]: string;
-  Header: string;
-  Index: string;
-  Login: string;
+  header: string;
+  index: string;
+  login: string;
 }
 
 export interface Transformed {
@@ -12,7 +12,7 @@ export interface Transformed {
 
 export interface TransformedModule {
   [key: string]: Transformed;
-  Header: Transformed;
-  Index: Transformed;
-  Login: Transformed;
+  header: Transformed;
+  index: Transformed;
+  login: Transformed;
 }

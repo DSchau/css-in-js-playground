@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { shallow } from 'enzyme';
-
 jest.mock('../../../utils/libraries', () => {
   return () => {};
 });
 
-global.onmessage = jest.fn();
+import * as React from 'react';
+import { shallow } from 'enzyme';
 
 import { CodeProvider } from '../';
 
+(global as any).onmessage = () => {};
+
 test('it can be rendered', () => {
-  expect(() => shallow(<CodeProvider snippet="var a = 'b';" />)).not.toThrow();
+  expect(() => shallow(<CodeProvider activeModule="index" code={{ index: '', header: '', login: '' }} library="styled-components" />)).not.toThrow();
 });

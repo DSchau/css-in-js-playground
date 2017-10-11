@@ -10,6 +10,7 @@ test('it can be rendered', () => {
         defaultSnippet="styled-components"
         primary="dark"
         onSelect={() => {}}
+        snippets={{}}
       />
     )
   ).not.toThrow();
