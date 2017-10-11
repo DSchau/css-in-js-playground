@@ -132,7 +132,7 @@ class Toolbar extends React.Component<Props, State> {
     );
   };
 
-  handleCancelAddFileClick = () => {
+  handleCancel = () => {
     this.setState({
       addingFile: false
     });
@@ -155,7 +155,7 @@ class Toolbar extends React.Component<Props, State> {
             {({ color, size }) => (
               <CancelIcon
                 color={color}
-                onClick={this.handleCancelAddFileClick}
+                onClick={this.handleCancel}
                 size={size}
               />
             )}
@@ -189,6 +189,7 @@ class Toolbar extends React.Component<Props, State> {
               <FileInput
                 files={files}
                 onAdd={this.handleOnAdd}
+                onCancel={this.handleCancel}
                 innerRef={node => (this.fileInput = node)}
               />
             </File>

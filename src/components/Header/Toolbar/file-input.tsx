@@ -38,6 +38,7 @@ const Input = glamorous
 interface Props {
   files: string[];
   onAdd(file: string): any;
+  onCancel(): any;
   innerRef?(node): any;
 }
 
@@ -52,7 +53,7 @@ export class FileInput extends React.Component<Props, State> {
     innerRef: () => {}
   };
 
-  static readonly ENTER_KEY_CODE = 13;
+  static readonly ESCAPE_KEY_CODE = 27;
 
   form: HTMLFormElement;
 
@@ -61,6 +62,14 @@ export class FileInput extends React.Component<Props, State> {
     touched: false,
     valid: false
   };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown);
+  }
 
   handleInputFileNameChange = ({ target }) => {
     const { fileName: oldFileName } = this.state;
@@ -77,6 +86,13 @@ export class FileInput extends React.Component<Props, State> {
 
     if (this.state.valid) {
       this.props.onAdd(this.normalize(this.state.fileName));
+    }
+  }
+
+  handleKeydown: EventListener = ({ keyCode, which }: KeyboardEvent) => {
+    const code = which || keyCode;
+    if (code === FileInput.ESCAPE_KEY_CODE) {
+      this.props.onCancel();
     }
   };
 
