@@ -8,11 +8,15 @@ import DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
 import Toolbar from './Toolbar';
 
-import { Theme, ThemeProps, SANS_SERIF } from '../../style/';
+import { Theme, ThemeProps, SANS_SERIF } from '../../style';
+import { Module } from '../../interfaces';
+
+const Container = glamorous.div<ThemeProps>({
+  flex: '0 0 auto'
+});
 
 const HeaderContainer = glamorous.header<ThemeProps>(
   {
-    flex: '0 0 auto',
     height: 44,
     display: 'flex',
     alignItems: 'center',
@@ -87,6 +91,12 @@ const IconContainer = glamorous.div({
 
 const Option = glamorous.option();
 
+interface SelectData {
+  library: string;
+  code: Module;
+  init?: boolean;
+}
+
 interface Props extends ThemeProps {
   activeModule: string;
   defaultLibrary: string;
@@ -94,9 +104,11 @@ interface Props extends ThemeProps {
   primary: string;
   onActiveChange(active: string): any;
   onFileAdd(file: string): any;
-  onSelect: Function;
+  onSelect(data: SelectData): any;
   onColorSwitch?: Function;
-  snippets: any;
+  snippets: {
+    [key: string]: Module;
+  };
 }
 
 interface State {
@@ -108,6 +120,7 @@ export class Header extends React.Component<Props, State> {
     selected: ''
   };
 
+  // TODO: cascade this down from provider
   componentDidMount() {
     const { library = this.props.defaultLibrary } = queryString.parse(
       location.search
@@ -119,22 +132,18 @@ export class Header extends React.Component<Props, State> {
       });
       this.props.onSelect({
         library,
-        code
+        code,
+        init: true
       });
     }
   }
 
-  handleChange = ev => {
+  handleSelect = ev => {
     const { value: library } = ev.target;
     const code = this.props.snippets[library];
     if (code) {
       this.setState({
         selected: library
-      });
-      const { theme, ...rest } = queryString.parse(location.search);
-      this.augmentHistory({
-        ...rest,
-        library
       });
       this.props.onSelect({
         library,
@@ -147,33 +156,17 @@ export class Header extends React.Component<Props, State> {
     if (this.props.onColorSwitch) {
       const { primary } = this.props;
       const theme = primary === 'dark' ? 'light' : 'dark';
-      const path = this.getPath({
-        ...(queryString.parse(location.search) || {}),
-        theme
-      });
-      history.replaceState({ path }, '', path);
       this.props.onColorSwitch(theme);
     }
   };
 
-  augmentHistory(params) {
-    const path = this.getPath(params);
-    history.replaceState({ path }, '', path);
-  }
-
-  getPath(params) {
-    return `${location.origin}${location.pathname}?${queryString.stringify(
-      params
-    )}`;
-  }
-
   render() {
     const options = Object.keys(this.props.snippets);
     return (
-      <glamorous.Div>
+      <Container>
         <HeaderContainer>
           <SelectContainer>
-            <Select value={this.state.selected} onChange={this.handleChange}>
+            <Select value={this.state.selected} onChange={this.handleSelect}>
               {options.map(option => (
                 <Option key={option} value={option}>
                   {kebabCase(option)}
@@ -192,7 +185,7 @@ export class Header extends React.Component<Props, State> {
           onActiveChange={this.props.onActiveChange}
           onFileAdd={this.props.onFileAdd}
         />
-      </glamorous.Div>
+      </Container>
     );
   }
 }

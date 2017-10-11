@@ -40,6 +40,7 @@ function App(props: Props) {
                   activeModule={activeModule}
                   library={library}
                   code={code}
+                  onUpdate={actions.handleCodeUpdate}
                 />
                 <Footer />
                 {updated && (

@@ -52,10 +52,12 @@ interface Props extends ThemeProps {
   code: Module;
   children?: any;
   className?: string;
-  onUpdate(value: string, active: string): void;
+  onUpdate(code: string, active: string): void;
 }
 
-interface State {}
+interface State {
+  loaded: boolean;
+}
 
 export class CodeEditorBase extends React.Component<Props, State> {
   private editor: any;
@@ -64,6 +66,10 @@ export class CodeEditorBase extends React.Component<Props, State> {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      loaded: false
+    };
 
     this.handleChange = debounce(this.onChange, 250);
   }

@@ -8,7 +8,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "react",
-    "lib": ["dom", "es5", "es2015", "webworker"],
+    "lib": ["es2015"],
     "paths": {
       "style/*": [
         "./src/style/*"
@@ -17,8 +17,7 @@
     "target": "es5"
   },
   "files": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/**/*.{ts,tsx}"
   ],
   "exclude": [
     "node_modules",

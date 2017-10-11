@@ -6,7 +6,6 @@ import { CodeEditor, ErrorBoundary, CodePreview } from '../';
 
 import { Module } from '../../interfaces';
 import { LARGE_UP } from '../../constants/breakpoints';
-import { compress, decompress } from '../../utils';
 
 const Container = glamorous.div({
   display: 'flex',
@@ -23,6 +22,7 @@ interface Props {
   activeModule: string;
   code: Module;
   library: string;
+  onUpdate(code: string, activeModule: string): any;
 }
 
 interface State {
@@ -46,26 +46,10 @@ export class CodeProvider extends React.PureComponent<Props, State> {
     library: 'styled-components'
   };
 
-  componentWillMount() {
-    const { activeModule, library, theme, ...rest } = queryString.parse(
-      location.search
-    );
-    const code = Object.keys(rest || {}).reduce((decompressed, key) => {
-      decompressed[key] = decompress(rest[key]);
-      return decompressed;
-    }, {}) as Module;
-
-    if (Object.keys(code).length > 0) {
-      this.setState({
-        code,
-        hydrated: true
-      });
-    }
-  }
-
   // TODO: Improve this
   componentWillReceiveProps({ library, code }: Props) {
-    if (this.props.library !== library) {
+    const containsNewFile = Object.keys(code).length !== Object.keys(this.state.code).length;
+    if (this.props.library !== library && !containsNewFile) {
       const update = this.state.hydrated
         ? {
             hydrated: false
@@ -74,6 +58,10 @@ export class CodeProvider extends React.PureComponent<Props, State> {
             code
           };
       this.setState(update);
+    } else if (containsNewFile) {
+      this.setState({
+        code
+      });
     }
   }
 
@@ -83,7 +71,7 @@ export class CodeProvider extends React.PureComponent<Props, State> {
       [active]: update
     };
     if (code[active] !== this.props.code[active]) {
-      this.persistToQueryString(code);
+      this.props.onUpdate(update, active);
     }
     this.setState({
       code,
@@ -97,26 +85,6 @@ export class CodeProvider extends React.PureComponent<Props, State> {
       errorInfo: info
     });
   };
-
-  persistToQueryString(code) {
-    const search = queryString.parse(location.search);
-    const params = Object.keys(code).reduce((compressed, key) => {
-      const value = code[key];
-      compressed[key] = compress(value);
-      return compressed;
-    }, {});
-
-    const path = [
-      location.origin,
-      location.pathname,
-      '?',
-      queryString.stringify({
-        ...search,
-        ...params
-      })
-    ].join('');
-    history.replaceState({ path }, '', path);
-  }
 
   render() {
     const { code, error, errorInfo } = this.state;

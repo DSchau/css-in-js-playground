@@ -25,10 +25,6 @@ const CodeContainer = glamorous.div({
   WebkitOverflowScrolling: 'touch'
 });
 
-const LivePreview = ({ code }) => {
-  return <pre>{code}</pre>;
-};
-
 interface Props {
   code: Module;
   error: Error;
@@ -38,7 +34,7 @@ interface Props {
 }
 
 interface State {
-  Component: Function;
+  Component: React.ComponentType;
   loaded: boolean;
   scope: any;
 }

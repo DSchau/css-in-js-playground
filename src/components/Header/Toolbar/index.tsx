@@ -75,9 +75,11 @@ const Button = withTheme(({ children, theme }) =>
   })
 );
 
-const ActiveIndicator = glamorous.span<ThemeProps & {
-  color?: string;
-}>(
+const ActiveIndicator = glamorous.span<
+  ThemeProps & {
+    color?: string;
+  }
+>(
   {
     position: 'absolute',
     bottom: 0,
@@ -85,7 +87,7 @@ const ActiveIndicator = glamorous.span<ThemeProps & {
     right: 0,
     height: 2,
     width: '100%',
-    margin: '0 auto',
+    margin: '0 auto'
   },
   ({ theme }) => ({
     backgroundColor: theme[theme.primary].text
@@ -101,7 +103,6 @@ interface Props {
 
 interface State {
   addingFile: boolean;
-  active: string;
 }
 
 class Toolbar extends React.Component<Props, State> {
@@ -111,16 +112,12 @@ class Toolbar extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      addingFile: false,
-      active: props.activeModule
+      addingFile: false
     };
   }
 
   handleActiveClick = ({ target }) => {
     const active = target.getAttribute('name');
-    this.setState({
-      active: active
-    });
     this.props.onActiveChange(active);
   };
 
@@ -149,8 +146,8 @@ class Toolbar extends React.Component<Props, State> {
   };
 
   render() {
-    const { files, onActiveChange } = this.props;
-    const { active, addingFile } = this.state;
+    const { activeModule, files, onActiveChange } = this.props;
+    const { addingFile } = this.state;
     return (
       <ToolbarContainer>
         {addingFile && (
@@ -173,7 +170,7 @@ class Toolbar extends React.Component<Props, State> {
               return [...acc, file];
             }, [])
             .map((file, index) => {
-              const isActive = file === active;
+              const isActive = file === activeModule;
               return (
                 <File key={file}>
                   <FileButton

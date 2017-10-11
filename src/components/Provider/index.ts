@@ -4,7 +4,7 @@ import queryString from 'query-string';
 import snippets from '../../snippets';
 
 import { THEME } from '../../style';
-import { capitalize, replaceHistory } from '../../utils';
+import { compress, decompress, replaceHistory } from '../../utils';
 
 import { Module } from '../../interfaces';
 
@@ -13,12 +13,15 @@ interface Props {
     state: State & {
       actions: {
         handleActiveChange(...args): any;
+        handleCodeUpdate(code: string, activeModule: string): any;
         handleColorSwitch(...args): any;
         handleFileAdd(...args): any;
         handleSelect(...args): any;
         handleTimerComplete(...args): any;
       };
-      snippets: Module;
+      snippets: {
+        [key: string]: Module;
+      };
     }
   );
 }
@@ -56,10 +59,51 @@ export class Provider extends React.Component<Props, State> {
     });
   }
 
-  handleSelect = ({ library, code }) => {
-    this.setState({
-      code,
-      library
+  // TODO: Revisit this algorithm and improve it
+  handleSelect = ({ library, code, init }) => {
+    const {
+      activeModule,
+      theme,
+      library: definedLibrary,
+      ...rest
+    } = queryString.parse(location.search);
+    const persistedCode = init
+      ? Object.keys(rest).reduce((merged, name) => {
+          const decompressed = decompress(rest[name]);
+          if (code[name] !== decompressed && decompressed.length > 0) {
+            merged[name] = decompressed;
+          }
+          return merged;
+        }, {})
+      : {};
+    this.setState(
+      {
+        ...((code[activeModule] && {}) || {
+          activeModule: 'index'
+        }),
+        code: {
+          ...code,
+          ...persistedCode
+        },
+        library
+      },
+      () => {
+        replaceHistory(
+          {
+            activeModule: this.state.activeModule,
+            library,
+            theme,
+            ...init ? rest : {}
+          },
+          false
+        );
+      }
+    );
+  };
+
+  handleCodeUpdate = (update, activeModule) => {
+    replaceHistory({
+      [activeModule]: compress(update)
     });
   };
 
@@ -78,22 +122,36 @@ export class Provider extends React.Component<Props, State> {
 
   handleFileAdd = file => {
     const fileContent = `import React from 'react';\n\nexport default () => null;\n`;
-    this.setState({
-      code: {
-        ...this.state.code,
-        [capitalize(file)]: fileContent
+    this.setState(
+      {
+        code: {
+          ...this.state.code,
+          [file]: fileContent
+        }
+      },
+      () => {
+        replaceHistory({
+          [file]: compress(fileContent)
+        });
       }
-    });
+    );
   };
 
   handleColorSwitch = primary => {
     const { theme } = this.state;
-    this.setState({
-      theme: {
-        ...theme,
-        primary
+    this.setState(
+      {
+        theme: {
+          ...theme,
+          primary
+        }
+      },
+      () => {
+        replaceHistory({
+          theme: primary
+        });
       }
-    });
+    );
   };
 
   handleTimerComplete = () => {
@@ -103,9 +161,10 @@ export class Provider extends React.Component<Props, State> {
   render() {
     return this.props.children({
       ...this.state,
-      snippets: snippets as Module,
+      snippets,
       actions: {
         handleActiveChange: this.handleActiveChange,
+        handleCodeUpdate: this.handleCodeUpdate,
         handleColorSwitch: this.handleColorSwitch,
         handleFileAdd: this.handleFileAdd,
         handleSelect: this.handleSelect,

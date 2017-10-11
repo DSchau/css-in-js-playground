@@ -17,7 +17,7 @@ const Input = glamorous
       borderColor: 'transparent',
       borderRadius: 4,
       fontSize: 14,
-      marginLeft: 12,
+      marginLeft: 6,
       paddingTop: 6,
       paddingRight: 4,
       paddingBottom: 6,
