@@ -23,8 +23,7 @@ const ToolbarContainer = glamorous.div<ThemeProps>(
     transition: '175ms ease-in-out'
   },
   ({ theme }) => ({
-    backgroundColor: darken(0.05, theme[theme.primary].base),
-    borderBottom: `1px solid ${darken(0.1, theme[theme.primary].base)}`
+    backgroundColor: darken(0.05, theme[theme.primary].base)
   })
 );
 
@@ -33,7 +32,7 @@ const Files = glamorous.ul<ThemeProps>({
   display: 'flex',
   overflowX: 'auto',
   margin: 0,
-  padding: 4,
+  padding: 0,
   width: '100%'
 });
 
@@ -76,19 +75,20 @@ const Button = withTheme(({ children, theme }) =>
   })
 );
 
-const ActiveIndicator = glamorous.span<ThemeProps>(
+const ActiveIndicator = glamorous.span<ThemeProps & {
+  color?: string;
+}>(
   {
     position: 'absolute',
-    bottom: 2,
+    bottom: 0,
     left: 0,
+    right: 0,
+    height: 2,
     width: '100%',
-    color: 'white',
-    fontSize: 16,
-    lineHeight: 0,
-    textAlign: 'center'
+    margin: '0 auto',
   },
   ({ theme }) => ({
-    color: theme[theme.primary].text
+    backgroundColor: theme[theme.primary].text
   })
 );
 
@@ -182,7 +182,7 @@ class Toolbar extends React.Component<Props, State> {
                     onClick={this.handleActiveClick}
                   >
                     {`${kebab(file)}.js`}
-                    {isActive && <ActiveIndicator>&middot;</ActiveIndicator>}
+                    {isActive && <ActiveIndicator />}
                   </FileButton>
                 </File>
               );

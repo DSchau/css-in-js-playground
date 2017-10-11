@@ -1,9 +1,7 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
 
-import evalCode from '../../utils/eval';
-import transform from '../../utils/transpile';
-import getStylingLibrary from '../../utils/libraries';
+import { evalCode, transform, getScopedImports } from '../../utils';
 
 import DisplayError from './display-error';
 
@@ -55,7 +53,7 @@ export class CodePreview extends React.Component<Props, State> {
   componentWillReceiveProps({ code }: Props) {
     this.setState({ loaded: false, scope: {} });
 
-    getStylingLibrary(code).then(library => {
+    getScopedImports(code).then(library => {
       this.setState(
         {
           loaded: true,

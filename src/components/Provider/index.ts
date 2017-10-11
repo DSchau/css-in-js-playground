@@ -4,8 +4,7 @@ import queryString from 'query-string';
 import snippets from '../../snippets';
 
 import { THEME } from '../../style';
-import { replaceHistory } from '../../utils/history';
-import { capitalize } from '../../utils/string';
+import { capitalize, replaceHistory } from '../../utils';
 
 import { Module } from '../../interfaces';
 

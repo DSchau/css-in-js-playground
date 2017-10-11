@@ -1,7 +1,7 @@
 /*
  * https://css-tricks.com/loading-web-fonts-with-the-web-font-loader/
  */
-export default function loadWebFonts(
+export function loadWebFonts(
   families = ['Montserrat:400,700', 'Bitter:400,700']
 ) {
   if (sessionStorage.fonts === families.join(' ')) {

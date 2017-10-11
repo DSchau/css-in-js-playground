@@ -28,7 +28,7 @@ const makeCapitalAvailable = components =>
     return allComponents;
   }, {});
 
-export default function evalCode(
+export function evalCode(
   code: TransformedModule,
   scope,
   defaultModule = 'index'

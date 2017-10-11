@@ -7,8 +7,8 @@ import { render } from 'react-dom';
 import 'normalize.css';
 
 import App from './App';
-import webFontLoader from './utils/web-fonts';
+import { loadWebFonts } from './utils';
 
-webFontLoader();
+loadWebFonts();
 
 render(<App />, document.getElementById('root'));

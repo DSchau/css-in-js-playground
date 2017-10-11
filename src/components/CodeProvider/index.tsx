@@ -6,7 +6,7 @@ import { CodeEditor, ErrorBoundary, CodePreview } from '../';
 
 import { Module } from '../../interfaces';
 import { LARGE_UP } from '../../constants/breakpoints';
-import { compress, decompress } from '../../utils/uri-utils';
+import { compress, decompress } from '../../utils';
 
 const Container = glamorous.div({
   display: 'flex',

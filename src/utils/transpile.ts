@@ -4,7 +4,7 @@ import { Module } from '../interfaces';
 
 const worker = new Worker();
 
-export default function transform(code: Module): Promise<any> {
+export function transform(code: Module): Promise<any> {
   return new Promise((resolve, reject) => {
     worker.onmessage = ev => {
       resolve(ev.data);

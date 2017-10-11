@@ -18,7 +18,7 @@ const exposeExports = (name, includeAll = true) => {
   };
 };
 
-export default (code: Module, defaultModule = 'index') => {
+export const getScopedImports = (code: Module, defaultModule = 'index') => {
   const matches = matchesExpression.bind(undefined, code[defaultModule]);
 
   if (matches('styled-components')) {
