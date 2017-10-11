@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Form from './Form';
-import Header from './Header';
-// import { THEME } from './theme';
+import Form from './form';
+import Header from './header';
 
 const Container = styled.main`
   display: flex;
@@ -26,7 +25,7 @@ export default function Login() {
     <Container>
       <Header />
       <Stripe />
-      <Form />
+      <Form fields={['email', 'phoneNumber']} />
     </Container>
   );
 }

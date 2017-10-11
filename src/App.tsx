@@ -8,6 +8,7 @@ import snippets from './snippets';
 
 import { GLOBAL, THEME } from './style';
 import { OfflineContainer } from './utils/offline';
+import { capitalize } from './utils/string';
 
 import { Module } from './interfaces';
 
@@ -63,6 +64,16 @@ class App extends React.Component<Props, State> {
     });
   };
 
+  handleFileAdd = file => {
+    const fileContent = `import React from 'react';\n\nexport default () => null;\n`;
+    this.setState({
+      code: {
+        ...this.state.code,
+        [capitalize(file)]: fileContent
+      }
+    });
+  };
+
   handleColorSwitch = primary => {
     const { theme } = this.state;
     this.setState({
@@ -89,6 +100,7 @@ class App extends React.Component<Props, State> {
                 primary={this.state.theme.primary}
                 onActiveChange={this.handleActiveChange}
                 onColorSwitch={this.handleColorSwitch}
+                onFileAdd={this.handleFileAdd}
                 files={Object.keys(this.state.code)}
                 snippets={snippets}
               />

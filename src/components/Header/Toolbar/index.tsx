@@ -1,10 +1,13 @@
 import * as React from 'react';
-import glamorous, { withTheme } from 'glamorous';
+import glamorous from 'glamorous';
 import { darken, lighten } from 'polished';
-import AddIcon from 'react-icons/lib/md/add';
+import AddIcon from 'react-icons/lib/md/note-add';
+import CancelIcon from 'react-icons/lib/md/cancel';
 import kebab from 'lodash.kebabcase';
 
 import { Theme, ThemeProps, SANS_SERIF } from '../../../style/';
+
+import { FileInput } from './file-input';
 
 const ToolbarContainer = glamorous.div<ThemeProps>(
   {
@@ -25,17 +28,19 @@ const ToolbarContainer = glamorous.div<ThemeProps>(
 );
 
 const Files = glamorous.ul<ThemeProps>({
+  boxSizing: 'border-box',
   display: 'flex',
   overflowX: 'auto',
   margin: 0,
-  padding: 0,
+  padding: 4,
   width: '100%'
 });
 
 const File = glamorous.li<ThemeProps>({
   margin: 0,
   listStyleType: 'none',
-  position: 'relative'
+  position: 'relative',
+  overflowY: 'hidden'
 });
 
 const FileButton = glamorous.button<
@@ -48,20 +53,21 @@ const FileButton = glamorous.button<
     backgroundColor: 'transparent',
     border: 'none',
     boxSizing: 'border-box',
+    cursor: 'pointer',
     fontSize: 14,
     padding: 8,
     outline: 'none'
   },
   SANS_SERIF,
   ({ active, theme }) => {
-    const fn = theme.primary === 'dark' ? darken : lighten;
+    const base = theme[theme.primary];
     return {
-      color: fn(active ? 0 : 0.3, theme[theme.primary].text)
+      color: active ? base.text : base.textSecondary
     };
   }
 );
 
-const AddFileButton = glamorous.button<ThemeProps>(
+const Button = glamorous.button<ThemeProps>(
   {
     border: 'none',
     boxSizing: 'border-box',
@@ -70,30 +76,38 @@ const AddFileButton = glamorous.button<ThemeProps>(
     paddingRight: 12,
     paddingLeft: 12
   },
+  SANS_SERIF,
   ({ theme }) => ({
     backgroundColor: lighten(0.1, theme[theme.primary].base),
     color: theme[theme.primary].text
   })
 );
 
-const ActiveIndicator = glamorous.span<ThemeProps>({
-  position: 'absolute',
-  bottom: 2,
-  left: 0,
-  width: '100%',
-  color: 'white',
-  fontSize: 16,
-  lineHeight: 0,
-  textAlign: 'center'
-});
+const ActiveIndicator = glamorous.span<ThemeProps>(
+  {
+    position: 'absolute',
+    bottom: 2,
+    left: 0,
+    width: '100%',
+    color: 'white',
+    fontSize: 16,
+    lineHeight: 0,
+    textAlign: 'center'
+  },
+  ({ theme }) => ({
+    color: theme[theme.primary].text
+  })
+);
 
 interface Props {
   activeModule: string;
   files: string[];
-  onActiveChange(active: string): void;
+  onActiveChange(active: string): any;
+  onFileAdd(file: string): any;
 }
 
 interface State {
+  addingFile: boolean;
   active: string;
 }
 
@@ -102,6 +116,7 @@ class Toolbar extends React.Component<Props, State> {
     super(props);
 
     this.state = {
+      addingFile: false,
       active: props.activeModule
     };
   }
@@ -114,11 +129,35 @@ class Toolbar extends React.Component<Props, State> {
     this.props.onActiveChange(active);
   };
 
+  handleAddFileClick = () => {
+    this.setState({
+      addingFile: true
+    });
+  };
+
+  handleCancelAddFileClick = () => {
+    this.setState({
+      addingFile: false
+    });
+  };
+
+  handleOnAdd = file => {
+    this.props.onFileAdd(file);
+    this.setState({
+      addingFile: false
+    });
+  };
+
   render() {
     const { files, onActiveChange } = this.props;
-    const { active } = this.state;
+    const { active, addingFile } = this.state;
     return (
       <ToolbarContainer>
+        {addingFile && (
+          <Button onClick={this.handleCancelAddFileClick}>
+            <CancelIcon />
+          </Button>
+        )}
         <Files>
           {files
             .sort((a, b) => {
@@ -140,10 +179,15 @@ class Toolbar extends React.Component<Props, State> {
                 </File>
               );
             })}
+          {addingFile && (
+            <File>
+              <FileInput files={files} onAdd={this.handleOnAdd} />
+            </File>
+          )}
         </Files>
-        <AddFileButton>
+        <Button onClick={this.handleAddFileClick}>
           <AddIcon />
-        </AddFileButton>
+        </Button>
       </ToolbarContainer>
     );
   }

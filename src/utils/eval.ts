@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as Logo from 'react-icons/lib/go/rocket';
 
+import { capitalize } from './string';
+
 import { TransformedModule } from '../interfaces';
 
 export const noop = () => null;
@@ -18,6 +20,13 @@ export const inject = (Component: string, scope) => {
     );
   };
 };
+
+const makeCapitalAvailable = components =>
+  Object.keys(components).reduce((allComponents, name) => {
+    const component = components[name];
+    allComponents[name] = allComponents[capitalize(name)] = component;
+    return allComponents;
+  }, {});
 
 export default function evalCode(
   code: TransformedModule,
@@ -43,7 +52,7 @@ export default function evalCode(
     .reduce((components, { component, name }) => {
       const Component = inject(component, {
         ...scope,
-        ...name === defaultModule ? components : {}
+        ...name === defaultModule ? makeCapitalAvailable(components) : {}
       })();
       components[name] = Component;
       return components;

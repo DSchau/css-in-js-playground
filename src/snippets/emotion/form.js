@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
-const Form = styled.form`
+const Form = styled('form')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,7 @@ const Form = styled.form`
   z-index: 2;
 `;
 
-const Input = styled.input`
+const Input = styled('input')`
   display: block;
   width: 100%;
   margin-bottom: 1rem;
@@ -28,39 +28,42 @@ const Input = styled.input`
   }
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled('div')`
   display: flex;
   flex-direction: row;
   width: 100%;
 `;
 
-const Button = styled.button`
+const Button = styled('button')`
   display: block;
-  background-color: #bbb;
+  backgorund-color: #bbb;
   color: white;
   border: none;
   width: 100%;
   padding: 1.25rem 1rem;
+  margin: 1rem 0.5rem;
   box-sizing: border-box;
   border-radius: 0.25rem;
   text-transform: uppercase;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem 0.5rem;
+  margin-top: 1rem;
 `;
 
-const SubmitButton = styled(Button).attrs({
-  type: 'submit'
-})`
+const SubmitButton = styled(Button)`
   background-color: ${props => (props.disabled ? '#BBB' : '#6772e5')};
 `;
+
+SubmitButton.defaultProps = {
+  type: 'submit'
+};
 
 export default class extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: '',
       phoneNumber: '',
+      fields: ['email', 'phoneNumber'],
       valid: false
     };
   }
@@ -73,14 +76,14 @@ export default class extends Component {
         [prop]: value,
         valid:
           value.length > 0 &&
-          this.props.fields.every(field => this.state[field].length > 0)
+          this.state.fields.every(field => this.state[field].length > 0)
       });
     };
   }
 
   handleReset() {
     return () => {
-      const resetFields = this.props.fields.reduce(
+      const resetFields = this.state.fields.reduce(
         (reset, field) => {
           reset[field] = '';
           return reset;
@@ -98,7 +101,7 @@ export default class extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.props.fields.map(fieldName => (
+        {this.state.fields.map(fieldName => (
           <Input
             type="text"
             name={fieldName}

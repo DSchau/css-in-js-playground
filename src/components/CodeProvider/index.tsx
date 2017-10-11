@@ -47,16 +47,21 @@ export class CodeProvider extends React.PureComponent<Props, State> {
   };
 
   componentWillMount() {
-    const { theme, ...rest } = queryString.parse(location.search);
-    // if (search.code) {
-    //   const code = decompress(search.code);
-    //   this.setState({
-    //     code,
-    //     hydrated: true
-    //   });
-    // }
+    const { library, theme, ...rest } = queryString.parse(location.search);
+    const code = Object.keys(rest || {}).reduce((decompressed, key) => {
+      decompressed[key] = decompress(rest[key]);
+      return decompressed;
+    }, {}) as Module;
+
+    if (Object.keys(code).length > 0) {
+      this.setState({
+        code,
+        hydrated: true
+      });
+    }
   }
 
+  // TODO: Improve this
   componentWillReceiveProps({ library, code }: Props) {
     if (this.props.library !== library) {
       const update = this.state.hydrated
@@ -75,9 +80,9 @@ export class CodeProvider extends React.PureComponent<Props, State> {
       ...this.state.code,
       [active]: update
     };
-    // if (code !== this.props.code) {
-    //   this.persistToQueryString(code);
-    // }
+    if (code[active] !== this.props.code[active]) {
+      this.persistToQueryString(code);
+    }
     this.setState({
       code,
       error: null
@@ -92,16 +97,23 @@ export class CodeProvider extends React.PureComponent<Props, State> {
   };
 
   persistToQueryString(code) {
-    // const search = queryString.parse(location.search);
-    // const compressed = compress(code);
-    // const params = {
-    //   ...search,
-    //   code: compressed
-    // };
-    // const path = `${location.origin}${location.pathname}?${queryString.stringify(
-    //   params
-    // )}`;
-    // history.replaceState({ path }, '', path);
+    const search = queryString.parse(location.search);
+    const params = Object.keys(code).reduce((compressed, key) => {
+      const value = code[key];
+      compressed[key] = compress(value);
+      return compressed;
+    }, {});
+
+    const path = [
+      location.origin,
+      location.pathname,
+      '?',
+      queryString.stringify({
+        ...search,
+        ...params
+      })
+    ].join('');
+    history.replaceState({ path }, '', path);
   }
 
   render() {

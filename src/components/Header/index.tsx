@@ -93,6 +93,7 @@ interface Props extends ThemeProps {
   files: string[];
   primary: string;
   onActiveChange(active: string): any;
+  onFileAdd(file: string): any;
   onSelect: Function;
   onColorSwitch?: Function;
   snippets: any;
@@ -134,11 +135,11 @@ export class Header extends React.Component<Props, State> {
       this.setState({
         selected: library
       });
-      // const { code, ...rest } = queryString.parse(location.search);
-      // this.augmentHistory({
-      //   ...rest,
-      //   library
-      // });
+      const { theme, ...rest } = queryString.parse(location.search);
+      this.augmentHistory({
+        ...rest,
+        library
+      });
       this.props.onSelect({
         library,
         code
@@ -150,6 +151,10 @@ export class Header extends React.Component<Props, State> {
     if (this.props.onColorSwitch) {
       const { primary } = this.props;
       const theme = primary === 'dark' ? 'light' : 'dark';
+      console.log({
+        ...(queryString.parse(location.search) || {}),
+        theme
+      });
       const path = this.getPath({
         ...(queryString.parse(location.search) || {}),
         theme
@@ -193,6 +198,7 @@ export class Header extends React.Component<Props, State> {
           activeModule="index"
           files={this.props.files}
           onActiveChange={this.props.onActiveChange}
+          onFileAdd={this.props.onFileAdd}
         />
       </glamorous.Div>
     );

@@ -97,7 +97,7 @@ export class CodeEditorBase extends React.Component<Props, State> {
       );
     }
     const code = codeModule[activeModule];
-    if (code !== this.editor.getValue()) {
+    if (code && code !== this.editor.getValue()) {
       this.editor.setValue(code);
     }
   }
