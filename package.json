@@ -71,6 +71,7 @@
     "history": "~4.7.2",
     "jss": "~9.0.0",
     "jss-preset-default": "~3.0.0",
+    "lodash.camelcase": "~4.3.0",
     "lodash.debounce": "~4.0.8",
     "lodash.kebabcase": "~4.1.1",
     "lz-string": "~1.4.4",

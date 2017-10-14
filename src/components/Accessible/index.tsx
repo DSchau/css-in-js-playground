@@ -3,15 +3,18 @@ import glamorous from 'glamorous';
 
 import { ThemeProps } from '../../style';
 
-const Button = glamorous.button<ThemeProps>({
-  border: 'none',
-  backgroundColor: 'transparent',
-  outline: 'none'
-}, ({ theme }) => ({
-  ':focus': {
-    boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
-  }
-}));
+const Button = glamorous.button<ThemeProps>(
+  {
+    border: 'none',
+    backgroundColor: 'transparent',
+    outline: 'none'
+  },
+  ({ theme }) => ({
+    ':focus': {
+      boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
+    }
+  })
+);
 
 interface Props {
   children(args: any): any;
@@ -29,6 +32,10 @@ export class Accessible extends React.Component<Props, State> {
 
   render() {
     const { children, onClick, tabIndex } = this.props;
-    return <Button tabIndex={tabIndex} onClick={onClick}>{children({})}</Button>;
+    return (
+      <Button tabIndex={tabIndex} onClick={onClick}>
+        {children({})}
+      </Button>
+    );
   }
 }

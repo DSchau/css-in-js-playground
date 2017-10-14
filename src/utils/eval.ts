@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Logo from 'react-icons/lib/go/rocket';
+import camelCase from 'lodash.camelcase';
 
 import { capitalize } from './string';
 
@@ -34,7 +35,11 @@ export function evalCode(
   scope,
   defaultModule = 'index'
 ) {
-  const { [defaultModule]: Component } = Object.keys(code)
+  const normalizedCode = Object.keys(code).reduce((camelCased, name) => {
+    camelCased[camelCase(name)] = code[name];
+    return camelCased;
+  }, {});
+  const { [defaultModule]: Component } = Object.keys(normalizedCode)
     .sort((a, b) => {
       if (a === defaultModule) {
         return 1;
@@ -42,7 +47,7 @@ export function evalCode(
       return a.localeCompare(b);
     })
     .map(name => {
-      const { code: component } = code[name];
+      const { code: component } = normalizedCode[name];
       return {
         name,
         component: component

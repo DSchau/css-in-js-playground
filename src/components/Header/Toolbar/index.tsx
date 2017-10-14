@@ -192,18 +192,11 @@ class Toolbar extends React.Component<Props, State> {
           )}
         </Files>
         <Accessible onClick={this.handleAddFileClick}>
-          {
-            () => (
-              <Button>
-                {({ color, size }) => (
-                  <AddIcon
-                    color={color}
-                    size={20}
-                  />
-                )}
-              </Button>
-            )
-          }
+          {() => (
+            <Button>
+              {({ color, size }) => <AddIcon color={color} size={20} />}
+            </Button>
+          )}
         </Accessible>
       </ToolbarContainer>
     );

@@ -49,7 +49,7 @@ const Select = glamorous.select<ThemeProps>(
     appearance: 'none',
     fontSize: '1.3rem',
     paddingRight: '1.3rem',
-    outline: 'none',
+    outline: 'none'
   },
   SANS_SERIF,
   ({ theme }) => ({
@@ -172,10 +172,7 @@ export class Header extends React.Component<Props, State> {
       <Container>
         <HeaderContainer>
           <SelectContainer>
-            <Select
-              value={this.state.selected}
-              onChange={this.handleSelect}
-            >
+            <Select value={this.state.selected} onChange={this.handleSelect}>
               {options.map(option => (
                 <Option key={option} value={option}>
                   {kebabCase(option)}
@@ -186,11 +183,7 @@ export class Header extends React.Component<Props, State> {
           </SelectContainer>
           <IconContainer>
             <Accessible onClick={this.handleColorSwitch}>
-              {() => (
-                <LightBulb
-                  size={24}
-                />
-              )}
+              {() => <LightBulb size={24} />}
             </Accessible>
           </IconContainer>
         </HeaderContainer>
