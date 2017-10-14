@@ -6,6 +6,8 @@ import queryString from 'query-string';
 import InvertedIcon from 'react-icons/lib/go/light-bulb';
 import DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
+import { Accessible } from '../';
+
 import Toolbar from './Toolbar';
 
 import { Theme, ThemeProps, SANS_SERIF } from '../../style';
@@ -42,15 +44,19 @@ const Select = glamorous.select<ThemeProps>(
   {
     height: 32,
     backgroundColor: 'transparent',
-    border: 'none',
+    border: '2px solid transparent',
     boxShadow: 'none',
     appearance: 'none',
     fontSize: '1.3rem',
-    paddingRight: '1.3rem'
+    paddingRight: '1.3rem',
+    outline: 'none',
   },
   SANS_SERIF,
   ({ theme }) => ({
-    color: theme[theme.primary].text
+    color: theme[theme.primary].text,
+    ':focus': {
+      boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
+    }
   })
 );
 
@@ -166,7 +172,10 @@ export class Header extends React.Component<Props, State> {
       <Container>
         <HeaderContainer>
           <SelectContainer>
-            <Select value={this.state.selected} onChange={this.handleSelect}>
+            <Select
+              value={this.state.selected}
+              onChange={this.handleSelect}
+            >
               {options.map(option => (
                 <Option key={option} value={option}>
                   {kebabCase(option)}
@@ -176,7 +185,13 @@ export class Header extends React.Component<Props, State> {
             <DownIcon size={20} />
           </SelectContainer>
           <IconContainer>
-            <LightBulb size={24} onClick={this.handleColorSwitch} />
+            <Accessible onClick={this.handleColorSwitch}>
+              {() => (
+                <LightBulb
+                  size={24}
+                />
+              )}
+            </Accessible>
           </IconContainer>
         </HeaderContainer>
         <Toolbar

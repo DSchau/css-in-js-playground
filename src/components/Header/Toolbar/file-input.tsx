@@ -22,6 +22,7 @@ const Input = glamorous
       paddingRight: 4,
       paddingBottom: 6,
       paddingLeft: 4,
+      outline: 'none',
       width: 100
     },
     SANS_SERIF,
@@ -30,7 +31,11 @@ const Input = glamorous
         ? lighten(0.3, 'red')
         : theme[theme.primary === 'dark' ? 'light' : 'dark'].base,
       borderColor: !valid ? 'red' : null,
-      color: theme[theme.primary === 'dark' ? 'light' : 'dark'].text
+      color: theme[theme.primary === 'dark' ? 'light' : 'dark'].text,
+      ':focus': {
+        borderColor: theme[theme.primary].secondary,
+        boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
+      }
     })
   )
   .withProps({ type: 'text' });
@@ -56,20 +61,13 @@ export class FileInput extends React.Component<Props, State> {
   static readonly ESCAPE_KEY_CODE = 27;
 
   form: HTMLFormElement;
+  input: HTMLInputElement;
 
   state = {
     fileName: '',
     touched: false,
     valid: false
   };
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeydown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeydown);
-  }
 
   handleInputFileNameChange = ({ target }) => {
     const { fileName: oldFileName } = this.state;
@@ -87,9 +85,9 @@ export class FileInput extends React.Component<Props, State> {
     if (this.state.valid) {
       this.props.onAdd(this.normalize(this.state.fileName));
     }
-  }
+  };
 
-  handleKeydown: EventListener = ({ keyCode, which }: KeyboardEvent) => {
+  handleKeydown = ({ keyCode, which }) => {
     const code = which || keyCode;
     if (code === FileInput.ESCAPE_KEY_CODE) {
       this.props.onCancel();
@@ -115,6 +113,7 @@ export class FileInput extends React.Component<Props, State> {
         <Input
           innerRef={innerRef}
           onChange={this.handleInputFileNameChange}
+          onKeyDown={this.handleKeydown}
           valid={valid || !touched}
         />
       </form>

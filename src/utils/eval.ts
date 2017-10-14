@@ -53,7 +53,8 @@ export function evalCode(
     .reduce((components, { component, name }) => {
       const Component = inject(component, {
         ...scope,
-        ...name === defaultModule ? makeNameVariants(components) : {}
+        ...makeNameVariants(components)
+        //...name === defaultModule ? makeNameVariants(components) : {}
       })();
       components[name] = Component;
       return components;

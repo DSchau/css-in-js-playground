@@ -126,9 +126,7 @@ export class Provider extends React.Component<Props, State> {
     const fileContent = [
       `import React from 'react';`,
       '',
-      `// the import (in index.js) will be import ${capitalize(
-        file
-      )} from './${file}';`,
+      `// index.js -> import ${capitalize(file)} from './${file}';`,
       `export default () => <h1>Hello from ${file}.js</h1>`,
       ''
     ].join('\n');

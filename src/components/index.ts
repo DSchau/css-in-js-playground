@@ -1,3 +1,4 @@
+export * from './Accessible';
 export * from './CodeEditor';
 export * from './CodePreview';
 export * from './CodeProvider';

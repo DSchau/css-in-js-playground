@@ -99,7 +99,12 @@ export class CodeProvider extends React.PureComponent<Props, State> {
           onUpdate={this.handleEditorUpdate}
         />
         <ErrorBoundary code={code} onError={this.handleError}>
-          <CodePreview code={code} error={error} errorInfo={errorInfo} />
+          <CodePreview
+            activeModule={this.props.activeModule}
+            code={code}
+            error={error}
+            errorInfo={errorInfo}
+          />
         </ErrorBoundary>
       </Container>
     );

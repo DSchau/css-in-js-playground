@@ -3,11 +3,13 @@ import glamorous, { withTheme } from 'glamorous';
 import { darken, lighten } from 'polished';
 import AddIcon from 'react-icons/lib/fa/plus-square';
 import CancelIcon from 'react-icons/lib/fa/ban';
+// import DeleteIcon from 'react-icons/lib/fa/times-circle';
 import kebab from 'lodash.kebabcase';
 
 import { Theme, ThemeProps, SANS_SERIF } from '../../../style/';
 
 import { FileInput } from './file-input';
+import { Accessible } from '../../';
 
 const ToolbarContainer = glamorous.div<ThemeProps>(
   {
@@ -37,6 +39,9 @@ const Files = glamorous.ul<ThemeProps>({
 });
 
 const File = glamorous.li<ThemeProps>({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   margin: 0,
   listStyleType: 'none'
 });
@@ -49,20 +54,26 @@ const FileButton = glamorous.button<
 >(
   {
     backgroundColor: 'transparent',
-    border: 'none',
+    border: '2px solid transparent',
     boxSizing: 'border-box',
     cursor: 'pointer',
     fontSize: 14,
     padding: 8,
-    position: 'relative',
     outline: 'none',
     whiteSpace: 'nowrap'
   },
   SANS_SERIF,
   ({ active, theme }) => {
     const base = theme[theme.primary];
+    const inverted = theme[theme.primary === 'dark' ? 'light' : 'dark'];
     return {
-      color: active ? base.text : base.textSecondary
+      color: base.textSecondary,
+      ':focus': {
+        color: base.secondary
+      },
+      ...(active && {
+        borderBottomColor: base.text
+      })
     };
   }
 );
@@ -75,25 +86,6 @@ const Button = withTheme(({ children, theme }) =>
   })
 );
 
-const ActiveIndicator = glamorous.span<
-  ThemeProps & {
-    color?: string;
-  }
->(
-  {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 2,
-    width: '100%',
-    margin: '0 auto'
-  },
-  ({ theme }) => ({
-    backgroundColor: theme[theme.primary].text
-  })
-);
-
 interface Props {
   activeModule: string;
   files: string[];
@@ -103,6 +95,7 @@ interface Props {
 
 interface State {
   addingFile: boolean;
+  previousActiveModule: string;
 }
 
 class Toolbar extends React.Component<Props, State> {
@@ -112,7 +105,8 @@ class Toolbar extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      addingFile: false
+      addingFile: false,
+      previousActiveModule: ''
     };
   }
 
@@ -122,9 +116,11 @@ class Toolbar extends React.Component<Props, State> {
   };
 
   handleAddFileClick = () => {
+    this.props.onActiveChange('');
     this.setState(
       {
-        addingFile: true
+        addingFile: true,
+        previousActiveModule: this.props.activeModule
       },
       () => {
         this.fileInput.focus();
@@ -133,6 +129,7 @@ class Toolbar extends React.Component<Props, State> {
   };
 
   handleCancel = () => {
+    this.props.onActiveChange(this.state.previousActiveModule);
     this.setState({
       addingFile: false
     });
@@ -179,7 +176,6 @@ class Toolbar extends React.Component<Props, State> {
                     onClick={this.handleActiveClick}
                   >
                     {`${kebab(file)}.js`}
-                    {isActive && <ActiveIndicator />}
                   </FileButton>
                 </File>
               );
@@ -195,15 +191,20 @@ class Toolbar extends React.Component<Props, State> {
             </File>
           )}
         </Files>
-        <Button>
-          {({ color, size }) => (
-            <AddIcon
-              color={color}
-              onClick={this.handleAddFileClick}
-              size={20}
-            />
-          )}
-        </Button>
+        <Accessible onClick={this.handleAddFileClick}>
+          {
+            () => (
+              <Button>
+                {({ color, size }) => (
+                  <AddIcon
+                    color={color}
+                    size={20}
+                  />
+                )}
+              </Button>
+            )
+          }
+        </Accessible>
       </ToolbarContainer>
     );
   }

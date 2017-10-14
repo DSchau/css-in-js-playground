@@ -26,6 +26,7 @@ const CodeContainer = glamorous.div({
 });
 
 interface Props {
+  activeModule: string;
   code: Module;
   error: Error;
   errorInfo: {

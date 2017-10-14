@@ -4,6 +4,7 @@ interface StyleBase {
   base: string;
   text: string;
   textSecondary: string;
+  secondary: string;
 }
 
 export interface Theme {
@@ -18,12 +19,14 @@ export interface ThemeProps {
 
 const dark = {
   base: '#1E1E20',
-  text: '#ddd'
+  text: '#ddd',
+  secondary: '#51cbee'
 };
 
 const light = {
   base: '#ECF0F1',
-  text: '#1E1E20'
+  text: '#1E1E20',
+  secondary: darken(0.15, dark.secondary)
 };
 
 export const THEME = {
