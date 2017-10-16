@@ -19,9 +19,8 @@ interface Props {}
 
 function App(props: Props) {
   return (
-    <OfflineContainer>
-      {updated => (
-        <Provider>
+    <OfflineContainer render={updated => {
+      return (<Provider>
           {({ actions, activeModule, code, library, snippets, theme }) => (
             <ThemeProvider theme={theme}>
               <Container>
@@ -52,9 +51,8 @@ function App(props: Props) {
               </Container>
             </ThemeProvider>
           )}
-        </Provider>
-      )}
-    </OfflineContainer>
+        </Provider>);
+    }}/>
   );
 }
 

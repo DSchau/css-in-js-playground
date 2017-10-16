@@ -109,13 +109,12 @@ export class Footer extends React.Component<Props, State> {
   };
 
   componentWillReceiveProps({ code }) {
-    const changes =
-      Object.keys(code).reduce((nonStandardFiles, name) => {
-        if (FILE_LIST.indexOf(name.toLowerCase()) === -1) {
-          nonStandardFiles.push(name);
-        }
-        return nonStandardFiles;
-      }, []);
+    const changes = Object.keys(code).reduce((nonStandardFiles, name) => {
+      if (FILE_LIST.indexOf(name.toLowerCase()) === -1) {
+        nonStandardFiles.push(name);
+      }
+      return nonStandardFiles;
+    }, []);
     const hasLocalChanges = changes.length > 0;
     if (this.state.hasLocalChanges !== hasLocalChanges) {
       this.setState({
