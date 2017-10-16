@@ -36,6 +36,7 @@ function App(props: Props) {
                     onFileAdd={actions.handleFileAdd}
                     files={Object.keys(code)}
                     snippets={snippets}
+                    theme={theme}
                   />
                   <CodeProvider
                     activeModule={activeModule}

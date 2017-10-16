@@ -115,6 +115,7 @@ interface Props extends ThemeProps {
   snippets: {
     [key: string]: Module;
   };
+  theme: Theme;
 }
 
 interface State {
@@ -190,7 +191,7 @@ export class Header extends React.Component<Props, State> {
           </SelectContainer>
           <IconContainer>
             <Accessible
-              aria-label="Toggle light/dark mode"
+              aria-label={`Toggle ${this.props.theme.primary === 'dark' ? 'light' : 'dark'} mode`}
               onClick={this.handleColorSwitch}
             >
               {() => <LightBulb size={24} />}

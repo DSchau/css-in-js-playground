@@ -12,6 +12,7 @@ interface Props {
 }
 
 export function handleOffline({ onUpdated = () => {} }) {
+  onUpdated();
   if (process.env.NODE_ENV === 'production') {
     OfflinePlugin.install({
       onUpdateReady() {

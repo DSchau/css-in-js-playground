@@ -58,8 +58,8 @@ export class Toolbar extends React.Component<Props, State> {
     return (
       <Container>
         <Message>You have local changes</Message>
-        <Button aria-label="Reset code snippet" onClick={this.props.onReset}>
-          Reset
+        <Button aria-label="Discard code snippet" onClick={this.props.onReset}>
+          Discard
         </Button>
       </Container>
     );
