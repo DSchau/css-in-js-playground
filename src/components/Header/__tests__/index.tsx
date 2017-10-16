@@ -16,6 +16,7 @@ test('it can be rendered', () => {
         primary="dark"
         onSelect={() => {}}
         snippets={{}}
+        theme={{primary: 'dark'}}
       />
     )
   ).not.toThrow();

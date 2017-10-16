@@ -10,7 +10,13 @@ import { Accessible } from '../';
 
 import Toolbar from './Toolbar';
 
-import { Theme, Themes, ThemeProps, SANS_SERIF, Z_INDEX_PREVIEW_CONTENT } from '../../style';
+import {
+  Theme,
+  Themes,
+  ThemeProps,
+  SANS_SERIF,
+  Z_INDEX_PREVIEW_CONTENT
+} from '../../style';
 import { Module } from '../../interfaces';
 
 const Container = glamorous.div<ThemeProps>({
@@ -191,7 +197,9 @@ export class Header extends React.Component<Props, State> {
           </SelectContainer>
           <IconContainer>
             <Accessible
-              aria-label={`Toggle ${this.props.theme.primary === 'dark' ? 'light' : 'dark'} mode`}
+              aria-label={`Toggle ${this.props.theme.primary === 'dark'
+                ? 'light'
+                : 'dark'} mode`}
               onClick={this.handleColorSwitch}
             >
               {() => <LightBulb size={24} />}
