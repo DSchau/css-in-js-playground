@@ -2,6 +2,8 @@ import * as React from 'react';
 import glamorous from 'glamorous';
 import { lighten } from 'polished';
 
+import { Z_INDEX_ABOVE_CONTENT } from '../../style';
+
 const ErrorContainer = glamorous.div({
   position: 'absolute',
   left: '0',
@@ -9,7 +11,7 @@ const ErrorContainer = glamorous.div({
   right: '0',
   backgroundColor: lighten(0.45, 'red'),
   borderTop: `1px solid ${lighten(0.4, 'red')}`,
-  zIndex: 4,
+  zIndex: Z_INDEX_ABOVE_CONTENT,
   padding: '0.5rem'
 });
 

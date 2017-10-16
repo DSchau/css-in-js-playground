@@ -10,7 +10,7 @@ import { Accessible } from '../';
 
 import Toolbar from './Toolbar';
 
-import { Theme, Themes, ThemeProps, SANS_SERIF } from '../../style';
+import { Theme, Themes, ThemeProps, SANS_SERIF, Z_INDEX_PREVIEW_CONTENT } from '../../style';
 import { Module } from '../../interfaces';
 
 const Container = glamorous.div<ThemeProps>({
@@ -24,7 +24,7 @@ const HeaderContainer = glamorous.header<ThemeProps>(
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0 0.5rem',
-    zIndex: 2,
+    zIndex: Z_INDEX_PREVIEW_CONTENT,
     transition: '250ms ease-in-out',
     position: 'relative'
   },

@@ -14,7 +14,7 @@ import 'codemirror/theme/dracula.css';
 import debounce from 'lodash.debounce';
 
 import { Module } from '../../interfaces';
-import { Theme, ThemeProps } from '../../style/theme';
+import { Theme, ThemeProps, Z_INDEX_PREVIEW_CONTENT } from '../../style';
 import { LARGE_UP } from '../../constants';
 
 const Container = glamorous.div<ThemeProps>(
@@ -26,7 +26,7 @@ const Container = glamorous.div<ThemeProps>(
     overflow: 'auto',
     position: 'relative',
     WebkitOverflowScrolling: 'touch',
-    zIndex: 2,
+    zIndex: Z_INDEX_PREVIEW_CONTENT,
     boxSizing: 'border-box',
     borderStyle: 'solid',
     borderWidth: 0,
