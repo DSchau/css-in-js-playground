@@ -31,9 +31,9 @@ export class Accessible extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, onClick, tabIndex } = this.props;
+    const { children, onClick, tabIndex, ...rest } = this.props;
     return (
-      <Button tabIndex={tabIndex} onClick={onClick}>
+      <Button tabIndex={tabIndex} onClick={onClick} {...rest}>
         {children({})}
       </Button>
     );

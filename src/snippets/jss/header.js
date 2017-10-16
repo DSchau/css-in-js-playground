@@ -1,8 +1,7 @@
 import React from 'react';
 import jss from 'jss';
 import preset from 'jss-preset-default';
-
-import Logo from './logo';
+import Logo from 'react-icons/lib/go/rocket';
 
 jss.setup(preset());
 

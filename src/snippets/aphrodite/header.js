@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-
-import Logo from './logo';
+import Logo from 'react-icons/lib/go/rocket';
 
 function Header() {
   return (

@@ -4,11 +4,13 @@ exports[`it contains a THEME object 1`] = `
 Object {
   "dark": Object {
     "base": "#1E1E20",
+    "secondary": "#51cbee",
     "text": "#ddd",
     "textSecondary": "#aaa",
   },
   "light": Object {
     "base": "#ECF0F1",
+    "secondary": "#16b0dd",
     "text": "#1E1E20",
     "textSecondary": "#4f4f55",
   },

@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import Logo from 'react-icons/lib/go/rocket';
 
 function Header() {
   return (

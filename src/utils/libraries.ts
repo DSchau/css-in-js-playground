@@ -2,26 +2,12 @@ import { Module } from '../interfaces';
 
 const expr = library => new RegExp(`["']${library}["']`);
 
-const matchesExpression = (text, library) => text.match(expr(library));
-const exposeExports = (name, includeAll = true) => {
-  return library => {
-    const lib = library.default ? library.default : library;
-    return Object.keys(includeAll ? lib : {}).reduce(
-      (scope, key) => {
-        scope[key] = lib[key];
-        return scope;
-      },
-      {
-        [name]: lib
-      }
-    );
-  };
-};
+const matchesExpression = (text, library): boolean => text.match(expr(library));
 
 export const getLibraryImportStatement = (
   code: Module,
   defaultModule = 'index'
-) => {
+): string => {
   const matches = matchesExpression.bind(undefined, code[defaultModule]);
   const importStatement = (statement, library) =>
     `import ${statement} from '${library}';`;
@@ -51,7 +37,10 @@ export const getLibraryImportStatement = (
   return '';
 };
 
-export const getScopedImports = (code: Module, defaultModule = 'index') => {
+export const getScopedImports = (
+  code: Module,
+  defaultModule = 'index'
+): Promise<any> => {
   const matches = matchesExpression.bind(undefined, code[defaultModule]);
 
   if (matches('styled-components')) {
@@ -65,16 +54,16 @@ export const getScopedImports = (code: Module, defaultModule = 'index') => {
       ...rest
     }));
   } else if (matches('aphrodite')) {
-    return import('aphrodite').then(exposeExports('aphrodite'));
+    return import('aphrodite').then(aphrodite => ({ ...aphrodite }));
   } else if (matches('react-emotion')) {
     return import('react-emotion').then(({ default: styled, ...rest }) => ({
       styled,
       ...rest
     }));
   } else if (matches('cxs/component')) {
-    return import('cxs/component').then(exposeExports('cxs'));
+    return import('cxs/component').then(cxs => ({ cxs }));
   } else if (matches('radium')) {
-    return import('radium').then(exposeExports('Radium'));
+    return import('radium').then(radium => ({ Radium: radium }));
   } else if (matches('jss')) {
     return Promise.all([
       import('jss'),

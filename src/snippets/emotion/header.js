@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'react-emotion';
-import Logo from './logo';
+import Logo from 'react-icons/lib/go/rocket';
 
 const Header = styled('header')`
   display: flex;
@@ -51,7 +51,9 @@ const StripeBottom = styled('div')`
   background: linear-gradient(150deg, rgba(172, 240, 181, 0) 40%, #acf0b5 70%);
 `;
 
-const TitleContainer = styled('div')`padding: 1rem;`;
+const TitleContainer = styled('div')`
+  padding: 1rem;
+`;
 
 const Title = styled('h1')`
   color: white;

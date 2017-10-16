@@ -1,5 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
+import Logo from 'react-icons/lib/go/rocket';
 
 const headerStyles = {
   header: {

@@ -78,7 +78,7 @@ const FileButton = glamorous.button<
   }
 );
 
-const Button = withTheme(({ children, theme }) =>
+const Icon = withTheme(({ children, theme }) =>
   children({
     color: theme[theme.primary].text,
     size: 20,
@@ -157,15 +157,13 @@ class Toolbar extends React.Component<Props, State> {
     return (
       <ToolbarContainer>
         {addingFile && (
-          <Button>
-            {({ color, size }) => (
-              <CancelIcon
-                color={color}
-                onClick={this.handleCancel}
-                size={size}
-              />
+          <Accessible onClick={this.handleCancel}>
+            {() => (
+              <Icon>
+                {({ color, size }) => <CancelIcon color={color} size={size} />}
+              </Icon>
             )}
-          </Button>
+          </Accessible>
         )}
         <Files>
           {files
@@ -202,9 +200,9 @@ class Toolbar extends React.Component<Props, State> {
         </Files>
         <Accessible onClick={this.handleAddFileClick}>
           {() => (
-            <Button>
+            <Icon>
               {({ color, size }) => <AddIcon color={color} size={20} />}
-            </Button>
+            </Icon>
           )}
         </Accessible>
       </ToolbarContainer>

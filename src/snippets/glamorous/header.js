@@ -1,7 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
-
-import Logo from './logo';
+import Logo from 'react-icons/lib/go/rocket';
 
 const Header = glamorous.header({
   display: 'flex',

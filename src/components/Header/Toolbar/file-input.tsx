@@ -30,11 +30,15 @@ const Input = glamorous
       backgroundColor: !valid
         ? lighten(0.3, 'red')
         : theme[theme.primary === 'dark' ? 'light' : 'dark'].base,
-      borderColor: !valid ? 'red' : null,
+      borderColor: valid ? null : 'red',
       color: theme[theme.primary === 'dark' ? 'light' : 'dark'].text,
       ':focus': {
-        borderColor: theme[theme.primary].secondary,
-        boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
+        borderColor: valid
+          ? theme[theme.primary].secondary
+          : lighten(0.2, 'red'),
+        boxShadow: `0 0 5px ${valid
+          ? theme[theme.primary].secondary
+          : lighten(0.2, 'red')}`
       }
     })
   )

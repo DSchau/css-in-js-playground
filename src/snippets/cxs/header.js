@@ -1,7 +1,6 @@
 import React from 'react';
 import cxs from 'cxs/component';
-
-import Logo from './logo';
+import Logo from 'react-icons/lib/go/rocket';
 
 const Header = cxs('header')({
   display: 'flex',

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": true,

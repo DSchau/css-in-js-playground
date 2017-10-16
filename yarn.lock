@@ -3501,6 +3501,10 @@ jest-mock@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-21.2.0.tgz#7eb0770e7317968165f61ea2a7281131534b3c0f"
 
+jest-preset-typescript@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jest-preset-typescript/-/jest-preset-typescript-1.0.0.tgz#a79fb344fd2e5043965be4a04cad2beec0d5022d"
+
 jest-regex-util@^21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/jest-regex-util/-/jest-regex-util-21.2.0.tgz#1b1e33e63143babc3e0f2e6c9b5ba1eb34b2d530"
