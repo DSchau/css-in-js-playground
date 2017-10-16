@@ -118,6 +118,9 @@ export class FileInput extends React.Component<Props, State> {
           placeholder="File name"
           aria-label="File name"
           aria-required={true}
+          autoCapitalize="none"
+          autoCorrect="off"
+          autoComplete="off"
           onChange={this.handleInputFileNameChange}
           onKeyDown={this.handleKeydown}
           valid={valid || !touched}
