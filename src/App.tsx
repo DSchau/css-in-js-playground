@@ -42,7 +42,7 @@ function App(props: Props) {
                   code={code}
                   onUpdate={actions.handleCodeUpdate}
                 />
-                <Footer />
+                <Footer code={code} onReset={actions.handleReset} />
                 {updated && (
                   <Timer
                     duration={10000}

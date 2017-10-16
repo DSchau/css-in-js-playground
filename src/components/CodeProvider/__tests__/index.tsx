@@ -1,3 +1,4 @@
+/* eslint import/first: "off" */
 jest.mock('../../../utils/libraries', () => {
   return () => {};
 });

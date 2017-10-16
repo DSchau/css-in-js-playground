@@ -25,7 +25,8 @@ const ToolbarContainer = glamorous.div<ThemeProps>(
     transition: '175ms ease-in-out'
   },
   ({ theme }) => ({
-    backgroundColor: darken(0.05, theme[theme.primary].base)
+    backgroundColor: theme[theme.primary].baseSecondary,
+    borderBottom: `1px solid ${darken(0.1, theme[theme.primary].baseSecondary)}`
   })
 );
 
@@ -69,7 +70,7 @@ const FileButton = glamorous.button<
     return {
       color: base.textSecondary,
       ':focus': {
-        color: base.secondary
+        color: base.accent
       },
       ...(active && {
         borderBottomColor: base.text
@@ -157,13 +158,14 @@ class Toolbar extends React.Component<Props, State> {
     return (
       <ToolbarContainer>
         {addingFile && (
-          <Accessible onClick={this.handleCancel}>
-            {() => (
+          <Accessible
+            onClick={this.handleCancel}
+            render={() => (
               <Icon>
                 {({ color, size }) => <CancelIcon color={color} size={size} />}
               </Icon>
             )}
-          </Accessible>
+          />
         )}
         <Files>
           {files
@@ -198,13 +200,14 @@ class Toolbar extends React.Component<Props, State> {
             </File>
           )}
         </Files>
-        <Accessible onClick={this.handleAddFileClick}>
-          {() => (
+        <Accessible
+          onClick={this.handleAddFileClick}
+          render={() => (
             <Icon>
               {({ color, size }) => <AddIcon color={color} size={20} />}
             </Icon>
           )}
-        </Accessible>
+        />
       </ToolbarContainer>
     );
   }

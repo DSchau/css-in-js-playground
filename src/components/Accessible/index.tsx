@@ -11,14 +11,15 @@ const Button = glamorous.button<ThemeProps>(
   },
   ({ theme }) => ({
     ':focus': {
-      boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
+      boxShadow: `0 0 5px ${theme[theme.primary].accent}`
     }
   })
 );
 
 interface Props {
-  children(args: any): any;
+  children?(args: any): any;
   onClick?(ev: any);
+  render?(): React.ReactElement<any>;
   tabIndex?: number;
 }
 
@@ -31,10 +32,10 @@ export class Accessible extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, onClick, tabIndex, ...rest } = this.props;
+    const { children, onClick, render, tabIndex, ...rest } = this.props;
     return (
       <Button tabIndex={tabIndex} onClick={onClick} {...rest}>
-        {children({})}
+        {render ? render() : children({})}
       </Button>
     );
   }

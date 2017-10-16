@@ -83,7 +83,7 @@ export class CodeEditorBase extends React.Component<Props, State> {
       lineNumbers: true,
       matchBrackets: true,
       tabSize: 2,
-      theme: 'dracula'
+      theme: this.props.theme.primary === 'dark' ? 'dracula' : 'default'
     } as EditorConfiguration);
 
     this.editor.on('change', this.handleChange);

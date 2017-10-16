@@ -13,6 +13,7 @@ export const inject = (Component: string, scope) => {
   const values = keys.map(key => scope[key]);
 
   return () => {
+    /* eslint no-new-func: "off" */
     return new Function('React', 'Component', 'Logo', ...keys, Component)(
       React,
       React.Component,
@@ -35,9 +36,9 @@ export function evalCode(
   scope,
   defaultModule = 'index'
 ) {
-  const normalizedCode = Object.keys(code).reduce((camelCased, name) => {
-    camelCased[camelCase(name)] = code[name];
-    return camelCased;
+  const normalizedCode = Object.keys(code).reduce((normalized, name) => {
+    normalized[camelCase(name)] = code[name];
+    return normalized;
   }, {});
   const { [defaultModule]: Component } = Object.keys(normalizedCode)
     .sort((a, b) => {

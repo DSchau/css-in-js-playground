@@ -22,6 +22,7 @@ interface Props {
         handleCodeUpdate(code: string, activeModule: string): any;
         handleColorSwitch(...args): any;
         handleFileAdd(...args): any;
+        handleReset(): any;
         handleSelect(...args): any;
         handleTimerComplete(...args): any;
       };
@@ -53,7 +54,7 @@ export class Provider extends React.Component<Props, State> {
 
   componentWillMount() {
     const { activeModule, theme: persistedTheme } = queryString.parse(
-      location.search
+      window.location.search
     );
     const theme = this.state.theme;
     this.setState({
@@ -73,7 +74,7 @@ export class Provider extends React.Component<Props, State> {
       theme,
       library: definedLibrary,
       ...rest
-    } = queryString.parse(location.search);
+    } = queryString.parse(window.location.search);
     const persistedCode = init
       ? Object.keys(rest).reduce((merged, name) => {
           const decompressed = decompress(rest[name]);
@@ -172,7 +173,26 @@ export class Provider extends React.Component<Props, State> {
   };
 
   handleTimerComplete = () => {
-    location.reload();
+    window.location.reload();
+  };
+
+  handleReset = () => {
+    this.setState(
+      {
+        activeModule: 'index',
+        code: snippets[this.state.library]
+      },
+      () => {
+        replaceHistory(
+          {
+            activeModule: this.state.activeModule,
+            library: this.state.library,
+            theme: this.state.theme.primary
+          },
+          false
+        );
+      }
+    );
   };
 
   render() {
@@ -184,6 +204,7 @@ export class Provider extends React.Component<Props, State> {
         handleCodeUpdate: this.handleCodeUpdate,
         handleColorSwitch: this.handleColorSwitch,
         handleFileAdd: this.handleFileAdd,
+        handleReset: this.handleReset,
         handleSelect: this.handleSelect,
         handleTimerComplete: this.handleTimerComplete
       }

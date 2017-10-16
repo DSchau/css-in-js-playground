@@ -1,16 +1,23 @@
 import { darken, lighten } from 'polished';
 
+/* eslint no-use-before-define: "off" */
 interface StyleBase {
   base: string;
+  baseSecondary: string;
   text: string;
   textSecondary: string;
-  secondary: string;
+  accent: string;
+}
+
+export enum Themes {
+  dark = 'dark',
+  light = 'light'
 }
 
 export interface Theme {
   dark: StyleBase;
   light: StyleBase;
-  primary: 'dark' | 'light';
+  primary: Themes;
 }
 
 export interface ThemeProps {
@@ -18,15 +25,17 @@ export interface ThemeProps {
 }
 
 const dark = {
-  base: '#1E1E20',
+  base: '#31353D',
+  baseSecondary: '#1C1D21',
   text: '#ddd',
-  secondary: '#51cbee'
+  accent: '#92CDCF'
 };
 
 const light = {
-  base: '#ECF0F1',
+  base: '#EEEFF7',
+  baseSecondary: darken(0.05, '#EEEFF7'),
   text: '#1E1E20',
-  secondary: darken(0.15, dark.secondary)
+  accent: darken(0.2, dark.accent)
 };
 
 export const THEME = {

@@ -1,15 +1,15 @@
 import queryString from 'query-string';
 
 export const replaceHistory = (params, useExisting = true) => {
-  const existing = useExisting ? queryString.parse(location.search) : {};
+  const existing = useExisting ? queryString.parse(window.location.search) : {};
   const path = [
-    location.origin,
-    location.pathname,
+    window.location.origin,
+    window.location.pathname,
     '?',
     queryString.stringify({
       ...existing,
       ...params
     })
   ].join('');
-  history.replaceState({ path }, '', path);
+  window.history.replaceState({ path }, '', path);
 };

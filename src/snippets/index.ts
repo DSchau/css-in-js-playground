@@ -1,22 +1,35 @@
 const context = require.context('.', true, /\.js$/);
 const keys = context.keys();
 
-const libraries = keys.reduce((libraries, path) => {
+const lib = keys.reduce((lib, path) => {
   let [, library, fileName] = path.split('/');
   const [file] = fileName.split('.js');
-  libraries[library] = {
-    ...(libraries[library] || {}),
+  lib[library] = {
+    ...(lib[library] || {}),
     [file]: context(path)
   };
-  return libraries;
+  return lib;
 }, {});
 
-export default keys.reduce((libraries, path) => {
-  let [, library, fileName] = path.split('/');
-  const [file] = fileName.split('.js');
-  libraries[library] = {
-    ...(libraries[library] || {}),
-    [file]: context(path)
-  };
-  return libraries;
-}, {});
+const { libraries, files } = keys.reduce(
+  (lib, path) => {
+    let [, library, fileName] = path.split('/');
+    const [file] = fileName.split('.js');
+    if (lib.files.indexOf(file) === -1) {
+      lib.files.push(file);
+    }
+    lib.libraries[library] = {
+      ...(lib.libraries[library] || {}),
+      [file]: context(path)
+    };
+    return lib;
+  },
+  {
+    libraries: {},
+    files: []
+  }
+);
+
+export { files };
+
+export default libraries;

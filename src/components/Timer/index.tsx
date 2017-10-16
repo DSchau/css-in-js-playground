@@ -42,8 +42,6 @@ const Title = glamorous.h1<ThemeProps>(
 
 const Button = glamorous.button<ThemeProps>(
   {
-    backgroundColor: '${props => }',
-    color: '${props => ',
     outline: 'none',
     borderWidth: 0,
     borderRadius: '0.125rem',

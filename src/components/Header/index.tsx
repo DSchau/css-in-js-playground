@@ -10,7 +10,7 @@ import { Accessible } from '../';
 
 import Toolbar from './Toolbar';
 
-import { Theme, ThemeProps, SANS_SERIF } from '../../style';
+import { Theme, Themes, ThemeProps, SANS_SERIF } from '../../style';
 import { Module } from '../../interfaces';
 
 const Container = glamorous.div<ThemeProps>({
@@ -55,7 +55,7 @@ const Select = glamorous.select<ThemeProps>(
   ({ theme }) => ({
     color: theme[theme.primary].text,
     ':focus': {
-      boxShadow: `0 0 5px ${theme[theme.primary].secondary}`
+      boxShadow: `0 0 5px ${theme[theme.primary].accent}`
     }
   })
 );
@@ -111,7 +111,7 @@ interface Props extends ThemeProps {
   onActiveChange(active: string): any;
   onFileAdd(file: string): any;
   onSelect(data: SelectData): any;
-  onColorSwitch?: Function;
+  onColorSwitch?(theme: Themes);
   snippets: {
     [key: string]: Module;
   };
@@ -131,7 +131,7 @@ export class Header extends React.Component<Props, State> {
   // TODO: cascade this down from provider
   componentDidMount() {
     const { library = this.props.defaultLibrary } = queryString.parse(
-      location.search
+      window.location.search
     );
     const code = this.props.snippets[library];
     if (code) {
@@ -164,7 +164,7 @@ export class Header extends React.Component<Props, State> {
   handleColorSwitch = () => {
     if (this.props.onColorSwitch) {
       const { primary } = this.props;
-      const theme = primary === 'dark' ? 'light' : 'dark';
+      const theme = (primary === 'dark' ? 'light' : 'dark') as Themes;
       this.props.onColorSwitch(theme);
     }
   };
