@@ -41,7 +41,9 @@ export class OfflineContainer extends React.Component<Props, State> {
   };
 
   render() {
-    const renderer = this.props.render ? this.props.render : this.props.children;
+    const renderer = this.props.render
+      ? this.props.render
+      : this.props.children;
     return renderer(this.state.updated);
   }
 }

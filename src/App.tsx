@@ -19,40 +19,44 @@ interface Props {}
 
 function App(props: Props) {
   return (
-    <OfflineContainer render={updated => {
-      return (<Provider>
-          {({ actions, activeModule, code, library, snippets, theme }) => (
-            <ThemeProvider theme={theme}>
-              <Container>
-                <Header
-                  activeModule={activeModule}
-                  defaultLibrary="styled-components"
-                  onSelect={actions.handleSelect}
-                  primary={theme.primary}
-                  onActiveChange={actions.handleActiveChange}
-                  onColorSwitch={actions.handleColorSwitch}
-                  onFileAdd={actions.handleFileAdd}
-                  files={Object.keys(code)}
-                  snippets={snippets}
-                />
-                <CodeProvider
-                  activeModule={activeModule}
-                  library={library}
-                  code={code}
-                  onUpdate={actions.handleCodeUpdate}
-                />
-                <Footer code={code} onReset={actions.handleReset} />
-                {updated && (
-                  <Timer
-                    duration={10000}
-                    onElapsed={actions.handleTimerComplete}
+    <OfflineContainer
+      render={updated => {
+        return (
+          <Provider>
+            {({ actions, activeModule, code, library, snippets, theme }) => (
+              <ThemeProvider theme={theme}>
+                <Container>
+                  <Header
+                    activeModule={activeModule}
+                    defaultLibrary="styled-components"
+                    onSelect={actions.handleSelect}
+                    primary={theme.primary}
+                    onActiveChange={actions.handleActiveChange}
+                    onColorSwitch={actions.handleColorSwitch}
+                    onFileAdd={actions.handleFileAdd}
+                    files={Object.keys(code)}
+                    snippets={snippets}
                   />
-                )}
-              </Container>
-            </ThemeProvider>
-          )}
-        </Provider>);
-    }}/>
+                  <CodeProvider
+                    activeModule={activeModule}
+                    library={library}
+                    code={code}
+                    onUpdate={actions.handleCodeUpdate}
+                  />
+                  <Footer code={code} onReset={actions.handleReset} />
+                  {updated && (
+                    <Timer
+                      duration={10000}
+                      onElapsed={actions.handleTimerComplete}
+                    />
+                  )}
+                </Container>
+              </ThemeProvider>
+            )}
+          </Provider>
+        );
+      }}
+    />
   );
 }
 
