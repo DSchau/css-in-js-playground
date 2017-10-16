@@ -4,7 +4,13 @@ import queryString from 'query-string';
 import snippets from '../../snippets';
 
 import { THEME } from '../../style';
-import { capitalize, compress, decompress, replaceHistory } from '../../utils';
+import {
+  capitalize,
+  compress,
+  decompress,
+  getLibraryImportStatement,
+  replaceHistory
+} from '../../utils';
 
 import { Module } from '../../interfaces';
 
@@ -125,6 +131,7 @@ export class Provider extends React.Component<Props, State> {
   handleFileAdd = file => {
     const fileContent = [
       `import React from 'react';`,
+      getLibraryImportStatement(this.state.code),
       '',
       `// index.js -> import ${capitalize(file)} from './${file}';`,
       `export default () => <h1>Hello from ${file}.js</h1>`,

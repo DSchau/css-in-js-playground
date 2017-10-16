@@ -18,6 +18,39 @@ const exposeExports = (name, includeAll = true) => {
   };
 };
 
+export const getLibraryImportStatement = (
+  code: Module,
+  defaultModule = 'index'
+) => {
+  const matches = matchesExpression.bind(undefined, code[defaultModule]);
+  const importStatement = (statement, library) =>
+    `import ${statement} from '${library}';`;
+
+  if (matches('styled-components')) {
+    return importStatement('styled', 'styled-components');
+  } else if (matches('glamorous')) {
+    return importStatement('glamorous', 'glamorous');
+  } else if (matches('aphrodite')) {
+    return importStatement('aphrodite', 'aphrodite');
+  } else if (matches('react-emotion')) {
+    return importStatement('styled', 'react-emotion');
+  } else if (matches('cxs/component')) {
+    return importStatement('cxs', 'cxs/component');
+  } else if (matches('radium')) {
+    return importStatement('Radium', 'radium');
+  } else if (matches('jss')) {
+    return [
+      importStatement('jss', 'jss'),
+      importStatement('preset', 'jss-preset-default'),
+      '',
+      'jss.setup(preset);'
+    ].join('\n');
+  } else if (matches('react-jss')) {
+    return importStatement('injectSheet', 'react-jss');
+  }
+  return '';
+};
+
 export const getScopedImports = (code: Module, defaultModule = 'index') => {
   const matches = matchesExpression.bind(undefined, code[defaultModule]);
 
@@ -26,8 +59,6 @@ export const getScopedImports = (code: Module, defaultModule = 'index') => {
       styled,
       ...rest
     }));
-  } else if (matches('glamor')) {
-    return import('glamor').then(exposeExports('glamor'));
   } else if (matches('glamorous')) {
     return import('glamorous').then(({ default: glamorous, ...rest }) => ({
       glamorous,

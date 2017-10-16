@@ -88,6 +88,7 @@ const Button = withTheme(({ children, theme }) =>
 
 interface Props {
   activeModule: string;
+  addingFile: boolean;
   files: string[];
   onActiveChange(active: string): any;
   onFileAdd(file: string): any;
@@ -108,6 +109,14 @@ class Toolbar extends React.Component<Props, State> {
       addingFile: false,
       previousActiveModule: ''
     };
+  }
+
+  componentWillReceiveProps({ addingFile }: Props) {
+    if (addingFile !== this.state.addingFile) {
+      this.setState({
+        addingFile
+      });
+    }
   }
 
   handleActiveClick = ({ target }) => {

@@ -112,6 +112,10 @@ export class FileInput extends React.Component<Props, State> {
       <form onSubmit={this.handleSubmit}>
         <Input
           innerRef={innerRef}
+          name="fileName"
+          placeholder="File name"
+          aria-label="File name"
+          aria-required={true}
           onChange={this.handleInputFileNameChange}
           onKeyDown={this.handleKeydown}
           valid={valid || !touched}

@@ -118,11 +118,13 @@ interface Props extends ThemeProps {
 }
 
 interface State {
+  addingFile: boolean;
   selected: string;
 }
 
 export class Header extends React.Component<Props, State> {
   state = {
+    addingFile: false,
     selected: ''
   };
 
@@ -149,6 +151,7 @@ export class Header extends React.Component<Props, State> {
     const code = this.props.snippets[library];
     if (code) {
       this.setState({
+        addingFile: false,
         selected: library
       });
       this.props.onSelect({
@@ -189,6 +192,7 @@ export class Header extends React.Component<Props, State> {
         </HeaderContainer>
         <Toolbar
           activeModule={this.props.activeModule}
+          addingFile={this.state.addingFile}
           files={this.props.files}
           onActiveChange={this.props.onActiveChange}
           onFileAdd={this.props.onFileAdd}

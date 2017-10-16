@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 
-import { Form } from './form';
-import { Header } from './header';
+import Form from './form';
+import Header from './header';
 
 const Container = styled('main')`
   display: flex;

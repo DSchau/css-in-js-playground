@@ -2,8 +2,8 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import Logo from './logo';
 
-import { Header } from './header';
-import { Form } from './form';
+import Header from './header';
+import Form from './form';
 
 function Login({ classes }) {
   return (
