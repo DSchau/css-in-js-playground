@@ -2,7 +2,7 @@
 
 ## Adding a library
 
-The general idea is that a ["Stripe inspired"][stripe] login form will be created with various CSS in JS libraries. It's a simple example that demonstrates the stylistic differences between the different libraries effectively. Take a look at any of the other [examples][snippets], e.g. [styled-components][styled-components], for an example of the expected output and code style.
+The general idea is that a ["Stripe inspired"][stripe] [login form][example] will be created with various CSS in JS libraries. It's a simple example that demonstrates the stylistic differences between the different libraries effectively. Take a look at any of the other [examples][snippets], e.g. [styled-components][styled-components], for an example of the expected output and code style.
 
 ### Creating the library folder
 
@@ -52,7 +52,12 @@ Once the code has been validated to run locally, you'll want to just create a PR
 
 Other contributions (e.g. adding functionality, fixing any bugs, etc.) are more than welcome! Simply open a PR explaining what you're trying to do or fix, and it'll be reviewed as quickly as possible!
 
+## Example
+
+![Stripe form example](./assets/form-example.png)
+
 [stripe]: https://stripe.com/connect
+[example]: #example
 [snippets]: ./src/snippets
 [styled-components]: ./src/snippets/styled-components/index.js
 [libraries.ts]: ./src/utils/libraries.ts
