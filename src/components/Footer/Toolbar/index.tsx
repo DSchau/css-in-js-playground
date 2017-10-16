@@ -9,7 +9,7 @@ const Container = glamorous.div<ThemeProps>(
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '100%',
+    maxWidth: '100%',
     boxSizing: 'border-box',
     padding: '0.5rem'
   },

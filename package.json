@@ -11,7 +11,7 @@
     "postbuild": "npm run copy",
     "build:production": "npm run build -- --env.environment production",
     "clean": "del-cli \"dist/**/*\"",
-    "copy": "cp src/manifest.json dist/manifest.json;",
+    "copy": "cp src/manifest.json assets/og-image.jpeg dist",
     "format": "npm run format:js & npm run format:ts",
     "format:js": "prettier --write --single-quote \"src/snippets/**/*.js\"",
     "format:ts": "prettier --write --single-quote --parser typescript \"src/**/*.ts\" \"src/**/*.tsx\"",
