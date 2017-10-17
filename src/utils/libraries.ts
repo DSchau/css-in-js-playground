@@ -1,3 +1,4 @@
+import * as glamorous from 'glamorous';
 import { Module } from '../interfaces';
 
 const expr = library => new RegExp(`["']${library}["']`);
@@ -49,10 +50,11 @@ export const getScopedImports = (
       ...rest
     }));
   } else if (matches('glamorous')) {
-    return import('glamorous').then(({ default: glamorous, ...rest }) => ({
-      glamorous,
+    const { default: glamorousFn, ...rest } = glamorous;
+    return Promise.resolve({
+      glamorous: glamorousFn,
       ...rest
-    }));
+    });
   } else if (matches('aphrodite')) {
     return import('aphrodite').then(aphrodite => ({ ...aphrodite }));
   } else if (matches('react-emotion')) {
