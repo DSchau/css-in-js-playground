@@ -75,7 +75,7 @@ export class Timer extends React.Component<Props, State> {
     };
   }
 
-  interval: number;
+  interval: NodeJS.Timer;
   componentDidMount() {
     this.interval = setInterval(() => {
       const seconds = this.state.seconds - 1;

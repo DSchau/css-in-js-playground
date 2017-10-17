@@ -10,6 +10,7 @@ const Container = glamorous.div<ThemeProps>(
     alignItems: 'center',
     justifyContent: 'space-between',
     maxWidth: '100%',
+    width: '100%',
     boxSizing: 'border-box',
     padding: '0.5rem'
   },

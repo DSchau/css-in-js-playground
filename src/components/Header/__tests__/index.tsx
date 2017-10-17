@@ -7,16 +7,21 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { Header } from '../';
+import { Theme, THEME } from '../../../style';
 
 test('it can be rendered', () => {
   expect(() =>
     shallow(
       <Header
-        defaultSnippet="styled-components"
+        activeModule="index"
+        defaultLibrary="styled-components"
+        files={['index.js']}
         primary="dark"
-        onSelect={() => {}}
         snippets={{}}
-        theme={{primary: 'dark'}}
+        theme={THEME as Theme}
+        onActiveChange={() => {}}
+        onFileAdd={() => {}}
+        onSelect={() => {}}
       />
     )
   ).not.toThrow();

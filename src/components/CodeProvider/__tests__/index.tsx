@@ -15,8 +15,9 @@ test('it can be rendered', () => {
     shallow(
       <CodeProvider
         activeModule="index"
-        code={{ index: '', header: '', login: '' }}
+        code={{ index: '', header: '', form: '', login: '' }}
         library="styled-components"
+        onUpdate={() => {}}
       />
     )
   ).not.toThrow();

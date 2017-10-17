@@ -9,5 +9,5 @@ import { shallow } from 'enzyme';
 import { Footer } from '../';
 
 test('it can be rendered', () => {
-  expect(() => shallow(<Footer />)).not.toThrow();
+  expect(() => shallow(<Footer code={{ index: ``, header: ``, form: ``, login: `` }} onReset={() => {}}/>)).not.toThrow();
 });
