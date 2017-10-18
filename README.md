@@ -14,6 +14,7 @@ A simple CodeMirror editor showcasing the various CSS in JS (or JSS) styling sol
 - [emotion](./src/snippets/emotion.js)
 - [glamorous](./src/snippets/glamorous.js)
 - [jss](./src/snippets/jss.js)
+- [linaria](./src/snippets/linaria.js)
 - [radium](./src/snippets/radium.js)
 - [react-jss](./src/snippets/react-jss.js)
 - [styled-components](./src/snippets/styled-components.js)

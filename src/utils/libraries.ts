@@ -54,6 +54,8 @@ export default code => {
     return import('react-jss').then(reactJSS => ({
       injectSheet: (reactJSS as any).default
     }));
+  } else if (matches('linaria')) {
+    return import('linaria').then(exposeExports('linaria'));
   }
   return Promise.resolve({});
 };

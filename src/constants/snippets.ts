@@ -6,6 +6,7 @@ import * as ReactJSS from '../snippets/react-jss';
 import * as JSS from '../snippets/jss';
 import * as CXS from '../snippets/cxs';
 import * as Radium from '../snippets/radium';
+import * as Linaria from '../snippets/linaria';
 
 export {
   StyledComponents,
@@ -15,5 +16,6 @@ export {
   ReactJSS,
   JSS,
   CXS,
-  Radium
+  Radium,
+  Linaria
 };
