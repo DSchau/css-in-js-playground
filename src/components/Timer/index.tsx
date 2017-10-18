@@ -2,7 +2,7 @@ import * as React from 'react';
 import glamorous from 'glamorous';
 import { darken } from 'polished';
 
-import { SANS_SERIF, SLIDE_UP, ThemeProps } from '../../style';
+import { SANS_SERIF, SLIDE_UP, ThemeProps, Z_INDEX_SUPER } from '../../style';
 
 const Container = glamorous.div<ThemeProps>(
   {
@@ -14,7 +14,8 @@ const Container = glamorous.div<ThemeProps>(
     margin: '0 auto',
     boxSizing: 'border-box',
     border: '1px solid transparent',
-    animation: `${SLIDE_UP} 325ms cubic-bezier(0.390, 0.575, 0.565, 1.000)`
+    animation: `${SLIDE_UP} 325ms cubic-bezier(0.390, 0.575, 0.565, 1.000)`,
+    zIndex: Z_INDEX_SUPER
   },
   ({ theme }) => ({
     backgroundColor: theme[theme.primary].base,
@@ -42,8 +43,6 @@ const Title = glamorous.h1<ThemeProps>(
 
 const Button = glamorous.button<ThemeProps>(
   {
-    backgroundColor: '${props => }',
-    color: '${props => ',
     outline: 'none',
     borderWidth: 0,
     borderRadius: '0.125rem',
@@ -60,7 +59,7 @@ const Button = glamorous.button<ThemeProps>(
 
 interface Props {
   duration: number;
-  onElapsed: Function;
+  onElapsed(): any;
 }
 
 interface State {
@@ -76,7 +75,7 @@ export class Timer extends React.Component<Props, State> {
     };
   }
 
-  interval: number;
+  interval: NodeJS.Timer;
   componentDidMount() {
     this.interval = setInterval(() => {
       const seconds = this.state.seconds - 1;

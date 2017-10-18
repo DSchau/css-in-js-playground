@@ -1,19 +1,34 @@
 import * as buble from 'buble';
 
-onmessage = ev => {
-  const { data } = ev;
-  const { code } = data;
-  try {
-    const { code: transformed } = buble.transform(code, {
-      transforms: {
-        modules: false,
-        templateString: false
-      }
-    });
-    (postMessage as any)(transformed);
-  } catch (e) {
-    console.warn(e);
-  }
-};
+import { Module } from './interfaces';
+
+interface MessageEvent {
+  data: {
+    code: Module;
+  };
+}
+
+if (typeof onmessage === 'object') {
+  onmessage = (ev: MessageEvent) => {
+    const { data } = ev;
+    const { code } = data;
+    try {
+      const transformed = Object.keys(code).reduce((components, name) => {
+        components[name] = buble.transform(code[name], {
+          transforms: {
+            modules: false,
+            templateString: false
+          },
+          sourcemap: false
+        });
+
+        return components;
+      }, {});
+      (postMessage as any)(transformed);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+}
 
 export default () => {}; // only to get around annoying typescript errors

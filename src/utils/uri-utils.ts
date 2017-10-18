@@ -2,7 +2,7 @@
  * This code lifted from bvaughn/babel-repl
  * Thank you!
  */
-import * as LZString from 'lz-string';
+import LZString from 'lz-string';
 
 export const compress = (string: string) =>
   LZString.compressToBase64(string)

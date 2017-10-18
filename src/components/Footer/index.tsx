@@ -1,11 +1,24 @@
 import * as React from 'react';
-import glamorous, { A } from 'glamorous';
+import glamorous, { A, withTheme } from 'glamorous';
 import { darken } from 'polished';
 
-import * as CodeIcon from 'react-icons/lib/md/code';
-import * as GithubIcon from 'react-icons/lib/go/mark-github';
+import Code from 'react-icons/lib/md/code';
+import Github from 'react-icons/lib/go/mark-github';
+
+import { files as FILE_LIST } from '../../snippets';
+import { Toolbar } from './Toolbar';
 
 import { SERIF, Theme, ThemeProps } from '../../style';
+import { Module } from '../../interfaces';
+
+const Container = glamorous.div<ThemeProps>({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flex: '0 0 auto',
+  width: '100%'
+});
 
 const FooterContainer = glamorous.footer<ThemeProps>(
   {
@@ -13,13 +26,13 @@ const FooterContainer = glamorous.footer<ThemeProps>(
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: '0 0 auto',
     padding: '0.75rem 0.5rem',
-    transition: '250ms ease-in-out'
+    transition: '250ms ease-in-out',
+    width: '100%'
   },
   ({ theme }) => ({
     backgroundColor: theme[theme.primary].base,
-    borderTop: `1px solid ${darken(0.05, theme[theme.primary].base)}`
+    borderTop: `1px solid ${theme[theme.primary].baseSecondary}`
   })
 );
 
@@ -27,7 +40,6 @@ const Text = glamorous.h1<ThemeProps>(
   {
     display: 'inline-block',
     fontSize: '0.8rem',
-    color: '${props => props.theme[props.theme.primary].text}',
     margin: 0,
     padding: 0,
     width: '100%',
@@ -62,7 +74,7 @@ const Link = glamorous.a<{
   })
 );
 
-const StyledGithubIcon = glamorous(GithubIcon)<
+const StyledGithub = glamorous(Github)<
   ThemeProps & {
     size?: number;
   }
@@ -70,26 +82,70 @@ const StyledGithubIcon = glamorous(GithubIcon)<
   color: theme[theme.primary].text
 }));
 
-interface Props extends ThemeProps {}
+const Icon = withTheme(({ children, theme }) => {
+  return children({
+    theme
+  });
+});
 
-export function Footer(props: Props) {
-  return (
-    <FooterContainer>
-      <Text>
-        Made with <CodeIcon color="#E74C3C" size={22} /> by{' '}
-        <Link href="https://dustinschau.com" target="_blank" rel="noopener">
-          Dustin Schau
-        </Link>
-      </Text>
-      <Link
-        href="https://github.com/dschau/css-in-js-playground"
-        target="_blank"
-        rel="noopener"
-        paddingLeft={8}
-        paddingRight={8}
-      >
-        <StyledGithubIcon size={20} />
-      </Link>
-    </FooterContainer>
-  );
+const CodeIcon = () => (
+  <Icon>
+    {({ theme }) => <Code color={theme[theme.primary].accent} size={22} />}
+  </Icon>
+);
+
+interface Props extends ThemeProps {
+  code: Module;
+  onReset(): any;
+}
+
+interface State {
+  hasLocalChanges: boolean;
+}
+
+export class Footer extends React.Component<Props, State> {
+  state = {
+    hasLocalChanges: false
+  };
+
+  componentWillReceiveProps({ code }) {
+    const changes = Object.keys(code).reduce((nonStandardFiles, name) => {
+      if (FILE_LIST.indexOf(name.toLowerCase()) === -1) {
+        nonStandardFiles.push(name);
+      }
+      return nonStandardFiles;
+    }, []);
+    const hasLocalChanges = changes.length > 0;
+    if (this.state.hasLocalChanges !== hasLocalChanges) {
+      this.setState({
+        hasLocalChanges
+      });
+    }
+  }
+
+  render() {
+    const { hasLocalChanges } = this.state;
+    return (
+      <Container>
+        {hasLocalChanges && <Toolbar onReset={this.props.onReset} />}
+        <FooterContainer>
+          <Text>
+            Made with <CodeIcon /> by{' '}
+            <Link href="https://dustinschau.com" target="_blank" rel="noopener">
+              Dustin Schau
+            </Link>
+          </Text>
+          <Link
+            href="https://github.com/dschau/css-in-js-playground"
+            target="_blank"
+            rel="noopener"
+            paddingLeft={8}
+            paddingRight={8}
+          >
+            <StyledGithub size={20} />
+          </Link>
+        </FooterContainer>
+      </Container>
+    );
+  }
 }

@@ -1,12 +1,11 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import glamorous from 'glamorous';
 
-import evalCode from '../../utils/eval';
-import transform from '../../utils/transpile';
-import getStylingLibrary from '../../utils/libraries';
+import { evalCode, transform, getScopedImports } from '../../utils';
 
 import DisplayError from './display-error';
+
+import { Module } from '../../interfaces';
 
 const Container = glamorous.div({
   display: 'flex',
@@ -26,12 +25,9 @@ const CodeContainer = glamorous.div({
   WebkitOverflowScrolling: 'touch'
 });
 
-const LivePreview = ({ code }) => {
-  return <pre>{code}</pre>;
-};
-
 interface Props {
-  code: string;
+  activeModule: string;
+  code: Module;
   error: Error;
   errorInfo: {
     componentStack: string;
@@ -39,7 +35,7 @@ interface Props {
 }
 
 interface State {
-  Component: Function;
+  Component: React.ComponentType;
   loaded: boolean;
   scope: any;
 }
@@ -51,17 +47,17 @@ export class CodePreview extends React.Component<Props, State> {
     scope: {}
   };
 
-  componentWillReceiveProps({ code }) {
+  componentWillReceiveProps({ code }: Props) {
     this.setState({ loaded: false, scope: {} });
 
-    getStylingLibrary(code).then(library => {
+    getScopedImports(code).then(library => {
       this.setState(
         {
           loaded: true,
           scope: library
         },
         () => {
-          transform(code || '').then(es5 => {
+          transform(code).then(es5 => {
             this.setState({
               Component: evalCode(es5, this.state.scope)
             });

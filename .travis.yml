@@ -10,7 +10,9 @@ install:
   - yarn
 
 before_script: greenkeeper-lockfile-update
-script: yarn test
+script:
+  - yarn lint
+  - yarn test
 after_script: greenkeeper-lockfile-upload
 
 before_deploy: yarn build:production

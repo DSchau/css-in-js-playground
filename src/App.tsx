@@ -3,9 +3,9 @@ import glamorous, { ThemeProvider } from 'glamorous';
 import { css } from 'glamor';
 import queryString from 'query-string';
 
-import { CodeProvider, Footer, Header, Timer } from './components';
+import { CodeProvider, Footer, Header, Provider, Timer } from './components';
 
-import { GLOBAL, THEME } from './style';
+import { GLOBAL } from './style';
 import { OfflineContainer } from './utils/offline';
 
 const Container = glamorous.main({
@@ -17,81 +17,48 @@ const Container = glamorous.main({
 
 interface Props {}
 
-interface State {
-  code: string;
-  library: string;
-  theme: any;
-}
-
-class App extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      code: '',
-      library: '',
-      theme: THEME
-    };
-  }
-
-  componentWillMount() {
-    const params = queryString.parse(location.search);
-    const theme = this.state.theme;
-    this.setState({
-      theme: {
-        ...theme,
-        primary: params.dark === 'false' ? 'light' : 'dark'
-      }
-    });
-  }
-
-  handleSelect = ({ library, snippet: code }) => {
-    this.setState({
-      code,
-      library
-    });
-  };
-
-  handleColorSwitch = primary => {
-    const { theme } = this.state;
-    this.setState({
-      theme: {
-        ...theme,
-        primary
-      }
-    });
-  };
-
-  handleTimerComplete = () => {
-    location.reload();
-  };
-
-  render() {
-    return (
-      <OfflineContainer>
-        {updated => (
-          <ThemeProvider theme={this.state.theme}>
-            <Container>
-              <Header
-                defaultSnippet="StyledComponents"
-                onSelect={this.handleSelect}
-                primary={this.state.theme.primary}
-                onColorSwitch={this.handleColorSwitch}
-              />
-              <CodeProvider
-                library={this.state.library}
-                snippet={this.state.code}
-              />
-              <Footer />
-              {updated && (
-                <Timer duration={10000} onElapsed={this.handleTimerComplete} />
-              )}
-            </Container>
-          </ThemeProvider>
-        )}
-      </OfflineContainer>
-    );
-  }
+function App(props: Props) {
+  return (
+    <OfflineContainer
+      render={updated => {
+        return (
+          <Provider>
+            {({ actions, activeModule, code, library, snippets, theme }) => (
+              <ThemeProvider theme={theme}>
+                <Container>
+                  <Header
+                    activeModule={activeModule}
+                    defaultLibrary="styled-components"
+                    onSelect={actions.handleSelect}
+                    primary={theme.primary}
+                    onActiveChange={actions.handleActiveChange}
+                    onColorSwitch={actions.handleColorSwitch}
+                    onFileAdd={actions.handleFileAdd}
+                    files={Object.keys(code)}
+                    snippets={snippets}
+                    theme={theme}
+                  />
+                  <CodeProvider
+                    activeModule={activeModule}
+                    library={library}
+                    code={code}
+                    onUpdate={actions.handleCodeUpdate}
+                  />
+                  <Footer code={code} onReset={actions.handleReset} />
+                  {updated && (
+                    <Timer
+                      duration={10000}
+                      onElapsed={actions.handleTimerComplete}
+                    />
+                  )}
+                </Container>
+              </ThemeProvider>
+            )}
+          </Provider>
+        );
+      }}
+    />
+  );
 }
 
 GLOBAL.split(/\n{2}/).forEach(rule => {

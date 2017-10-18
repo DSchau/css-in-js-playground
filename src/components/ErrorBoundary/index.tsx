@@ -1,6 +1,8 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
 
+import { Module } from '../../interfaces';
+
 const Container = glamorous.div({
   display: 'flex',
   width: '100%'
@@ -8,17 +10,17 @@ const Container = glamorous.div({
 
 interface Props {
   children: any;
-  code: string | undefined;
+  code: Module;
   onError?: Function;
 }
 
 interface State {
-  code: string | undefined;
+  code: Module | undefined;
 }
 
 export class ErrorBoundary extends React.Component<Props, State> {
   state = {
-    code: ``,
+    code: undefined,
     error: undefined
   };
 

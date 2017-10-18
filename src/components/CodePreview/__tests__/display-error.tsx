@@ -7,9 +7,7 @@ test('it renders', () => {
   expect(() =>
     shallow(
       <DisplayError
-        error={{
-          name: 'hello-world'
-        }}
+        error={new Error('Hello World')}
         errorInfo={{
           componentStack: 'asdf'
         }}

@@ -1,29 +1,42 @@
 import * as React from 'react';
 import glamorous, { withTheme } from 'glamorous';
 import { darken } from 'polished';
-import * as kebabCase from 'lodash.kebabcase';
-import * as queryString from 'query-string';
-import * as InvertedIcon from 'react-icons/lib/go/light-bulb';
-import * as DownIconElement from 'react-icons/lib/md/arrow-drop-down';
+import kebabCase from 'lodash.kebabcase';
+import queryString from 'query-string';
+import InvertedIcon from 'react-icons/lib/go/light-bulb';
+import DownIconElement from 'react-icons/lib/md/arrow-drop-down';
 
-import * as snippets from '../../constants/snippets';
-import { Theme, ThemeProps, SANS_SERIF } from '../../style/';
+import { Accessible } from '../';
+
+import Toolbar from './Toolbar';
+
+import {
+  Theme,
+  Themes,
+  ThemeProps,
+  SANS_SERIF,
+  Z_INDEX_PREVIEW_CONTENT
+} from '../../style';
+import { Module } from '../../interfaces';
+
+const Container = glamorous.div<ThemeProps>({
+  flex: '0 0 auto'
+});
 
 const HeaderContainer = glamorous.header<ThemeProps>(
   {
-    flex: '0 0 auto',
     height: 44,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0 0.5rem',
-    zIndex: 2,
+    zIndex: Z_INDEX_PREVIEW_CONTENT,
     transition: '250ms ease-in-out',
     position: 'relative'
   },
   ({ theme }) => ({
     backgroundColor: theme[theme.primary].base,
-    borderBottom: `1px solid ${darken(0.05, theme[theme.primary].base)}`
+    borderBottom: `1px solid ${darken(0.1, theme[theme.primary].base)}`
   })
 );
 
@@ -37,15 +50,19 @@ const Select = glamorous.select<ThemeProps>(
   {
     height: 32,
     backgroundColor: 'transparent',
-    border: 'none',
+    border: '2px solid transparent',
     boxShadow: 'none',
     appearance: 'none',
     fontSize: '1.3rem',
-    paddingRight: '1.3rem'
+    paddingRight: '1.3rem',
+    outline: 'none'
   },
   SANS_SERIF,
   ({ theme }) => ({
-    color: theme[theme.primary].text
+    color: theme[theme.primary].text,
+    ':focus': {
+      boxShadow: `0 0 5px ${theme[theme.primary].accent}`
+    }
   })
 );
 
@@ -86,53 +103,67 @@ const IconContainer = glamorous.div({
 
 const Option = glamorous.option();
 
+interface SelectData {
+  library: string;
+  code: Module;
+  init?: boolean;
+}
+
 interface Props extends ThemeProps {
-  defaultSnippet: string;
+  activeModule: string;
+  defaultLibrary: string;
+  files: string[];
   primary: string;
-  onSelect: Function;
-  onColorSwitch?: Function;
+  onActiveChange(active: string): any;
+  onFileAdd(file: string): any;
+  onSelect(data: SelectData): any;
+  onColorSwitch?(theme: Themes);
+  snippets: {
+    [key: string]: Module;
+  };
+  theme: Theme;
 }
 
 interface State {
+  addingFile: boolean;
   selected: string;
 }
 
 export class Header extends React.Component<Props, State> {
   state = {
+    addingFile: false,
     selected: ''
   };
 
+  // TODO: cascade this down from provider
   componentDidMount() {
-    const { library = this.props.defaultSnippet } = queryString.parse(
-      location.search
+    const { library = this.props.defaultLibrary } = queryString.parse(
+      window.location.search
     );
-    const snippet = snippets[library];
-    if (snippet) {
+    const code = this.props.snippets[library];
+    if (code) {
       this.setState({
         selected: library
       });
       this.props.onSelect({
         library,
-        snippet
+        code,
+        init: true
       });
     }
   }
 
-  handleChange = ev => {
+  handleSelect = ev => {
     const { value: library } = ev.target;
-    const snippet = snippets[library];
-    if (snippet) {
+    const code = this.props.snippets[library];
+    if (code) {
       this.setState({
+        addingFile: false,
         selected: library
-      });
-      const { code, ...rest } = queryString.parse(location.search);
-      this.augmentHistory({
-        ...rest,
-        library
       });
       this.props.onSelect({
         library,
-        snippet
+        code
       });
     }
   };
@@ -140,45 +171,49 @@ export class Header extends React.Component<Props, State> {
   handleColorSwitch = () => {
     if (this.props.onColorSwitch) {
       const { primary } = this.props;
-      const theme = primary === 'dark' ? 'light' : 'dark';
-      const path = this.getPath({
-        ...(queryString.parse(location.search) || {}),
-        dark: theme === 'dark'
-      });
-      history.replaceState({ path }, '', path);
+      const theme = (primary === 'dark' ? 'light' : 'dark') as Themes;
       this.props.onColorSwitch(theme);
     }
   };
 
-  augmentHistory(params) {
-    const path = this.getPath(params);
-    history.replaceState({ path }, '', path);
-  }
-
-  getPath(params) {
-    return `${location.origin}${location.pathname}?${queryString.stringify(
-      params
-    )}`;
-  }
-
   render() {
-    const options = Object.keys(snippets);
+    const options = Object.keys(this.props.snippets);
     return (
-      <HeaderContainer>
-        <SelectContainer>
-          <Select value={this.state.selected} onChange={this.handleChange}>
-            {options.map(option => (
-              <Option key={option} value={option}>
-                {kebabCase(option)}
-              </Option>
-            ))}
-          </Select>
-          <DownIcon size={20} />
-        </SelectContainer>
-        <IconContainer>
-          <LightBulb size={24} onClick={this.handleColorSwitch} />
-        </IconContainer>
-      </HeaderContainer>
+      <Container>
+        <HeaderContainer>
+          <SelectContainer>
+            <Select
+              value={this.state.selected}
+              onChange={this.handleSelect}
+              aria-label="Select a library"
+            >
+              {options.map(option => (
+                <Option key={option} value={option}>
+                  {kebabCase(option)}
+                </Option>
+              ))}
+            </Select>
+            <DownIcon size={20} />
+          </SelectContainer>
+          <IconContainer>
+            <Accessible
+              aria-label={`Toggle ${this.props.theme.primary === 'dark'
+                ? 'light'
+                : 'dark'} mode`}
+              onClick={this.handleColorSwitch}
+            >
+              {() => <LightBulb size={24} />}
+            </Accessible>
+          </IconContainer>
+        </HeaderContainer>
+        <Toolbar
+          activeModule={this.props.activeModule}
+          addingFile={this.state.addingFile}
+          files={this.props.files}
+          onActiveChange={this.props.onActiveChange}
+          onFileAdd={this.props.onFileAdd}
+        />
+      </Container>
     );
   }
 }

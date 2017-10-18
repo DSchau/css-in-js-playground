@@ -6,6 +6,11 @@ Array [
   "SANS_SERIF",
   "SERIF",
   "GLOBAL",
+  "Themes",
   "THEME",
+  "Z_INDEX_BASE",
+  "Z_INDEX_PREVIEW_CONTENT",
+  "Z_INDEX_ABOVE_CONTENT",
+  "Z_INDEX_SUPER",
 ]
 `;

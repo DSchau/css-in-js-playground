@@ -4,13 +4,17 @@ import { css } from 'glamor';
 import { darken, lighten } from 'polished';
 
 import * as CodeMirror from 'codemirror';
+import { EditorConfiguration } from 'codemirror';
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/keymap/sublime';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
-import * as debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 
-import { Theme, ThemeProps } from '../../style/theme';
+import { Module } from '../../interfaces';
+import { Theme, ThemeProps, Z_INDEX_PREVIEW_CONTENT } from '../../style';
 import { LARGE_UP } from '../../constants';
 
 const Container = glamorous.div<ThemeProps>(
@@ -22,7 +26,7 @@ const Container = glamorous.div<ThemeProps>(
     overflow: 'auto',
     position: 'relative',
     WebkitOverflowScrolling: 'touch',
-    zIndex: 2,
+    zIndex: Z_INDEX_PREVIEW_CONTENT,
     boxSizing: 'border-box',
     borderStyle: 'solid',
     borderWidth: 0,
@@ -44,13 +48,16 @@ const TextArea = glamorous.textarea({
 });
 
 interface Props extends ThemeProps {
-  code: string;
+  activeModule: string;
+  code: Module;
   children?: any;
   className?: string;
-  onUpdate(value: string): void;
+  onUpdate(code: string, active: string): void;
 }
 
-interface State {}
+interface State {
+  loaded: boolean;
+}
 
 export class CodeEditorBase extends React.Component<Props, State> {
   private editor: any;
@@ -60,18 +67,24 @@ export class CodeEditorBase extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
+    this.state = {
+      loaded: false
+    };
+
     this.handleChange = debounce(this.onChange, 250);
   }
 
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.textArea, {
       autofocus: true,
+      autoCloseBrackets: true,
       mode: 'text/jsx',
       keyMap: 'sublime',
       lineNumbers: true,
+      matchBrackets: true,
       tabSize: 2,
-      theme: 'dracula'
-    });
+      theme: this.props.theme.primary === 'dark' ? 'dracula' : 'default'
+    } as EditorConfiguration);
 
     this.editor.on('change', this.handleChange);
   }
@@ -82,20 +95,21 @@ export class CodeEditorBase extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { code, theme } = nextProps;
+    const { activeModule, code: codeModule, theme } = nextProps;
     if (theme.primary !== this.props.theme.primary) {
       this.editor.setOption(
         'theme',
         theme.primary === 'dark' ? 'dracula' : 'default'
       );
     }
-    if (code !== this.editor.getValue()) {
+    const code = codeModule[activeModule];
+    if (code && code !== this.editor.getValue()) {
       this.editor.setValue(code);
     }
   }
 
   onChange = codeMirrorEv => {
-    this.props.onUpdate(codeMirrorEv.getValue());
+    this.props.onUpdate(codeMirrorEv.getValue(), this.props.activeModule);
   };
 
   render() {

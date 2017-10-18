@@ -7,7 +7,8 @@ interface State {
 }
 
 interface Props {
-  children: (updated: boolean) => any;
+  children?: (updated: boolean) => React.ReactElement<any>;
+  render?(updated: boolean): React.ReactElement<any>;
 }
 
 export function handleOffline({ onUpdated = () => {} }) {
@@ -40,6 +41,9 @@ export class OfflineContainer extends React.Component<Props, State> {
   };
 
   render() {
-    return this.props.children(this.state.updated);
+    const renderer = this.props.render
+      ? this.props.render
+      : this.props.children;
+    return renderer(this.state.updated);
   }
 }

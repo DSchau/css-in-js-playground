@@ -1,11 +1,11 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
-import * as queryString from 'query-string';
+import queryString from 'query-string';
 
 import { CodeEditor, ErrorBoundary, CodePreview } from '../';
 
+import { Module } from '../../interfaces';
 import { LARGE_UP } from '../../constants/breakpoints';
-import { compress, decompress } from '../../utils/uri-utils';
 
 const Container = glamorous.div({
   display: 'flex',
@@ -19,12 +19,14 @@ const Container = glamorous.div({
 });
 
 interface Props {
+  activeModule: string;
+  code: Module;
   library: string;
-  snippet: string;
+  onUpdate(code: string, activeModule: string): any;
 }
 
 interface State {
-  code?: string;
+  code: Module;
   error: Error | null;
   errorInfo: {
     componentStack: string;
@@ -34,49 +36,43 @@ interface State {
 
 export class CodeProvider extends React.PureComponent<Props, State> {
   state = {
-    code: ``,
+    code: {} as Module,
     error: null,
     errorInfo: null,
     hydrated: false
   };
 
   static defaultProps = {
-    snippet: ``
+    library: 'styled-components'
   };
 
-  componentWillMount() {
-    const search = queryString.parse(location.search);
-    if (search.code) {
-      const code = decompress(search.code);
+  // TODO: Improve this
+  componentWillReceiveProps({ library, code }: Props) {
+    const containsNewFile =
+      Object.keys(code).length !== Object.keys(this.state.code).length;
+    if (this.props.library !== library && !containsNewFile) {
+      const update = this.state.hydrated
+        ? {
+            hydrated: false
+          } as State
+        : {
+            code
+          };
+      this.setState(update);
+    } else if (containsNewFile) {
       this.setState({
-        code,
-        hydrated: true
+        code
       });
     }
   }
 
-  componentWillReceiveProps({ library, snippet }: Props) {
-    if (this.props.library !== library) {
-      const update = this.state.hydrated
-        ? {
-            hydrated: false
-          }
-        : {
-            code: snippet
-          };
-      this.setState(update);
-    }
-  }
-
-  handleSelect = code => {
-    this.setState({
-      code
-    });
-  };
-
-  handleEditorUpdate = code => {
-    if (code !== this.props.snippet) {
-      this.persistToQueryString(code);
+  handleEditorUpdate = (update, active) => {
+    const code = {
+      ...this.state.code,
+      [active]: update
+    };
+    if (code[active] !== this.props.code[active]) {
+      this.props.onUpdate(update, active);
     }
     this.setState({
       code,
@@ -91,31 +87,24 @@ export class CodeProvider extends React.PureComponent<Props, State> {
     });
   };
 
-  persistToQueryString(code) {
-    const search = queryString.parse(location.search);
-    const compressed = compress(code);
-    const params = {
-      ...search,
-      code: compressed
-    };
-    const path = `${location.origin}${location.pathname}?${queryString.stringify(
-      params
-    )}`;
-    history.replaceState({ path }, '', path);
-  }
-
   render() {
     const { code, error, errorInfo } = this.state;
     return (
       <Container>
         <CodeEditor
+          activeModule={this.props.activeModule}
           code={code}
           error={error}
           errorInfo={errorInfo}
           onUpdate={this.handleEditorUpdate}
         />
         <ErrorBoundary code={code} onError={this.handleError}>
-          <CodePreview code={code} error={error} errorInfo={errorInfo} />
+          <CodePreview
+            activeModule={this.props.activeModule}
+            code={code}
+            error={error}
+            errorInfo={errorInfo}
+          />
         </ErrorBoundary>
       </Container>
     );

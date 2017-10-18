@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "outDir": "./dist/",
+    "outDir": "dist",
     "sourceMap": true,
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "react",
-    "lib": ["dom", "es5", "es2015", "webworker"],
+    "lib": ["dom", "es2015"],
     "paths": {
       "style/*": [
         "./src/style/*"
@@ -15,12 +16,8 @@
     },
     "target": "es5"
   },
-  "files": [
+  "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "!node_modules/@types"
   ]
 }

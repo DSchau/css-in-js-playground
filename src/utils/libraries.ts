@@ -1,47 +1,71 @@
+import * as glamorous from 'glamorous';
+import { Module } from '../interfaces';
+
 const expr = library => new RegExp(`["']${library}["']`);
 
-const matchesExpression = (text, library) => text.match(expr(library));
-const exposeExports = (name, includeAll = true) => {
-  return library => {
-    const lib = library.default ? library.default : library;
-    return Object.keys(includeAll ? lib : {}).reduce(
-      (scope, key) => {
-        scope[key] = lib[key];
-        return scope;
-      },
-      {
-        [name]: lib
-      }
-    );
-  };
+const matchesExpression = (text, library): boolean => text.match(expr(library));
+
+export const getLibraryImportStatement = (
+  code: Module,
+  defaultModule = 'index'
+): string => {
+  const matches = matchesExpression.bind(undefined, code[defaultModule]);
+  const importStatement = (statement, library) =>
+    `import ${statement} from '${library}';`;
+
+  if (matches('styled-components')) {
+    return importStatement('styled', 'styled-components');
+  } else if (matches('glamorous')) {
+    return importStatement('glamorous', 'glamorous');
+  } else if (matches('aphrodite')) {
+    return importStatement('aphrodite', 'aphrodite');
+  } else if (matches('react-emotion')) {
+    return importStatement('styled', 'react-emotion');
+  } else if (matches('cxs/component')) {
+    return importStatement('cxs', 'cxs/component');
+  } else if (matches('radium')) {
+    return importStatement('Radium', 'radium');
+  } else if (matches('jss')) {
+    return [
+      importStatement('jss', 'jss'),
+      importStatement('preset', 'jss-preset-default'),
+      '',
+      'jss.setup(preset);'
+    ].join('\n');
+  } else if (matches('react-jss')) {
+    return importStatement('injectSheet', 'react-jss');
+  }
+  return '';
 };
 
-export default code => {
-  const matches = matchesExpression.bind(undefined, code);
+export const getScopedImports = (
+  code: Module,
+  defaultModule = 'index'
+): Promise<any> => {
+  const matches = matchesExpression.bind(undefined, code[defaultModule]);
 
   if (matches('styled-components')) {
     return import('styled-components').then(({ default: styled, ...rest }) => ({
       styled,
       ...rest
     }));
-  } else if (matches('glamor')) {
-    return import('glamor').then(exposeExports('glamor'));
   } else if (matches('glamorous')) {
-    return import('glamorous').then(({ default: glamorous, ...rest }) => ({
-      glamorous,
+    const { default: glamorousFn, ...rest } = glamorous;
+    return Promise.resolve({
+      glamorous: glamorousFn,
       ...rest
-    }));
+    });
   } else if (matches('aphrodite')) {
-    return import('aphrodite').then(exposeExports('aphrodite'));
+    return import('aphrodite').then(aphrodite => ({ ...aphrodite }));
   } else if (matches('react-emotion')) {
     return import('react-emotion').then(({ default: styled, ...rest }) => ({
       styled,
       ...rest
     }));
   } else if (matches('cxs/component')) {
-    return import('cxs/component').then(exposeExports('cxs'));
+    return import('cxs/component').then(cxs => ({ cxs }));
   } else if (matches('radium')) {
-    return import('radium').then(exposeExports('Radium'));
+    return import('radium').then(radium => ({ Radium: radium }));
   } else if (matches('jss')) {
     return Promise.all([
       import('jss'),
@@ -55,7 +79,7 @@ export default code => {
       injectSheet: (reactJSS as any).default
     }));
   } else if (matches('linaria')) {
-    return import('linaria').then(exposeExports('linaria'));
+    return import('linaria');
   }
   return Promise.resolve({});
 };
