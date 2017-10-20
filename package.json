@@ -21,7 +21,7 @@
     "stop": "kill-port 8000 || echo \"Could not kill port 8000; please kill manually\"",
     "test": "jest",
     "pretest:integration": "npm start -- --quiet & wait-on http://localhost:8000",
-    "test:integration": "jest -c integration-tests/jest.config.js",
+    "test:integration": "jest -c integration-tests/jest.config.js || npm run stop && exit 1",
     "posttest:integration": "npm run stop"
   },
   "devDependencies": {
