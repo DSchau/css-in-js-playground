@@ -2,7 +2,7 @@ import * as React from 'react';
 import glamorous from 'glamorous';
 import { lighten } from 'polished';
 
-import { SANS_SERIF, ThemeProps } from '../../../style';
+import { FADE_IN, SANS_SERIF, ThemeProps } from '../../../style';
 
 const Input = glamorous
   .input<
@@ -11,6 +11,7 @@ const Input = glamorous
     }
   >(
     {
+      animation: `${FADE_IN} 250ms ease-in`,
       boxSizing: 'border-box',
       borderWidth: 1,
       borderStyle: 'solid',
@@ -36,7 +37,7 @@ const Input = glamorous
         borderColor: valid ? theme[theme.primary].accent : lighten(0.2, 'red'),
         boxShadow: `0 0 5px ${valid
           ? theme[theme.primary].accent
-          : lighten(0.2, 'red')}`
+          : theme[theme.primary].danger}`
       }
     })
   )

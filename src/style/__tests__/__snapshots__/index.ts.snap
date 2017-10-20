@@ -2,6 +2,9 @@
 
 exports[`it contains expected exports 1`] = `
 Array [
+  "FADE_IN",
+  "SCALE_IN",
+  "SCALE_OUT",
   "SLIDE_UP",
   "SANS_SERIF",
   "SERIF",

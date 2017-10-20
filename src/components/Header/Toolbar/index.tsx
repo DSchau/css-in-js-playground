@@ -3,7 +3,6 @@ import glamorous, { withTheme } from 'glamorous';
 import { darken, lighten } from 'polished';
 import AddIcon from 'react-icons/lib/fa/plus-square';
 import CancelIcon from 'react-icons/lib/fa/ban';
-// import DeleteIcon from 'react-icons/lib/fa/times-circle';
 import kebab from 'lodash.kebabcase';
 
 import { Theme, ThemeProps, SANS_SERIF } from '../../../style/';
@@ -22,7 +21,10 @@ const ToolbarContainer = glamorous.div<ThemeProps>(
     paddingRight: 8,
     paddingLeft: 8,
     boxSizing: 'border-box',
-    transition: '175ms ease-in-out'
+    transition: '175ms ease-in-out',
+    '@media only screen and (min-width: 768px)': {
+      width: 'auto'
+    }
   },
   ({ theme }) => ({
     backgroundColor: theme[theme.primary].baseSecondary,
@@ -36,7 +38,10 @@ const Files = glamorous.ul<ThemeProps>({
   overflowX: 'auto',
   margin: 0,
   padding: 0,
-  width: '100%'
+  width: '100%',
+  '@media only screen and (min-width: 768px)': {
+    width: 'auto'
+  }
 });
 
 const File = glamorous.li<ThemeProps>({
@@ -79,9 +84,9 @@ const FileButton = glamorous.button<
   }
 );
 
-const Icon = withTheme(({ children, theme }) =>
+const Icon = withTheme(({ danger, children, theme }) =>
   children({
-    color: theme[theme.primary].text,
+    color: danger ? theme[theme.primary].danger : theme[theme.primary].text,
     size: 20,
     theme
   })
@@ -157,16 +162,6 @@ class Toolbar extends React.Component<Props, State> {
     const { addingFile } = this.state;
     return (
       <ToolbarContainer>
-        {addingFile && (
-          <Accessible
-            onClick={this.handleCancel}
-            render={() => (
-              <Icon>
-                {({ color, size }) => <CancelIcon color={color} size={size} />}
-              </Icon>
-            )}
-          />
-        )}
         <Files>
           {files
             .reduce((acc, file) => {
@@ -201,12 +196,15 @@ class Toolbar extends React.Component<Props, State> {
           )}
         </Files>
         <Accessible
-          onClick={this.handleAddFileClick}
-          render={() => (
-            <Icon>
-              {({ color, size }) => <AddIcon color={color} size={20} />}
-            </Icon>
-          )}
+          onClick={addingFile ? this.handleCancel : this.handleAddFileClick}
+          render={() => {
+            const Component = addingFile ? CancelIcon : AddIcon;
+            return (
+              <Icon danger={addingFile}>
+                {({ color, size }) => <Component color={color} size={20} />}
+              </Icon>
+            );
+          }}
         />
       </ToolbarContainer>
     );
