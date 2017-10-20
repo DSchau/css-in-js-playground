@@ -1,3 +1,7 @@
+dist: trusty
+addons:
+  chrome: stable
+
 language: node_js
 node_js:
 - stable
@@ -13,6 +17,7 @@ before_script: greenkeeper-lockfile-update
 script:
   - yarn lint
   - yarn test
+  - yarn test:integration
 after_script: greenkeeper-lockfile-upload
 
 before_deploy: yarn build:production
