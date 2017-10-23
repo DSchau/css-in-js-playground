@@ -87,7 +87,7 @@
     "history": "~4.7.2",
     "jss": "~9.0.0",
     "jss-preset-default": "~4.0.1",
-    "linaria": "^0.1.4",
+    "linaria": "^0.2.0",
     "lodash.camelcase": "~4.3.0",
     "lodash.debounce": "~4.0.8",
     "lodash.kebabcase": "~4.1.1",

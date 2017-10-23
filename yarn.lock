@@ -567,7 +567,7 @@ babel-plugin-syntax-object-rest-spread@^6.13.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
 
-babel-plugin-transform-es2015-modules-commonjs@^6.24.1:
+babel-plugin-transform-es2015-modules-commonjs@^6.24.1, babel-plugin-transform-es2015-modules-commonjs@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-es2015-modules-commonjs/-/babel-plugin-transform-es2015-modules-commonjs-6.26.0.tgz#0d8394029b7dc6abe1a97ef181e00758dd2e5d8a"
   dependencies:
@@ -4377,13 +4377,14 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linaria@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.1.4.tgz#745d40d058f8be7de4bab54141234f4179360b39"
+linaria@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.2.0.tgz#bbe2cbf21f045359314718b1d14a3e052ab5f1e9"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
     babel-generator "^6.26.0"
+    babel-plugin-transform-es2015-modules-commonjs "^6.26.0"
     cssom "^0.3.2"
     dedent "^0.7.0"
     error-stack-parser "^2.0.1"
