@@ -1207,7 +1207,7 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codemirror@5.31.0:
+codemirror@~5.31.0:
   version "5.31.0"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.31.0.tgz#ecf3d057eb74174147066bfc7c5f37b4c4e07df2"
 
@@ -2842,7 +2842,7 @@ glamor@~2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@4.10.0:
+glamorous@~4.10.0:
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.10.0.tgz#2f2e06c27b93aade93432c98ca21db0b8c3d9a5e"
   dependencies:
@@ -4377,9 +4377,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linaria@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.2.0.tgz#bbe2cbf21f045359314718b1d14a3e052ab5f1e9"
+linaria@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.3.1.tgz#732d0b280f5bc9f8e633d7272b27a4767237575c"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
