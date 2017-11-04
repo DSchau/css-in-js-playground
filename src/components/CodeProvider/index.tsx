@@ -35,15 +35,15 @@ interface State {
 }
 
 export class CodeProvider extends React.PureComponent<Props, State> {
+  static defaultProps = {
+    library: 'styled-components'
+  };
+
   state = {
     code: {} as Module,
     error: null,
     errorInfo: null,
     hydrated: false
-  };
-
-  static defaultProps = {
-    library: 'styled-components'
   };
 
   // TODO: Improve this

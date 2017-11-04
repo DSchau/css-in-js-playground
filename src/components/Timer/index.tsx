@@ -75,9 +75,9 @@ export class Timer extends React.Component<Props, State> {
     };
   }
 
-  interval: NodeJS.Timer;
+  interval: number;
   componentDidMount() {
-    this.interval = setInterval(() => {
+    this.interval = window.setInterval(() => {
       const seconds = this.state.seconds - 1;
       let stateUpdatedCallback = () => {};
       if (seconds === 0) {

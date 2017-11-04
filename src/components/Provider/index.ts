@@ -41,16 +41,12 @@ interface State {
 }
 
 export class Provider extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      activeModule: 'index',
-      code: {} as Module,
-      library: '',
-      theme: THEME
-    };
-  }
+  state = {
+    activeModule: 'index',
+    code: {} as Module,
+    library: '',
+    theme: THEME
+  };
 
   componentWillMount() {
     const { activeModule, theme: persistedTheme } = queryString.parse(
