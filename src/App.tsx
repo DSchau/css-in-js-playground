@@ -28,7 +28,7 @@ function App(props: Props) {
                 <Container>
                   <Header
                     activeModule={activeModule}
-                    defaultLibrary="styled-components"
+                    library={library}
                     onSelect={actions.handleSelect}
                     primary={theme.primary}
                     onActiveChange={actions.handleActiveChange}

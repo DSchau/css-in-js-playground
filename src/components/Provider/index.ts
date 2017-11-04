@@ -41,6 +41,8 @@ interface State {
 }
 
 export class Provider extends React.Component<Props, State> {
+  readonly DEFAULT_LIBRARY = 'styled-components';
+
   constructor(props: Props) {
     super(props);
 
@@ -52,13 +54,31 @@ export class Provider extends React.Component<Props, State> {
     };
   }
 
-  componentWillMount() {
-    const { activeModule, theme: persistedTheme } = queryString.parse(
-      window.location.search
-    );
-    const theme = this.state.theme;
+  componentDidMount() {
+    const {
+      activeModule,
+      theme: persistedTheme,
+      library: persistedLibrary = this.DEFAULT_LIBRARY,
+      ...rest
+    } = queryString.parse(window.location.search);
+    const library = persistedLibrary.toLowerCase();
+    const code = snippets[library] || snippets[this.DEFAULT_LIBRARY];
+    const persistedCode = Object.keys(rest).reduce((merged, name) => {
+      const decompressed = decompress(rest[name]);
+      if (code[name] !== decompressed && decompressed.length > 0) {
+        merged[name] = decompressed;
+      }
+      return merged;
+    }, {});
+
+    const { theme } = this.state;
     this.setState({
       ...activeModule ? { activeModule } : {},
+      code: {
+        ...code,
+        ...persistedCode
+      },
+      library,
       theme: {
         ...theme,
         primary: persistedTheme || 'dark'
@@ -68,41 +88,19 @@ export class Provider extends React.Component<Props, State> {
 
   // TODO: Revisit this algorithm and improve it
   // TODO: Remove items from query params that match local snippets
-  handleSelect = ({ library, code, init }) => {
-    const {
-      activeModule,
-      theme,
-      library: definedLibrary,
-      ...rest
-    } = queryString.parse(window.location.search);
-    const persistedCode = init
-      ? Object.keys(rest).reduce((merged, name) => {
-          const decompressed = decompress(rest[name]);
-          if (code[name] !== decompressed && decompressed.length > 0) {
-            merged[name] = decompressed;
-          }
-          return merged;
-        }, {})
-      : {};
-    const activeModuleFound = code[activeModule] || persistedCode[activeModule];
+  handleSelect = ({ library, code }) => {
+    const { theme } = queryString.parse(window.location.search);
     this.setState(
       {
-        ...((activeModuleFound && {}) || {
-          activeModule: 'index'
-        }),
-        code: {
-          ...code,
-          ...persistedCode
-        },
-        library
+        library,
+        code
       },
       () => {
         replaceHistory(
           {
             activeModule: this.state.activeModule,
             library,
-            theme,
-            ...init ? rest : {}
+            theme
           },
           false
         );

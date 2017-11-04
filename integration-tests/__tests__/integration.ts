@@ -23,6 +23,10 @@ libraries
       test.concurrent(`displays '${library}' in the playground`, async () => {
         browser = await browser;
         const page = await browser.newPage();
+        await page.setViewport({
+          height: 800,
+          width: 800
+        });
         await page.goto(`http://localhost:8000/?library=${library}`);
 
         await page.waitForSelector(rootSelector);

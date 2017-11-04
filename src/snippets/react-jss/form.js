@@ -71,7 +71,7 @@ const FormRenderer = ({
       type="text"
       name="phoneNumber"
       className={classes.input}
-      placeholder="Phone number"
+      placeholder="Phone Number"
       onChange={onChange}
       value={values.phoneNumber}
     />

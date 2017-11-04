@@ -117,7 +117,7 @@ interface SelectData {
 
 interface Props extends ThemeProps {
   activeModule: string;
-  defaultLibrary: string;
+  library: string;
   files: string[];
   primary: string;
   onActiveChange(active: string): any;
@@ -132,31 +132,15 @@ interface Props extends ThemeProps {
 
 interface State {
   addingFile: boolean;
-  selected: string;
 }
 
 export class Header extends React.Component<Props, State> {
-  state = {
-    addingFile: false,
-    selected: ''
-  };
+  constructor(props) {
+    super(props);
 
-  // TODO: cascade this down from provider
-  componentDidMount() {
-    const { library = this.props.defaultLibrary } = queryString.parse(
-      window.location.search
-    );
-    const code = this.props.snippets[library];
-    if (code) {
-      this.setState({
-        selected: library
-      });
-      this.props.onSelect({
-        library,
-        code,
-        init: true
-      });
-    }
+    this.state = {
+      addingFile: false
+    };
   }
 
   handleSelect = ev => {
@@ -164,8 +148,7 @@ export class Header extends React.Component<Props, State> {
     const code = this.props.snippets[library];
     if (code) {
       this.setState({
-        addingFile: false,
-        selected: library
+        addingFile: false
       });
       this.props.onSelect({
         library,
@@ -189,7 +172,7 @@ export class Header extends React.Component<Props, State> {
         <HeaderContainer>
           <SelectContainer>
             <Select
-              value={this.state.selected}
+              value={this.props.library}
               onChange={this.handleSelect}
               aria-label="Select a library"
             >
