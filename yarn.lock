@@ -4385,6 +4385,19 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
+jsxstyle-utils@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.yarnpkg.com/jsxstyle-utils/-/jsxstyle-utils-2.0.0.tgz#211a4d113bd2ed3ce2a27072f97bcc9179333f69"
+  dependencies:
+    invariant "^2.2.1"
+
+jsxstyle@2.0.0:
+  version "2.0.0"
+  resolved "http://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.0.0.tgz#5d032edbd10a9b585a477b365cd19d3edec1d0fc"
+  dependencies:
+    invariant "^2.2.1"
+    jsxstyle-utils "^2.0.0"
+
 kind-of@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
