@@ -25,6 +25,12 @@ export const getLibraryImportStatement = (
     return importStatement('cxs', 'cxs/component');
   } else if (matches('radium')) {
     return importStatement('Radium', 'radium');
+  } else if (matches('fela')) {
+    return [
+      importStatement('fela', 'fela'),
+      importStatement('webPreset', 'fela-preset-web'),
+      importStatement('reactFela', 'react-fela')
+    ].join('\n');
   } else if (matches('jss')) {
     return [
       importStatement('jss', 'jss'),
@@ -77,6 +83,16 @@ export const getScopedImports = (
   } else if (matches('react-jss')) {
     return import('react-jss').then(reactJSS => ({
       injectSheet: (reactJSS as any).default
+    }));
+  } else if (matches('fela')) {
+    return Promise.all([
+      import('fela'),
+      import('fela-preset-web'),
+      import('react-fela')
+    ]).then(([fela, webPreset, reactFela]) => ({
+      ...fela,
+      webPreset: (webPreset as any).default,
+      ...reactFela
     }));
   } else if (matches('linaria')) {
     return import('linaria');
