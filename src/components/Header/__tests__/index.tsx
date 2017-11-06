@@ -14,7 +14,7 @@ test('it can be rendered', () => {
     shallow(
       <Header
         activeModule="index"
-        defaultLibrary="styled-components"
+        library="styled-components"
         files={['index.js']}
         primary="dark"
         snippets={{}}

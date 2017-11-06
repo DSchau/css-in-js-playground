@@ -36,7 +36,7 @@ const ButtonContainer = styled('div')`
 
 const Button = styled('button')`
   display: block;
-  backgorund-color: #bbb;
+  background-color: #bbb;
   color: white;
   border: none;
   width: 100%;
