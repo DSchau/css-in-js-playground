@@ -4459,9 +4459,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linaria@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.2.0.tgz#bbe2cbf21f045359314718b1d14a3e052ab5f1e9"
+linaria@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.3.0.tgz#8b220f649cacf1e7b8bfba3a6af4820e42ba42c3"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
