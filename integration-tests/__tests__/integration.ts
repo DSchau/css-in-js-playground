@@ -29,7 +29,7 @@ libraries
           height: 800,
           width: 800
         });
-        await page.goto(`http://localhost:8000/?library=${library}`);
+        await page.goto(`http://localhost:8000/?library=${library}`, process.env.CI ? { timeout: 0 } : {});
 
         await page.waitForSelector(rootSelector);
         await page.waitFor(2000);
