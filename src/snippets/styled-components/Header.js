@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from 'react-icons/lib/go/rocket';
 
+import theme from './theme';
+
+console.log(theme);
+
 const Header = styled.header`
   display: flex;
   flex-direction: column;
@@ -78,8 +82,8 @@ export default () => (
       <StripeBottom />
     </Stripes>
     <TitleContainer>
-      <Title>Set up your payments</Title>
-      <SubTitle>Rocketship, Inc.</SubTitle>
+      <Title>CSS in JS Playground</Title>
+      <SubTitle>Form Design by Stripe</SubTitle>
     </TitleContainer>
   </Header>
 );

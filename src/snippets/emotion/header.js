@@ -79,8 +79,8 @@ export default function() {
         <StripeBottom />
       </Stripes>
       <TitleContainer>
-        <Title>Set up your payments</Title>
-        <SubTitle>Rocketship, Inc.</SubTitle>
+        <Title>CSS in JS Playground</Title>
+        <SubTitle>Form Design by Stripe</SubTitle>
       </TitleContainer>
     </Header>
   );

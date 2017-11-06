@@ -76,8 +76,8 @@ const HeaderRenderer = ({ classes }) => (
       <div className={classes.stripeBottom} />
     </div>
     <div className={classes.titleContainer}>
-      <h1 className={classes.title}>Set up your payments</h1>
-      <h1 className={classes.subTitle}>Rocketship, Inc.</h1>
+      <h1 className={classes.title}>CSS in JS Playground</h1>
+      <h1 className={classes.subTitle}>Form Design by Stripe</h1>
     </div>
   </header>
 );

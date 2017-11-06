@@ -8,7 +8,7 @@ import { TransformedModule } from '../interfaces';
 
 export const noop = () => null;
 
-export const inject = (Component: string, scope) => {
+export const inject = (Component: string, scope: any) => {
   const keys = Object.keys(scope);
   const values = keys.map(key => scope[key]);
 
@@ -23,6 +23,9 @@ export const inject = (Component: string, scope) => {
   };
 };
 
+/*
+ * TODO: Inject "active" component last, before index
+ */
 const makeNameVariants = components =>
   Object.keys(components).reduce((allComponents, name) => {
     const component = components[name];
@@ -31,18 +34,19 @@ const makeNameVariants = components =>
   }, {});
 
 // TODO: Figure out how to inject each component with each component
-export function evalCode(
-  code: TransformedModule,
+export function evalCode({
+  code,
   scope,
+  activeModule,
   defaultModule = 'index'
-) {
+}) {
   const normalizedCode = Object.keys(code).reduce((normalized, name) => {
     normalized[camelCase(name)] = code[name];
     return normalized;
   }, {});
   const { [defaultModule]: Component } = Object.keys(normalizedCode)
     .sort((a, b) => {
-      if (a === defaultModule) {
+      if (a === defaultModule || a === activeModule) {
         return 1;
       }
       return a.localeCompare(b);
@@ -57,12 +61,10 @@ export function evalCode(
       };
     })
     .reduce((components, { component, name }) => {
-      const Component = inject(component, {
+      components[name] = inject(component, {
         ...scope,
         ...makeNameVariants(components)
-        //...name === defaultModule ? makeNameVariants(components) : {}
       })();
-      components[name] = Component;
       return components;
     }, {}) as TransformedModule;
 

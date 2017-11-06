@@ -1,15 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Form from './form';
 import Header from './header';
+import theme from './theme';
 
 const Container = styled.main`
   display: flex;
   flex-direction: column;
   min-height: 100%;
   width: 100%;
-  background-color: #f6f9fc;
+  background-color: ${props => props.theme.base};
 `;
 
 const Stripe = styled.div`
@@ -17,15 +18,17 @@ const Stripe = styled.div`
   overflow: hidden;
   transform: skewY(-8deg);
   transform-origin: 0;
-  background: linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%);
+  background: ${props => `linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, ${props.theme.header} 70%)`};
 `;
 
 export default function Login() {
   return (
-    <Container>
-      <Header />
-      <Stripe />
-      <Form fields={['email', 'phoneNumber']} />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Header />
+        <Stripe />
+        <Form fields={['email', 'phoneNumber']} />
+      </Container>
+    </ThemeProvider>
   );
 }

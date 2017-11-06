@@ -1,4 +1,4 @@
-import { darken, lighten } from 'polished';
+import { complement, darken, lighten } from 'polished';
 
 /* eslint no-use-before-define: "off" */
 interface StyleBase {
@@ -37,7 +37,7 @@ const light = {
   base: '#EEEFF7',
   baseSecondary: darken(0.05, '#EEEFF7'),
   text: '#1E1E20',
-  accent: darken(0.2, dark.accent),
+  accent: complement(dark.accent),
   danger: lighten(0.1, '#CD2C24')
 };
 

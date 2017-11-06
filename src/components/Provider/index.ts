@@ -14,23 +14,24 @@ import {
 
 import { Module } from '../../interfaces';
 
+type InjectedState = State & {
+  actions: {
+    handleActiveChange(...args): any;
+    handleCodeUpdate(code: string, activeModule: string): any;
+    handleColorSwitch(...args): any;
+    handleFileAdd(...args): any;
+    handleReset(): any;
+    handleSelect(...args): any;
+    handleTimerComplete(...args): any;
+  };
+  snippets: {
+    [key: string]: Module;
+  };
+};
+
 interface Props {
-  children(
-    state: State & {
-      actions: {
-        handleActiveChange(...args): any;
-        handleCodeUpdate(code: string, activeModule: string): any;
-        handleColorSwitch(...args): any;
-        handleFileAdd(...args): any;
-        handleReset(): any;
-        handleSelect(...args): any;
-        handleTimerComplete(...args): any;
-      };
-      snippets: {
-        [key: string]: Module;
-      };
-    }
-  );
+  children?(injectedState);
+  render?(injectedState);
 }
 
 interface State {
@@ -194,7 +195,8 @@ export class Provider extends React.Component<Props, State> {
   };
 
   render() {
-    return this.props.children({
+    const renderFn = this.props.render || this.props.children;
+    return renderFn({
       ...this.state,
       snippets,
       actions: {

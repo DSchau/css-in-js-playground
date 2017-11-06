@@ -11,9 +11,9 @@ function Header() {
         <div style={styles.stripeBottom} />
       </div>
       <div style={styles.titleContainer}>
-        <h1 style={styles.title}>Set up your payments</h1>
+        <h1 style={styles.title}>CSS in JS Playground</h1>
         <h1 style={Object.assign({}, styles.title, styles.subTitle)}>
-          Rocketship, Inc.
+          Form Design by Stripe
         </h1>
       </div>
     </header>

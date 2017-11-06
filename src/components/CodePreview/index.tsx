@@ -59,7 +59,11 @@ export class CodePreview extends React.Component<Props, State> {
         () => {
           transform(code).then(es5 => {
             this.setState({
-              Component: evalCode(es5, this.state.scope)
+              Component: evalCode({
+                code: es5,
+                scope: this.state.scope,
+                activeModule: this.props.activeModule
+              })
             });
           });
         }

@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import glamorous from 'glamorous';
+import glamorous, { ThemeProvider } from 'glamorous';
 
 import Form from './form';
 import Header from './header';
+import theme from './theme';
 
 const Container = glamorous.main({
   display: 'flex',
   flexDirection: 'column',
   minHeight: '100%',
-  width: '100%',
-  backgroundColor: '#f6f9fc'
+  width: '100%'
+}, ({ theme }) => ({
+  backgroundColor: theme.base
+}), props => {
+  console.log(props);
+  return {};
 });
 
 const Stripe = glamorous.div({
@@ -23,10 +28,12 @@ const Stripe = glamorous.div({
 
 export default function Login() {
   return (
-    <Container>
-      <Header />
-      <Stripe />
-      <Form />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Header />
+        <Stripe />
+        <Form />
+      </Container>
+    </ThemeProvider>
   );
 }

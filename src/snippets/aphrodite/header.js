@@ -12,8 +12,8 @@ function Header() {
         <div className={css(styles.stripeBottom)} />
       </div>
       <div className={css(styles.titleContainer)}>
-        <h1 className={css(styles.title)}>Set up your payments</h1>
-        <h1 className={css(styles.title, styles.subTitle)}>Rocketship, Inc.</h1>
+        <h1 className={css(styles.title)}>CSS in JS Playground</h1>
+        <h1 className={css(styles.title, styles.subTitle)}>Form Design by Stripe</h1>
       </div>
     </header>
   );

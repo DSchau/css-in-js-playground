@@ -79,8 +79,8 @@ export default function Header() {
         <div className={stripeBottom} />
       </div>
       <div className={titleContainer}>
-        <h1 className={title}>Set up your payments</h1>
-        <h1 className={subTitle}>Rocketship, Inc.</h1>
+        <h1 className={title}>CSS in JS Playground</h1>
+        <h1 className={subTitle}>Form Design by Stripe</h1>
       </div>
     </header>
   );
