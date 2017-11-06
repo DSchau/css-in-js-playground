@@ -26,10 +26,10 @@ libraries
         browser = await browser;
         const page = await browser.newPage();
         await page.setViewport({
-          height: 800,
-          width: 800
+          height: 600,
+          width: 600
         });
-        await page.goto(`http://localhost:8000/?library=${library}`, process.env.CI ? { timeout: 0 } : {});
+        await page.goto(`http://localhost:8000/?library=${library}`);
 
         await page.waitForSelector(rootSelector);
         await page.waitFor(2000);
