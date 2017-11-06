@@ -2,6 +2,8 @@ import puppeteer from 'puppeteer';
 import * as path from 'path';
 import * as fs from 'fs';
 
+process.setMaxListeners(0); // https://stackoverflow.com/a/9768586
+
 const ignore = [/__.*/, /\..+/];
 const libraries = fs.readdirSync(path.resolve('src/snippets'))
   .filter(file => !ignore.some(expr => expr.test(file)));
