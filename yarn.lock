@@ -4360,14 +4360,6 @@ jss-vendor-prefixer@^7.0.0:
   dependencies:
     css-vendor "^0.3.8"
 
-jss@9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/jss/-/jss-9.1.0.tgz#601f18478a26ac95a128f919d2e481088e93b28f"
-  dependencies:
-    is-in-browser "^1.1.3"
-    is-observable "^0.2.0"
-    warning "^3.0.0"
-
 jss@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/jss/-/jss-8.1.0.tgz#b32f15efcce22446dfda4c2be09a04f38431da0a"
@@ -4378,6 +4370,14 @@ jss@^8.1.0:
 jss@^9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/jss/-/jss-9.0.0.tgz#cc5264b16ae0d605ce5e293295c8a03caf3e8413"
+  dependencies:
+    is-in-browser "^1.1.3"
+    is-observable "^0.2.0"
+    warning "^3.0.0"
+
+jss@~9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/jss/-/jss-9.1.0.tgz#601f18478a26ac95a128f919d2e481088e93b28f"
   dependencies:
     is-in-browser "^1.1.3"
     is-observable "^0.2.0"
@@ -4467,9 +4467,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linaria@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.3.0.tgz#8b220f649cacf1e7b8bfba3a6af4820e42ba42c3"
+linaria@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.2.0.tgz#bbe2cbf21f045359314718b1d14a3e052ab5f1e9"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
@@ -5634,9 +5634,9 @@ pngjs@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-2.3.1.tgz#11d1e12b9cb64d63e30c143a330f4c1f567da85f"
 
-polished@~1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/polished/-/polished-1.7.0.tgz#cfc55113f52e9ecec7c84dbd0c708b9a3235d7c3"
+polished@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-1.8.2.tgz#b73c16f7ae4e531a459e9de5dc2416d97e1df4e9"
 
 portfinder@^1.0.9:
   version "1.0.13"

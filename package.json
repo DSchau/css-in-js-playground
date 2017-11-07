@@ -101,7 +101,7 @@
     "lz-string": "~1.4.4",
     "normalize.css": "~7.0.0",
     "offline-plugin": "~4.8.4",
-    "polished": "~1.7.0",
+    "polished": "~1.8.2",
     "query-string": "~5.0.0",
     "radium": "~0.19.4",
     "react": "~16.0.0",
