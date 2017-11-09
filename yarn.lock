@@ -5634,9 +5634,9 @@ pngjs@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-2.3.1.tgz#11d1e12b9cb64d63e30c143a330f4c1f567da85f"
 
-polished@~1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/polished/-/polished-1.8.2.tgz#b73c16f7ae4e531a459e9de5dc2416d97e1df4e9"
+polished@1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-1.9.0.tgz#76d277d6610dbcb85477dbba1bd1aa8e642741b6"
 
 portfinder@^1.0.9:
   version "1.0.13"
