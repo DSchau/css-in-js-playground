@@ -22,5 +22,6 @@ Array [
   "radium",
   "react-jss",
   "styled-components",
+  "styletron",
 ]
 `;

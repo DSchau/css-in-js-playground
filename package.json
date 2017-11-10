@@ -14,17 +14,13 @@
     "copy": "cp src/manifest.json assets/og-image.jpeg dist",
     "format": "npm run format:js & npm run format:ts",
     "format:js": "prettier --write --single-quote \"src/snippets/**/*.js\"",
-    "format:ts":
-      "prettier --write --single-quote --parser typescript \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "format:ts": "prettier --write --single-quote --parser typescript \"src/**/*.ts\" \"src/**/*.tsx\"",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "markdown": "md-magic",
-    "start":
-      "webpack-dev-server --env.environment development --hot --port 8000",
-    "stop":
-      "kill-port 8000 || echo \"Could not kill port 8000; please kill manually\"",
+    "start": "webpack-dev-server --env.environment development --hot --port 8000",
+    "stop": "kill-port 8000 || echo \"Could not kill port 8000; please kill manually\"",
     "test": "jest",
-    "pretest:integration":
-      "npm start -- --quiet & wait-on http://localhost:8000",
+    "pretest:integration": "npm start -- --quiet & wait-on http://localhost:8000",
     "test:integration": "jest -c integration-tests/jest.config.js",
     "posttest:integration": "npm run stop"
   },
@@ -111,11 +107,18 @@
     "react-icons": "~2.2.5",
     "react-jss": "~7.2.0",
     "styled-components": "~2.2.0",
-    "styled-jss": "~2.0.2",
+    "styletron": "~3.0.0-rc.3",
+    "styletron-react": "~3.0.0-rc.3",
     "webfontloader": "~1.6.28"
   },
   "lint-staged": {
-    "src/**/*.ts": ["npm run format:ts", "git add"],
-    "src/snippets/*.js": ["npm run markdown & npm run format:js", "git add"]
+    "src/**/*.ts": [
+      "npm run format:ts",
+      "git add"
+    ],
+    "src/snippets/*.js": [
+      "npm run markdown & npm run format:js",
+      "git add"
+    ]
   }
 }

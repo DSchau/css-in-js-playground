@@ -3427,7 +3427,7 @@ ini@~1.3.0:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.4.tgz#0537cb79daf59b59a1a517dff706c86ec039162e"
 
-inline-style-prefixer@3.0.8, inline-style-prefixer@^3.0.1, inline-style-prefixer@^3.0.6:
+inline-style-prefixer@3.0.8, inline-style-prefixer@^3.0.1, inline-style-prefixer@^3.0.3, inline-style-prefixer@^3.0.6:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-3.0.8.tgz#8551b8e5b4d573244e66a34b04f7d32076a2b534"
   dependencies:
@@ -3697,10 +3697,6 @@ is-primitive@^2.0.0:
 is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
-
-is-react-prop@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/is-react-prop/-/is-react-prop-1.0.0.tgz#b90040b44bde7c03e990c8d3046f87445577ee3f"
 
 is-redirect@^1.0.0:
   version "1.0.0"
@@ -4319,7 +4315,7 @@ jss-preset-default@^3.0.0:
     jss-props-sort "^5.0.0"
     jss-vendor-prefixer "^6.0.0"
 
-jss-preset-default@^4.0.0, jss-preset-default@~4.0.1:
+jss-preset-default@~4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/jss-preset-default/-/jss-preset-default-4.0.1.tgz#822cecb87c27ff91633774422f4c221d61486b65"
   dependencies:
@@ -4365,14 +4361,6 @@ jss@^8.1.0:
   resolved "https://registry.yarnpkg.com/jss/-/jss-8.1.0.tgz#b32f15efcce22446dfda4c2be09a04f38431da0a"
   dependencies:
     is-in-browser "^1.0.2"
-    warning "^3.0.0"
-
-jss@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/jss/-/jss-9.0.0.tgz#cc5264b16ae0d605ce5e293295c8a03caf3e8413"
-  dependencies:
-    is-in-browser "^1.1.3"
-    is-observable "^0.2.0"
     warning "^3.0.0"
 
 jss@~9.1.0:
@@ -6141,7 +6129,7 @@ react-addons-test-utils@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
 
-react-dom@16.1.0:
+react-dom@~16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.1.0.tgz#ab6fd2a285096f388aeba51919a573d06c9bdde4"
   dependencies:
@@ -7094,13 +7082,44 @@ styled-components@~2.2.0:
     stylis "^3.2.1"
     supports-color "^3.2.3"
 
-styled-jss@~2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/styled-jss/-/styled-jss-2.0.2.tgz#f2e4c76d1649fdbbda5a4318dc16eaa1e6e89bdd"
+styletron-client@^3.0.0-rc.3:
+  version "3.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/styletron-client/-/styletron-client-3.0.0-rc.3.tgz#41fbca51a6bd22ba6145df1cb57cfaada119aeab"
   dependencies:
-    is-react-prop "^1.0.0"
-    jss "^9.0.0"
-    jss-preset-default "^4.0.0"
+    styletron-core "^3.0.0-rc.3"
+
+styletron-core@^3.0.0-rc.3:
+  version "3.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/styletron-core/-/styletron-core-3.0.0-rc.3.tgz#9468e275d9085d2e5d6d6468cc6d8733dbfa3cba"
+
+styletron-react@~3.0.0-rc.3:
+  version "3.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/styletron-react/-/styletron-react-3.0.0-rc.3.tgz#80fdca3360270b2841aecb62c56c5b2ca8365a9a"
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.5.8"
+    styletron-client "^3.0.0-rc.3"
+    styletron-server "^3.0.0-rc.3"
+    styletron-utils "^3.0.0-rc.3"
+
+styletron-server@^3.0.0-rc.3:
+  version "3.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/styletron-server/-/styletron-server-3.0.0-rc.3.tgz#07d14c808d2f89a90cfafe3551ba7c748923191b"
+  dependencies:
+    styletron-core "^3.0.0-rc.3"
+
+styletron-utils@^3.0.0-rc.3:
+  version "3.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/styletron-utils/-/styletron-utils-3.0.0-rc.3.tgz#21fef2099f1c368e6ff2b8f76bf7a64bb547b760"
+  dependencies:
+    inline-style-prefixer "^3.0.3"
+
+styletron@~3.0.0-rc.3:
+  version "3.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/styletron/-/styletron-3.0.0-rc.3.tgz#52f8c50d1e25042dc44ab8218faba017511eaa96"
+  dependencies:
+    styletron-client "^3.0.0-rc.3"
+    styletron-server "^3.0.0-rc.3"
 
 stylis@^3.2.1, stylis@^3.2.13:
   version "3.2.19"

@@ -42,6 +42,8 @@ export const getLibraryImportStatement = (
     ].join('\n');
   } else if (matches('react-jss')) {
     return importStatement('injectSheet', 'react-jss');
+  } else if (matches('styletron-react')) {
+    return importStatement('{ styled } ', 'styletron-react');
   }
   return '';
 };
@@ -100,6 +102,16 @@ export const getScopedImports = (
     }));
   } else if (matches('linaria')) {
     return import('linaria');
+  } else if (matches('styletron-react')) {
+    return Promise.all([
+      import('styletron'),
+      import('styletron-react')
+    ]).then(([styletron, styletronReact]) => {
+      return {
+        Styletron: styletron.default,
+        ...styletronReact
+      };
+    });
   }
   return Promise.resolve({});
 };

@@ -1,10 +1,11 @@
 import React from 'react';
-import glamorous from 'glamorous';
+import Styletron from 'styletron';
+import { styled, StyletronProvider } from 'styletron-react';
 
 import Form from './form';
 import Header from './header';
 
-const Container = glamorous.main({
+const Container = styled('main', {
   display: 'flex',
   flexDirection: 'column',
   minHeight: '100%',
@@ -12,7 +13,7 @@ const Container = glamorous.main({
   backgroundColor: '#f6f9fc'
 });
 
-const Stripe = glamorous.div({
+const Stripe = styled('div', {
   height: '10vh',
   overflow: 'hidden',
   transform: 'skewY(-8deg)',
@@ -23,10 +24,12 @@ const Stripe = glamorous.div({
 
 export default function Login() {
   return (
-    <Container>
-      <Header />
-      <Stripe />
-      <Form />
-    </Container>
+    <StyletronProvider styletron={new Styletron()}>
+      <Container>
+        <Header />
+        <Stripe />
+        <Form />
+      </Container>
+    </StyletronProvider>
   );
 }
