@@ -4322,11 +4322,10 @@ jsxstyle-utils@^2.0.0:
   dependencies:
     invariant "^2.2.1"
 
-jsxstyle@2.0.0:
-  version "2.0.0"
-  resolved "http://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.0.0.tgz#5d032edbd10a9b585a477b365cd19d3edec1d0fc"
+jsxstyle@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.0.1.tgz#bf7898cecaaec309029b53b3914c9dd7ff86d20c"
   dependencies:
-    invariant "^2.2.1"
     jsxstyle-utils "^2.0.0"
 
 kind-of@^2.0.0:
