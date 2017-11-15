@@ -23,5 +23,6 @@ Array [
   "react-jss",
   "styled-components",
   "styletron",
+  "yocss",
 ]
 `;

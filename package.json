@@ -109,7 +109,8 @@
     "styled-components": "~2.2.0",
     "styletron": "~3.0.0-rc.3",
     "styletron-react": "~3.0.0-rc.3",
-    "webfontloader": "~1.6.28"
+    "webfontloader": "~1.6.28",
+    "yocss": "~0.2.0"
   },
   "lint-staged": {
     "src/**/*.ts": [

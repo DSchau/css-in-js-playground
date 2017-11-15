@@ -7929,3 +7929,7 @@ yauzl@2.4.1:
   resolved "https://registry.yarnpkg.com/yauzl/-/yauzl-2.4.1.tgz#9528f442dab1b2284e58b4379bb194e22e0c4005"
   dependencies:
     fd-slicer "~1.0.1"
+
+yocss@~0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.2.0.tgz#00ee5d980e3d77ccad960e16e6b7c4b0a715de11"

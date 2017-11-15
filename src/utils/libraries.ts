@@ -44,6 +44,8 @@ export const getLibraryImportStatement = (
     return importStatement('injectSheet', 'react-jss');
   } else if (matches('styletron-react')) {
     return importStatement('{ styled } ', 'styletron-react');
+  } else if (matches('yocss')) {
+    return importStatement('css', 'yocss');
   }
   return '';
 };
@@ -112,6 +114,10 @@ export const getScopedImports = (
         ...styletronReact
       };
     });
+  } else if (matches('yocss')) {
+    return import('yocss/es/index').then(({ default: yocss }) => ({
+      css: yocss
+    }));
   }
   return Promise.resolve({});
 };

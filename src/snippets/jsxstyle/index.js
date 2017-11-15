@@ -4,7 +4,7 @@ import { Col, Block } from 'jsxstyle';
 import Form from './form';
 import Header from './header';
 
-function Container({children}) {
+function Container({ children }) {
   return (
     <Col
       component="main"
@@ -20,14 +20,14 @@ function Container({children}) {
 function Stripe() {
   return (
     <Block
-      height= "10vh"
-      overflow= "hidden"
-      transform= "skewY(-8deg)"
-      transformOrigin= {0}
+      height="10vh"
+      overflow="hidden"
+      transform="skewY(-8deg)"
+      transformOrigin={0}
       background="linear-gradient(-150deg, rgba(255, 255, 255, 0) 40%, #ddecf7 70%)"
     />
-  )
-};
+  );
+}
 
 export default function Login() {
   return (

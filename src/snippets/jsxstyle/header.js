@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row, Block } from 'jsxstyle';
 import Logo from 'react-icons/lib/go/rocket';
 
-function LogoContainer({children}) {
+function LogoContainer({ children }) {
   return (
     <Row
       justifyContent="center"
@@ -22,7 +22,7 @@ function LogoContainer({children}) {
   );
 }
 
-function Stripes({children}) {
+function Stripes({ children }) {
   return (
     <Block
       position="absolute"
@@ -50,7 +50,7 @@ function Stripes({children}) {
   );
 }
 
-function Title({color="white", marginTop=0, children}) {
+function Title({ color = 'white', marginTop = 0, children }) {
   return (
     <Block
       component="h1"
@@ -67,13 +67,13 @@ function Title({color="white", marginTop=0, children}) {
   );
 }
 
-function SubTitle({children}) {
+function SubTitle({ children }) {
   return (
     <Title color="#025450" marginTop="0.5rem">
       {children}
     </Title>
   );
-};
+}
 
 export default function Header() {
   return (

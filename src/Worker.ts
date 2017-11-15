@@ -19,6 +19,7 @@ if (typeof onmessage === 'object') {
             modules: false,
             templateString: false
           },
+          objectAssign: 'Object.assign',
           sourcemap: false
         });
 

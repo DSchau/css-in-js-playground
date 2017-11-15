@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Block } from 'jsxstyle';
 
-function TextInput({name, placeholder, onChange, value}) {
+function TextInput({ name, placeholder, onChange, value }) {
   return (
     <Block
       component="input"
@@ -16,12 +16,18 @@ function TextInput({name, placeholder, onChange, value}) {
       focusBorderColor="#6772e5"
       focusOutline="none"
       focusBoxShadow="0 1px 6px rgba(103, 114, 229, 0.5)"
-      props={{name, placeholder, onChange, value}}
+      props={{ name, placeholder, onChange, value }}
     />
   );
 }
 
-function Button({children, type, onClick, disabled, backgroundColor="#BBB"}) {
+function Button({
+  children,
+  type,
+  onClick,
+  disabled,
+  backgroundColor = '#BBB'
+}) {
   return (
     <Block
       component="button"
@@ -35,20 +41,20 @@ function Button({children, type, onClick, disabled, backgroundColor="#BBB"}) {
       boxShadow="0 1px 6px rgba(0, 0, 0, 0.1)"
       margin="1rem 0.5rem"
       backgroundColor={backgroundColor}
-      props={{disabled, onClick}}
+      props={{ disabled, onClick }}
     >
       {children}
     </Block>
   );
 }
 
-function SubmitButton({children, disabled, onClick}) {
+function SubmitButton({ children, disabled, onClick }) {
   return (
     <Button
       type="submit"
       disabled={disabled}
       onClick={onClick}
-      backgroundColor={disabled ? void 0 : "#6772e5"}
+      backgroundColor={disabled ? void 0 : '#6772e5'}
     >
       {children}
     </Button>
@@ -106,7 +112,7 @@ export default class Form extends Component {
         padding="2rem"
         boxSizing="border-box"
         zIndex={2}
-        props={{onSubmit: this.handleSubmit}}
+        props={{ onSubmit: this.handleSubmit }}
       >
         {this.state.fields.map(fieldName => (
           <TextInput
