@@ -5,7 +5,7 @@ import Form from './form';
 import Header from './header';
 
 const styled = (Type, styles) => props => (
-  <Type {...props} className={css(styles).toString()} />
+  <Type {...props} className={css(styles)} />
 );
 
 const Container = styled('main', {

@@ -5,7 +5,7 @@ import Logo from 'react-icons/lib/go/rocket';
 const styled = (Type, styles) => props => (
   <Type
     {...props}
-    className={[css(styles).toString()].concat(props.className || []).join(' ')}
+    className={[css(styles)].concat(props.className || []).join(' ')}
   />
 );
 
@@ -69,7 +69,7 @@ const titleClassName = css({
   position: 'relative',
   fontSize: '1.5rem',
   fontWeight: '100'
-}).toString();
+});
 
 const Title = styled('h1', {});
 

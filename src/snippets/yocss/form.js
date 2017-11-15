@@ -5,7 +5,7 @@ const styled = (Type, styles) => props => (
   <Type
     {...props}
     className={[
-      css(typeof styles === 'function' ? styles(props) : styles).toString()
+      css(typeof styles === 'function' ? styles(props) : styles)
     ]
       .concat(props.className || [])
       .join(' ')}
@@ -57,7 +57,7 @@ const buttonClassName = css({
   textTransform: 'uppercase',
   boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
   margin: '1rem 0.5rem'
-}).toString();
+});
 
 const Button = styled('button', {});
 
