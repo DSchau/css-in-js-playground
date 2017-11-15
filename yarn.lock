@@ -6105,7 +6105,7 @@ react-icons@~2.2.5:
   dependencies:
     react-icon-base "2.0.7"
 
-react-jss@8.0.0:
+react-jss@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-8.0.0.tgz#568ba0502c58e6adb94263a05f4971406ffee386"
   dependencies:
@@ -7930,6 +7930,6 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yocss@~0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.2.0.tgz#00ee5d980e3d77ccad960e16e6b7c4b0a715de11"
+yocss@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.0.tgz#b84f43a8d38cf3e86c93ad13a375611363b61afe"
