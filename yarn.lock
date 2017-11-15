@@ -10,9 +10,13 @@
   version "21.1.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.3.tgz#158d13cc3fa6b2f34d78118677af77754fe5b3fe"
 
-"@types/node@*", "@types/node@8.0.32":
+"@types/node@*":
   version "8.0.32"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.32.tgz#869a716538b6eec65ab3893f183d557be3cda206"
+
+"@types/node@8.0.53":
+  version "8.0.53"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
 
 "@types/node@^6.0.46":
   version "6.0.88"
@@ -6105,7 +6109,7 @@ react-icons@~2.2.5:
   dependencies:
     react-icon-base "2.0.7"
 
-react-jss@8.0.0:
+react-jss@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-8.0.0.tgz#568ba0502c58e6adb94263a05f4971406ffee386"
   dependencies:
