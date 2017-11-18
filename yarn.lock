@@ -7930,6 +7930,6 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yocss@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.0.tgz#b84f43a8d38cf3e86c93ad13a375611363b61afe"
+yocss@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.4.0.tgz#92027098594d28e99be03f6479660d861e5afbb5"
