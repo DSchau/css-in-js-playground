@@ -77,7 +77,7 @@
   },
   "dependencies": {
     "aphrodite": "~1.2.4",
-    "buble": "~0.16.0",
+    "buble": "~0.18.0",
     "codemirror": "~5.31.0",
     "corejs": "~1.0.0",
     "cxs": "~6.1.0",
