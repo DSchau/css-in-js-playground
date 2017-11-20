@@ -133,6 +133,14 @@ div.CodeMirror {
   left: 0;
   font-family: "Operator Mono SSm A", "Operator Mono SSm B", monospace;
   font-size: 12px;
+  
+  /* iOS 11.2+ */
+  padding-left: constant(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  
+  /* iOS 11.2+ */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 `);
 
