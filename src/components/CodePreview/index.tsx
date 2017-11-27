@@ -1,5 +1,6 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
+import { css } from 'glamor';
 
 import { evalCode, transform, getScopedImports } from '../../utils';
 
@@ -74,7 +75,7 @@ export class CodePreview extends React.Component<Props, State> {
     }
     const { Component } = this.state;
     return (
-      <Container>
+      <Container className="preview-container">
         <CodeContainer>
           {this.props.error ? (
             <DisplayError error={error} errorInfo={errorInfo} />
@@ -86,3 +87,15 @@ export class CodePreview extends React.Component<Props, State> {
     );
   }
 }
+
+css.insert(`
+.previewContainer {
+  /* iOS 11+ */
+  padding-left: constant(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  
+  /* iOS 11.2+ */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+`);
