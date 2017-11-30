@@ -4389,9 +4389,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linaria@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.2.0.tgz#bbe2cbf21f045359314718b1d14a3e052ab5f1e9"
+linaria@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.4.1.tgz#c4719d5744afae166038f0119d9ed2a71247d875"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
@@ -7930,6 +7930,6 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yocss@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.0.tgz#b84f43a8d38cf3e86c93ad13a375611363b61afe"
+yocss@~0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.1.tgz#4af90a306fbc149fce9b4bb160ab5bb5a466440c"
