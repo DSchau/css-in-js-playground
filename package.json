@@ -54,7 +54,7 @@
     "jest-enzyme": "^4.0.0",
     "jest-image-snapshot": "~1.0.1",
     "jest-preset-typescript": "^1.0.0",
-    "lint-staged": "^4.2.3",
+    "lint-staged": "^6.0.0",
     "markdown-magic": "^0.1.19",
     "mock-local-storage": "^1.0.5",
     "name-all-modules-plugin": "^1.0.1",
