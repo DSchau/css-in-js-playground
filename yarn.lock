@@ -6,13 +6,23 @@
   version "0.0.47"
   resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.47.tgz#7fba9190c52bc0cdc6f7cad522581ac4a274fe98"
 
+"@types/events@*":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-1.1.0.tgz#93b1be91f63c184450385272c47b6496fd028e02"
+
 "@types/jest@~21.1.3":
   version "21.1.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.3.tgz#158d13cc3fa6b2f34d78118677af77754fe5b3fe"
 
-"@types/node@*", "@types/node@8.0.32":
+"@types/node@*":
   version "8.0.32"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.32.tgz#869a716538b6eec65ab3893f183d557be3cda206"
+
+"@types/node@8.0.54":
+  version "8.0.54"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.54.tgz#3fd9357db4af388b79e03845340259440edffde6"
+  dependencies:
+    "@types/events" "*"
 
 "@types/node@^6.0.46":
   version "6.0.88"
@@ -7930,6 +7940,6 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yocss@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.0.tgz#b84f43a8d38cf3e86c93ad13a375611363b61afe"
+yocss@~0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.1.tgz#4af90a306fbc149fce9b4bb160ab5bb5a466440c"
