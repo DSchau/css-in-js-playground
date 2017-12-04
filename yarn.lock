@@ -4316,17 +4316,17 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-jsxstyle-utils@^2.0.0:
-  version "2.0.0"
-  resolved "http://registry.yarnpkg.com/jsxstyle-utils/-/jsxstyle-utils-2.0.0.tgz#211a4d113bd2ed3ce2a27072f97bcc9179333f69"
+jsxstyle-utils@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/jsxstyle-utils/-/jsxstyle-utils-2.0.3.tgz#9834a907b4bc7d01bff12bce38f0e444e92793fc"
   dependencies:
     invariant "^2.2.1"
 
-jsxstyle@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.0.1.tgz#bf7898cecaaec309029b53b3914c9dd7ff86d20c"
+jsxstyle@2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.0.7.tgz#11082f546b8f356c168c8828450ca63199644584"
   dependencies:
-    jsxstyle-utils "^2.0.0"
+    jsxstyle-utils "^2.0.3"
 
 kind-of@^2.0.0:
   version "2.0.1"
@@ -7930,6 +7930,6 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yocss@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.0.tgz#b84f43a8d38cf3e86c93ad13a375611363b61afe"
+yocss@~0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.1.tgz#4af90a306fbc149fce9b4bb160ab5bb5a466440c"
