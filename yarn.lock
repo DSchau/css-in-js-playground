@@ -3105,6 +3105,10 @@ hash-base@^3.0.0:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+hash-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hash-string/-/hash-string-1.0.0.tgz#c3fa15f078ddd16bc150b4176fde7091620f2c7f"
+
 hash.js@^1.0.0, hash.js@^1.0.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.3.tgz#340dedbe6290187151c1ea1d777a3448935df846"
@@ -4389,9 +4393,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-linaria@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.2.0.tgz#bbe2cbf21f045359314718b1d14a3e052ab5f1e9"
+linaria@0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/linaria/-/linaria-0.4.2.tgz#9fdd59a62db7822ec85d5a1cdfc5f179d671daaa"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-core "^6.26.0"
@@ -4402,6 +4406,7 @@ linaria@^0.2.0:
     error-stack-parser "^2.0.1"
     mkdirp "^0.5.1"
     postcss "^6.0.10"
+    short-hash "^1.0.0"
     source-map "^0.5.7"
     stylis "^3.2.13"
 
@@ -6640,6 +6645,12 @@ shellwords@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
 
+short-hash@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/short-hash/-/short-hash-1.0.0.tgz#3f491d728fcc777ec605bbaf7f83f23712f42050"
+  dependencies:
+    hash-string "^1.0.0"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -7930,6 +7941,6 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-yocss@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.0.tgz#b84f43a8d38cf3e86c93ad13a375611363b61afe"
+yocss@~0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/yocss/-/yocss-0.3.1.tgz#4af90a306fbc149fce9b4bb160ab5bb5a466440c"
