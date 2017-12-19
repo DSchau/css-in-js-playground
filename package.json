@@ -105,7 +105,7 @@
     "react-emotion": "~8.0.2-13",
     "react-fela": "^6.0.5",
     "react-icons": "~2.2.5",
-    "react-jss": "~8.0.0",
+    "react-jss": "~8.2.0",
     "styled-components": "~2.3.0",
     "styletron": "~3.0.0-rc.3",
     "styletron-react": "~3.0.0-rc.3",
