@@ -99,7 +99,7 @@
     "offline-plugin": "~4.8.4",
     "polished": "~1.9.0",
     "query-string": "~5.0.0",
-    "radium": "~0.19.4",
+    "radium": "~0.21.2",
     "react": "~16.1.0",
     "react-dom": "~16.1.0",
     "react-emotion": "~8.0.2-13",
