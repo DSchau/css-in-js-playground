@@ -106,7 +106,7 @@
     "react-fela": "^6.0.5",
     "react-icons": "~2.2.5",
     "react-jss": "~8.0.0",
-    "styled-components": "~2.4.0",
+    "styled-components": "~3.1.6",
     "styletron": "~3.0.0-rc.3",
     "styletron-react": "~3.0.0-rc.3",
     "webfontloader": "~1.6.28",
