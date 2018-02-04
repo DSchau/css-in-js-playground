@@ -102,7 +102,7 @@
     "radium": "~0.19.4",
     "react": "~16.1.0",
     "react-dom": "~16.1.0",
-    "react-emotion": "~8.0.2-13",
+    "react-emotion": "~9.0.0",
     "react-fela": "^6.0.5",
     "react-icons": "~2.2.5",
     "react-jss": "~8.0.0",
