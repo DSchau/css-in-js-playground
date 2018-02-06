@@ -4236,17 +4236,31 @@ jss-default-unit@^8.0.0:
   dependencies:
     is-observable "^0.2.0"
 
+jss-default-unit@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-8.0.2.tgz#cc1e889bae4c0b9419327b314ab1c8e2826890e6"
+
 jss-expand@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-5.0.0.tgz#8eadb782f29ec5f1d285451dd38052d5ac51644a"
   dependencies:
     is-observable "^0.2.0"
 
+jss-expand@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-5.1.0.tgz#b1ad74ec18631f34f65a2124fcfceb6400610e3d"
+
 jss-extend@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/jss-extend/-/jss-extend-6.0.1.tgz#e53430bc92a42e50d036883ccfecfbc4e1199147"
   dependencies:
     is-observable "^0.2.0"
+    warning "^3.0.0"
+
+jss-extend@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/jss-extend/-/jss-extend-6.2.0.tgz#4af09d0b72fb98ee229970f8ca852fec1ca2a8dc"
+  dependencies:
     warning "^3.0.0"
 
 jss-global@^3.0.0:
@@ -4259,7 +4273,7 @@ jss-nested@^6.0.1:
   dependencies:
     warning "^3.0.0"
 
-jss-preset-default@^4.0.1, jss-preset-default@~4.0.1:
+jss-preset-default@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/jss-preset-default/-/jss-preset-default-4.0.1.tgz#822cecb87c27ff91633774422f4c221d61486b65"
   dependencies:
@@ -4274,6 +4288,21 @@ jss-preset-default@^4.0.1, jss-preset-default@~4.0.1:
     jss-template "^1.0.0"
     jss-vendor-prefixer "^7.0.0"
 
+jss-preset-default@~4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/jss-preset-default/-/jss-preset-default-4.2.0.tgz#03d1f8e4f41c059bb69cfdecdca39e1984e9390f"
+  dependencies:
+    jss-camel-case "^6.0.0"
+    jss-compose "^5.0.0"
+    jss-default-unit "^8.0.2"
+    jss-expand "^5.1.0"
+    jss-extend "^6.2.0"
+    jss-global "^3.0.0"
+    jss-nested "^6.0.1"
+    jss-props-sort "^6.0.0"
+    jss-template "^1.0.1"
+    jss-vendor-prefixer "^7.0.0"
+
 jss-props-sort@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/jss-props-sort/-/jss-props-sort-6.0.0.tgz#9105101a3b5071fab61e2d85ea74cc22e9b16323"
@@ -4281,6 +4310,12 @@ jss-props-sort@^6.0.0:
 jss-template@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/jss-template/-/jss-template-1.0.0.tgz#4b874608706ddceecacdb5567e254aecb6ea69b3"
+  dependencies:
+    warning "^3.0.0"
+
+jss-template@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/jss-template/-/jss-template-1.0.1.tgz#09aed9d86cc547b07f53ef355d7e1777f7da430a"
   dependencies:
     warning "^3.0.0"
 
@@ -6992,7 +7027,7 @@ style-loader@^0.19.0:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
 
-styled-components@2.4.0:
+styled-components@~2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-2.4.0.tgz#086d0fd483d54638837fca3ea546a030b94adf75"
   dependencies:
