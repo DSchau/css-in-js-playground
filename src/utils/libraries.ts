@@ -52,10 +52,14 @@ export const getLibraryImportStatement = (
   return '';
 };
 
+/*
+ * TODO: figure out how to import other files into other files
+ * TODO: figure out how to get exports (babylon?)
+ */
 export const getScopedImports = (
   code: Module,
   defaultModule = 'index'
-): Promise<any> => {
+): Promise<Object> => {
   const matches = matchesExpression.bind(undefined, code[defaultModule]);
 
   if (matches('styled-components')) {
@@ -79,7 +83,6 @@ export const getScopedImports = (
   } else if (matches('cxs/component')) {
     return import('cxs/component').then(cxs => ({ cxs }));
   } else if (matches('./nano')) {
-    console.log('sup  nigga');
     return Promise.all([
       import('nano-css'),
       import('nano-css/addon/cache'),

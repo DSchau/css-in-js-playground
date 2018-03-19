@@ -62,7 +62,6 @@ export function evalCode(
       const Component = inject(component, {
         ...scope,
         ...makeNameVariants(components)
-        //...name === defaultModule ? makeNameVariants(components) : {}
       })();
       components[name] = Component;
       return components;

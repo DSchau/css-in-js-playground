@@ -9,9 +9,10 @@ import {addon as addonRule} from 'nano-css/addon/rule'
 import {addon as addonSheet} from 'nano-css/addon/sheet'
 import {addon as addonJsx} from 'nano-css/addon/jsx'
 
-const nano = {
+const nano = create({
+  pfx: `css-in-js-playground-`,
   h: createElement
-};
+});
 
 addonCache(nano);
 addonStable(nano);
@@ -22,8 +23,4 @@ addonRule(nano);
 addonSheet(nano);
 addonJsx(nano);
 
-const { jsx } = nano;
-
-export default { 
-  jsx
-}
+export default nano;
