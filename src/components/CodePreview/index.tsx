@@ -89,7 +89,7 @@ export class CodePreview extends React.Component<Props, State> {
 }
 
 css.insert(`
-.previewContainer {
+.preview-container {
   /* iOS 11+ */
   padding-left: constant(safe-area-inset-left);
   padding-right: constant(safe-area-inset-right);

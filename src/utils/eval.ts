@@ -8,17 +8,18 @@ import { TransformedModule } from '../interfaces';
 
 export const noop = () => null;
 
-export const inject = (Component: string, scope) => {
-  const keys = Object.keys(scope);
-  const values = keys.map(key => scope[key]);
+export const inject = (code: string, scope) => {
+  const keys = obj => Object.keys(obj);
+  const values = (keys, obj) => keys.map(key => obj[key]);
 
   return () => {
+    const reactKeys = keys(React);
+    const scopeKeys = keys(scope);
     /* eslint no-new-func: "off" */
-    return new Function('React', 'Component', 'Logo', ...keys, Component)(
+    return new Function('React', 'Logo', ...reactKeys.concat(scopeKeys), code)(
       React,
-      React.Component,
       Logo,
-      ...values
+      ...values(reactKeys, React).concat(values(scopeKeys, scope))
     );
   };
 };
