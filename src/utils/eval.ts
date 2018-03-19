@@ -14,12 +14,14 @@ export const inject = (Component: string, scope) => {
 
   return () => {
     /* eslint no-new-func: "off" */
-    return new Function('React', 'Component', 'Logo', ...keys, Component)(
-      React,
-      React.Component,
-      Logo,
-      ...values
-    );
+    return new Function(
+      'React',
+      'Component',
+      'createElement',
+      'Logo',
+      ...keys,
+      Component
+    )(React, React.Component, React.createElement, Logo, ...values);
   };
 };
 

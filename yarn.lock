@@ -2519,6 +2519,10 @@ fast-memoize@^2.2.7:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/fast-memoize/-/fast-memoize-2.2.8.tgz#d7f899f31d037b12d9db4281912f9018575720b1"
 
+fastest-stable-stringify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/fastest-stable-stringify/-/fastest-stable-stringify-1.0.1.tgz#9122d406d4c9d98bea644a6b6853d5874b87b028"
+
 fastparse@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"
@@ -3432,6 +3436,13 @@ inline-style-prefixer@^2.0.5:
   dependencies:
     bowser "^1.0.0"
     hyphenate-style-name "^1.0.1"
+
+inline-style-prefixer@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-4.0.0.tgz#30a03df1b346ba6b1fb8a812bc3c9dabef48022d"
+  dependencies:
+    bowser "^1.7.3"
+    css-in-js-utils "^2.0.0"
 
 inquirer@^3.0.6:
   version "3.3.0"
@@ -4951,6 +4962,14 @@ name-all-modules-plugin@^1.0.1:
 nan@^2.3.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
+
+nano-css@~1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/nano-css/-/nano-css-1.4.0.tgz#545662566b6271bcc6810d78eaeb7ce6627ed66c"
+  dependencies:
+    fastest-stable-stringify "^1.0.1"
+    inline-style-prefixer "^4.0.0"
+    stylis "3.5.0"
 
 nanomatch@^1.2.1:
   version "1.2.3"
@@ -6992,7 +7011,7 @@ style-loader@^0.19.0:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
 
-styled-components@2.4.0:
+styled-components@~2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-2.4.0.tgz#086d0fd483d54638837fca3ea546a030b94adf75"
   dependencies:
@@ -7043,6 +7062,10 @@ styletron@~3.0.0-rc.3:
   dependencies:
     styletron-client "^3.0.0-rc.3"
     styletron-server "^3.0.0-rc.3"
+
+stylis@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.0.tgz#016fa239663d77f868fef5b67cf201c4b7c701e1"
 
 stylis@^3.2.13:
   version "3.2.19"

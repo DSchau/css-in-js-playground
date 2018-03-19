@@ -40,6 +40,8 @@ export const getLibraryImportStatement = (
       '',
       'jss.setup(preset);'
     ].join('\n');
+  } else if (matches('nano-css')) {
+    return importStatement('nano', 'nano-css');
   } else if (matches('react-jss')) {
     return importStatement('injectSheet', 'react-jss');
   } else if (matches('styletron-react')) {
@@ -76,6 +78,45 @@ export const getScopedImports = (
     }));
   } else if (matches('cxs/component')) {
     return import('cxs/component').then(cxs => ({ cxs }));
+  } else if (matches('./nano')) {
+    console.log('sup  nigga');
+    return Promise.all([
+      import('nano-css'),
+      import('nano-css/addon/cache'),
+      import('nano-css/addon/stable'),
+      import('nano-css/addon/nesting'),
+      import('nano-css/addon/atoms'),
+      import('nano-css/addon/keyframes'),
+      import('nano-css/addon/sheet'),
+      import('nano-css/addon/jsx'),
+      import('nano-css/addon/rule')
+    ]).then(
+      (
+        [
+          nano,
+          addonCache,
+          addonStable,
+          addonNesting,
+          addonAtoms,
+          addonKeyframes,
+          addonSheet,
+          addonJsx,
+          addonRule
+        ]
+      ) => {
+        return {
+          ...nano,
+          addonCache: addonCache.addon,
+          addonStable: addonStable.addon,
+          addonNesting: addonNesting.addon,
+          addonAtoms: addonAtoms.addon,
+          addonKeyframes: addonKeyframes.addon,
+          addonSheet: addonSheet.addon,
+          addonJsx: addonJsx.addon,
+          addonRule: addonRule.addon
+        };
+      }
+    );
   } else if (matches('radium')) {
     return import('radium').then(radium => ({ Radium: radium }));
   } else if (matches('jsxstyle')) {
